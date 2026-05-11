@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Calendar, Filter, ChevronDown, X, Clock, Sparkles, Award, LayoutGrid, List, Crown, Flag, Download, Printer, Share2, Copy, Check, FileJson, CalendarPlus } from 'lucide-react';
+import { Search, Calendar, Filter, ChevronDown, X, Clock, Sparkles, Award, LayoutGrid, List, Crown, Flag, Download, Printer, Share2, Copy, Check, CalendarPlus } from 'lucide-react';
 
 // =================================================================
 // DATA — REHC 2026/27
@@ -7,7 +7,7 @@ import { Search, Calendar, Filter, ChevronDown, X, Clock, Sparkles, Award, Layou
 const PROGRAMME = [
   { p: 'I', m: 1, d: '2026-10-30', races: [
     { dist: 1200, text: '0-90', field: 5 },
-    { dist: 1400, text: 'Late H H Sh Rashid Bin Isa Al Khalifa Cup — Domestic Grade 2', field: 5 },
+    { dist: 1400, text: 'Late HH Sh Rashid Bin Isa Al Khalifa Cup — Domestic Grade 2', field: 5 },
     { dist: 1600, text: '4th & Maiden', field: 6 },
     { dist: 1800, text: 'TBC', field: null }
   ]},
@@ -19,7 +19,7 @@ const PROGRAMME = [
     { dist: 2000, text: '0-85', field: 6 }
   ]},
   { p: 'I', m: 3, d: '2026-11-13', races: [
-    { dist: 1000, text: 'Grand Seiko Bahrain Jewellery Centre Cup — Domestic Grade 1', field: 7 },
+    { dist: 1000, text: 'Domestic Grade 1', field: 7 },
     { dist: 1200, text: '0-90', field: 9 },
     { dist: 1600, text: 'Open Handicap', field: 8 },
     { dist: 2000, text: 'Bahrain International Trophy — Group 2', field: 8 },
@@ -62,8 +62,8 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 10, d: '2026-12-18', races: [
     { dist: 1200, text: 'Al Manama Cup — Turf Series 84-100', field: 16 },
-    { dist: 1600, text: 'Sh Khalid Bin Hamad Al Khalifa Cup — Listed', field: 7 },
-    { dist: 1800, text: '0-100 — Turf Series', field: null },
+    { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup — Listed', field: 7 },
+    { dist: 1600, text: '0-100 (no guests) — Turf Series', field: null },
     { dist: 2000, text: 'Al Muharraq Cup — Turf Series 84-100', field: 13 },
     { dist: 2400, text: 'National Day Cup — Domestic Grade 1', field: 7 }
   ]},
@@ -108,7 +108,7 @@ const PROGRAMME = [
     { dist: 1000, text: '0-80', field: 13 },
     { dist: 1400, text: 'Domestic Grade 2', field: 8 },
     { dist: 1600, text: 'Bahrain Mile 4yo+ — Domestic Grade 1', field: 7 },
-    { dist: 2000, text: 'Crown Princes Cup 4yo+ — Group 3', field: 8 }
+    { dist: 2000, text: "Crown Prince's Cup 4yo+ — Group 3", field: 8 }
   ]},
   { p: 'I', m: 18, d: '2027-02-05', races: [
     { dist: 1200, text: '0-70', field: 14 },
@@ -124,9 +124,9 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 20, d: '2027-02-18', races: [
     { dist: 1200, text: 'Al Sakhir Cup — Turf Series 80-100', field: 18 },
-    { dist: 1400, text: 'Sheema Bint Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 1', field: 14 },
+    { dist: 1400, text: 'HH Sheema Bint Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 1', field: 14 },
     { dist: 1600, text: 'Bahrain Vision Cup — Turf Series 80-100', field: 15 },
-    { dist: 2000, text: 'Sh Nasser Bin Hamad Al Khalifa Cup — Listed', field: 10 }
+    { dist: 2000, text: 'HH Sh Nasser Bin Hamad Al Khalifa Cup — Listed', field: 10 }
   ]},
   { p: 'I', m: 21, d: '2027-02-25', races: [
     { dist: 1000, text: '0-75 APP', field: 11 },
@@ -142,10 +142,10 @@ const PROGRAMME = [
     { dist: 1800, text: 'The International Handicap — Turf Series 80-100', field: 8 }
   ]},
   { p: 'I', m: 23, d: '2027-03-05', races: [
-    { dist: 1000, text: 'Chairmans Cup 4yo+ — Domestic Grade 1', field: 8 },
+    { dist: 1000, text: "Chairman's Cup 4yo+ — Domestic Grade 1", field: 8 },
     { dist: 1600, text: 'Al Methaq Cup 4yo+ — Listed', field: 7 },
     { dist: 1800, text: '0-90', field: 7 },
-    { dist: 2200, text: 'Kings Cup 4yo+ — Group 3', field: 9 }
+    { dist: 2200, text: "King's Cup 4yo+ — Group 3", field: 9 }
   ]},
   { p: 'I', m: 24, d: '2027-03-12', races: [
     { dist: 1200, text: '4th & Maiden', field: 13 },
@@ -272,7 +272,7 @@ const PROGRAMME = [
   ]},
   { p: 'B', m: 17, d: '2027-01-29', races: [
     { dist: 1000, text: 'Domestic Grade 2', field: 6 },
-    { dist: 2000, text: 'Crown Princes Cup — Domestic Grade 1', field: 12 },
+    { dist: 2000, text: "Crown Prince's Cup — Domestic Grade 1", field: 12 },
     { dist: 2000, text: 'Derby 4yo — Domestic Grade 1', field: 6 }
   ]},
   { p: 'B', m: 18, d: '2027-02-05', races: [
@@ -304,7 +304,7 @@ const PROGRAMME = [
   { p: 'B', m: 23, d: '2027-03-05', races: [
     { dist: 1400, text: 'Domestic Grade 2', field: 6 },
     { dist: 1600, text: '4th & Maiden', field: 10 },
-    { dist: 2400, text: 'Kings Cup — Domestic Grade 1', field: 11 }
+    { dist: 2400, text: "King's Cup — Domestic Grade 1", field: 11 }
   ]},
   { p: 'B', m: 24, d: '2027-03-12', races: [
     { dist: 1000, text: '3rd, 4th & Maiden 3yo — Challenge Series', field: 8 },
@@ -376,7 +376,7 @@ const PROGRAMME = [
     { dist: 1200, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 10, d: '2026-12-18', races: [
-    { dist: 1600, text: 'H H Sh Khalid Bin Hamad Al Khalifa Cup (All Classes & Maidens)', field: null }
+    { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup (All Classes & Maidens)', field: null }
   ]},
   { p: 'W', m: 11, d: '2026-12-24', races: [
     { dist: 1400, text: '2nd / 3rd / 4th / Maidens', field: null }
@@ -388,7 +388,7 @@ const PROGRAMME = [
     { dist: 1200, text: 'Maidens / Fillies & Mares', field: null }
   ]},
   { p: 'W', m: 14, d: '2027-01-15', races: [
-    { dist: 1400, text: 'H H Sh Isa Bin Salman Al Khalifa Cup (All Classes & Maidens)', field: null }
+    { dist: 1400, text: 'HH Sh Isa Bin Salman Al Khalifa Cup (All Classes & Maidens)', field: null }
   ]},
   { p: 'W', m: 15, d: '2027-01-22', races: [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }
@@ -397,7 +397,7 @@ const PROGRAMME = [
     { dist: 1000, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 17, d: '2027-01-29', races: [
-    { dist: 1400, text: 'Crown Prince\u2019s Cup — Domestic Grade 2', field: null }
+    { dist: 1400, text: "Crown Prince's Cup — Domestic Grade 2", field: null }
   ]},
   { p: 'W', m: 18, d: '2027-02-05', races: [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }
@@ -407,7 +407,7 @@ const PROGRAMME = [
   ]},
   { p: 'W', m: 20, d: '2027-02-18', races: [
     { dist: 1400, text: 'Domestic Grade 2', field: 18 },
-    { dist: 1600, text: 'H H Sh Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 2', field: null }
+    { dist: 1600, text: 'HH Sh Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 2', field: null }
   ]},
   { p: 'W', m: 21, d: '2027-02-25', races: [
     { dist: 1200, text: 'Maidens / 4yo & 5yo', field: null }
@@ -416,7 +416,7 @@ const PROGRAMME = [
     { dist: 1000, text: '3rd / 4th / Maidens (APP)', field: null }
   ]},
   { p: 'W', m: 23, d: '2027-03-05', races: [
-    { dist: 1600, text: 'King\u2019s Cup — Domestic Grade 1', field: null }
+    { dist: 1600, text: "King's Cup — Domestic Grade 1", field: null }
   ]},
   { p: 'W', m: 24, d: '2027-03-12', races: [
     { dist: 1200, text: '3rd / 4th / Maidens — Fillies & Mares', field: null }
@@ -486,13 +486,13 @@ const C = {
   gold: '#C8A35C',
   burgundy: '#6B2737',
   rust: '#9C4A2C',
-  green: '#1A3D2A'
+  green: '#0B223E'
 };
 
 const ACCENTS = {
   gold:     { bg: '#C8A35C', fg: '#1A2E20', soft: 'rgba(200,163,92,0.18)' },
   burgundy: { bg: '#6B2737', fg: '#F2EBDC', soft: 'rgba(107,39,55,0.13)' },
-  green:    { bg: '#1A3D2A', fg: '#F2EBDC', soft: 'rgba(26,61,42,0.14)' },
+  green:    { bg: '#0B223E', fg: '#F2EBDC', soft: 'rgba(11,34,62,0.14)' },
   sage:     { bg: '#7B8A6E', fg: '#F2EBDC', soft: 'rgba(123,138,110,0.20)' },
   teal:     { bg: '#3B6B6B', fg: '#F2EBDC', soft: 'rgba(59,107,107,0.16)' },
   amber:    { bg: '#B5763E', fg: '#F2EBDC', soft: 'rgba(181,118,62,0.16)' },
@@ -509,7 +509,7 @@ const FONT_MONO = "ui-monospace, 'SF Mono', Menlo, monospace";
 
 // Programme metadata: colour, short label, sort order
 const PROGRAMME_META = {
-  'Imported':     { color: '#1A3D2A', short: 'IMP',  order: 1 },
+  'Imported':     { color: '#0B223E', short: 'IMP',  order: 1 },
   'Bahrain Bred': { color: '#9C4A2C', short: 'BB',   order: 2 },
   'WAHO':         { color: '#3B6B6B', short: 'WAHO', order: 3 }
 };
@@ -565,9 +565,6 @@ function exportCSV(rows) {
     ].join(','));
   });
   downloadFile('\ufeff' + lines.join('\r\n'), 'rehc-2026-27.csv', 'text/csv;charset=utf-8;');
-}
-function exportJSON(rows) {
-  downloadFile(JSON.stringify(rows, null, 2), 'rehc-2026-27.json', 'application/json');
 }
 function exportICS() {
   const meetings = new Map();
@@ -710,12 +707,11 @@ function StatCard({ label, value, sub, icon: Icon, accentColor, onClick, isActiv
 
 function NextUpHero({ daysToNext, nextMeeting, isMobile }) {
   if (!nextMeeting) return null;
-  const marquee = nextMeeting.races.find(r => r.tier <= 2) || nextMeeting.races[0];
   return (
     <div style={{
-      position: 'relative', backgroundColor: C.forest, color: C.ivory,
+      position: 'relative', backgroundColor: '#0B223E', color: C.ivory,
       borderRadius: '4px', overflow: 'hidden',
-      boxShadow: '0 8px 30px -12px rgba(26,46,32,0.45)'
+      boxShadow: '0 8px 30px -12px rgba(11,34,62,0.45)'
     }}>
       <div style={{ position: 'absolute', right: '-80px', top: '-80px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,163,92,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '4px', background: 'linear-gradient(90deg, ' + C.gold + ' 0%, #A88842 50%, ' + C.gold + ' 100%)' }} />
@@ -746,10 +742,6 @@ function NextUpHero({ daysToNext, nextMeeting, isMobile }) {
               {fmtShort(nextMeeting.date)}
             </span>
           </h2>
-          <p style={{ margin: 0, fontSize: '13px', color: 'rgba(242,235,220,0.75)', fontFamily: FONT_DISPLAY, fontStyle: 'italic', lineHeight: 1.5 }}>
-            Featuring <span style={{ color: C.ivory, fontStyle: 'normal', fontWeight: 500 }}>{marquee.text}</span>
-            <span style={{ color: 'rgba(242,235,220,0.5)' }}> · {marquee.distance}m</span>
-          </p>
         </div>
         <div style={{
           textAlign: isMobile ? 'left' : 'right',
@@ -904,12 +896,6 @@ function MeetingCard({ raceDay, isOpen, onToggle, todayIso, isMobile }) {
         {isMobile && (
           <div style={{ padding: '0 18px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <StatusPill date={raceDay.date} todayIso={todayIso} />
-            {marquee && (
-              <span style={{ fontSize: '10px', color: C.gold, display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                <Crown size={11} strokeWidth={2} />
-                Feature race
-              </span>
-            )}
           </div>
         )}
       </button>
@@ -1048,10 +1034,9 @@ function ShareModal({ onClose }) {
           </div>
           <div style={{ paddingTop: '16px', borderTop: '1px dashed ' + C.forestSoft }}>
             <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em', color: C.forestDim, fontWeight: 700, marginBottom: '10px', textAlign: 'center' }}>Quick exports</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {[
                 { label: 'CSV', icon: Download, fn: () => exportCSV(RACES) },
-                { label: 'JSON', icon: FileJson, fn: () => exportJSON(RACES) },
                 { label: 'iCal', icon: CalendarPlus, fn: exportICS },
                 { label: 'Print', icon: Printer, fn: () => window.print() }
               ].map(b => (
@@ -1120,19 +1105,22 @@ export default function App() {
   const todayIso = now.toISOString().slice(0, 10);
   const BLACK_TYPE = ['Group 2','Group 3','Listed'];
 
-  const onTileMeetings = () => {
-    if (activeTile === 'meetings') { setActiveTile(null); return; }
-    setActiveTile('meetings'); setProgramme('All'); setActiveTypes(new Set()); setSearch('');
+  // Tile click handlers — each filters dashboard to a specific programme or to black-type
+  const onTileImported = () => {
+    if (activeTile === 'imported') { setActiveTile(null); setProgramme('All'); }
+    else { setActiveTile('imported'); setProgramme('Imported'); setActiveTypes(new Set()); setSearch(''); }
   };
-  const onTileTotal = () => {
-    setActiveTile(null); setProgramme('All'); setActiveTypes(new Set()); setSearch('');
+  const onTileBahrainBred = () => {
+    if (activeTile === 'bahrainbred') { setActiveTile(null); setProgramme('All'); }
+    else { setActiveTile('bahrainbred'); setProgramme('Bahrain Bred'); setActiveTypes(new Set()); setSearch(''); }
+  };
+  const onTileWAHO = () => {
+    if (activeTile === 'waho') { setActiveTile(null); setProgramme('All'); }
+    else { setActiveTile('waho'); setProgramme('WAHO'); setActiveTypes(new Set()); setSearch(''); }
   };
   const onTileBlackType = () => {
     if (activeTile === 'blacktype') { setActiveTile(null); setActiveTypes(new Set()); }
     else { setActiveTile('blacktype'); setActiveTypes(new Set(BLACK_TYPE)); setProgramme('All'); setSearch(''); }
-  };
-  const onTileSeason = () => {
-    setActiveTile(activeTile === 'season' ? null : 'season');
   };
 
   const filtered = useMemo(() => {
@@ -1187,7 +1175,10 @@ export default function App() {
     const nextDate = upcoming[0];
     const daysToNext = nextDate ? daysBetween(todayIso, nextDate) : null;
     const totalRaceDays = new Set(RACES.map(r => r.date)).size;
-    return { totalMeetings, totalRaces, blackType, nextDate, daysToNext, totalRaceDays, seasonDays: daysBetween('2026-10-30', '2027-04-16') };
+    const importedCount = RACES.filter(r => r.programme === 'Imported').length;
+    const bahrainBredCount = RACES.filter(r => r.programme === 'Bahrain Bred').length;
+    const wahoCount = RACES.filter(r => r.programme === 'WAHO').length;
+    return { totalMeetings, totalRaces, blackType, nextDate, daysToNext, totalRaceDays, importedCount, bahrainBredCount, wahoCount, seasonDays: daysBetween('2026-10-30', '2027-04-16') };
   }, [todayIso]);
 
   const nextMeeting = useMemo(() => {
@@ -1283,10 +1274,42 @@ export default function App() {
       {/* CLICKABLE STATS */}
       <section className="rehc-no-print" style={{ maxWidth: MW, margin: '0 auto', padding: (isMobile ? '20px' : '28px') + ' ' + PX + ' 0' }}>
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
-          <StatCard label="Race Days" value={stats.totalRaceDays} sub={isMobile ? 'Tap to reset filters' : 'Click to view all race days'} icon={Flag} accentColor={C.green} onClick={onTileMeetings} isActive={activeTile === 'meetings'} />
-          <StatCard label="Total Races" value={stats.totalRaces} sub={isMobile ? 'Tap to reset' : 'Click to clear filters'} icon={Sparkles} accentColor={C.gold} onClick={onTileTotal} isActive={false} />
-          <StatCard label="Black-Type" value={stats.blackType} sub={isMobile ? 'Tap for prestige races' : 'Click to filter to G2 / G3 / Listed'} icon={Award} accentColor={C.burgundy} onClick={onTileBlackType} isActive={activeTile === 'blacktype'} />
-          <StatCard label="Season Days" value={stats.seasonDays} sub="30 Oct → 16 Apr" icon={Calendar} accentColor={C.rust} onClick={onTileSeason} isActive={activeTile === 'season'} />
+          <StatCard
+            label="Imported"
+            value={stats.importedCount}
+            sub={isMobile ? 'Tap to filter' : 'Click to filter to Imported only'}
+            icon={Flag}
+            accentColor={progColor('Imported')}
+            onClick={onTileImported}
+            isActive={activeTile === 'imported'}
+          />
+          <StatCard
+            label="Bahrain Bred"
+            value={stats.bahrainBredCount}
+            sub={isMobile ? 'Tap to filter' : 'Click to filter to Bahrain Bred'}
+            icon={Sparkles}
+            accentColor={progColor('Bahrain Bred')}
+            onClick={onTileBahrainBred}
+            isActive={activeTile === 'bahrainbred'}
+          />
+          <StatCard
+            label="WAHO"
+            value={stats.wahoCount}
+            sub={isMobile ? 'Tap to filter' : 'Click to filter to WAHO only'}
+            icon={Crown}
+            accentColor={progColor('WAHO')}
+            onClick={onTileWAHO}
+            isActive={activeTile === 'waho'}
+          />
+          <StatCard
+            label="International Listed Races"
+            value={stats.blackType}
+            sub={isMobile ? 'Tap for prestige races' : 'Click for G2 / G3 / Listed'}
+            icon={Award}
+            accentColor={C.burgundy}
+            onClick={onTileBlackType}
+            isActive={activeTile === 'blacktype'}
+          />
         </div>
       </section>
 
@@ -1314,7 +1337,14 @@ export default function App() {
             </div>
             <div style={{ display: 'flex', border: '1px solid ' + C.forestSoft, borderRadius: '2px', overflow: 'hidden', flexWrap: 'wrap' }}>
               {['All','Imported','Bahrain Bred','WAHO'].map(p => (
-                <button key={p} onClick={() => setProgramme(p)} style={{
+                <button key={p} onClick={() => {
+                  setProgramme(p);
+                  // Sync active tile with programme selection
+                  if (p === 'All') setActiveTile(null);
+                  else if (p === 'Imported') setActiveTile('imported');
+                  else if (p === 'Bahrain Bred') setActiveTile('bahrainbred');
+                  else if (p === 'WAHO') setActiveTile('waho');
+                }} style={{
                   padding: isMobile ? '9px 10px' : '10px 13px',
                   fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
                   border: 'none', cursor: 'pointer', fontFamily: FONT_BODY,
@@ -1329,10 +1359,6 @@ export default function App() {
               <ToolBtn onClick={() => exportCSV(filtered)} title={'Export ' + filtered.length + ' races as CSV'}>
                 <Download size={13} strokeWidth={1.8} />
                 {!isMobile && 'CSV'}
-              </ToolBtn>
-              <ToolBtn onClick={() => exportJSON(filtered)} title="Export as JSON">
-                <FileJson size={13} strokeWidth={1.8} />
-                {!isMobile && 'JSON'}
               </ToolBtn>
               <ToolBtn onClick={exportICS} title="Add all meetings to calendar">
                 <CalendarPlus size={13} strokeWidth={1.8} />
