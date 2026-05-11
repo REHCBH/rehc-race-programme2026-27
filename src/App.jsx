@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Calendar, Filter, ChevronDown, X, Clock, Sparkles, Award, LayoutGrid, List, Crown, Flag, Download, Printer, Share2, Copy, Check, CalendarPlus } from 'lucide-react';
+import { Search, Calendar, Filter, ChevronDown, X, Clock, Sparkles, Award, LayoutGrid, List, Crown, Flag, Download, Printer, Share2, Copy, Check, CalendarPlus, FileDown } from 'lucide-react';
 
 // =================================================================
 // DATA — REHC 2026/27
@@ -595,6 +595,160 @@ function exportICS() {
   downloadFile(lines.join('\r\n'), 'rehc-2026-27.ics', 'text/calendar;charset=utf-8;');
 }
 
+// Lazy-load jsPDF from CDN — runs in any browser without npm install
+function loadJsPDF() {
+  if (typeof window === 'undefined') return Promise.reject('SSR');
+  if (window.jspdf && window.jspdf.jsPDF) return Promise.resolve(window.jspdf.jsPDF);
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-jspdf]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.jspdf?.jsPDF));
+      existing.addEventListener('error', reject);
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.setAttribute('data-jspdf', 'true');
+    s.onload = () => {
+      if (window.jspdf && window.jspdf.jsPDF) resolve(window.jspdf.jsPDF);
+      else reject(new Error('jsPDF failed to expose'));
+    };
+    s.onerror = () => reject(new Error('Failed to load jsPDF from CDN'));
+    document.head.appendChild(s);
+  });
+}
+
+async function exportPDF(rows) {
+  let jsPDF;
+  try {
+    jsPDF = await loadJsPDF();
+  } catch (e) {
+    // Fallback: use browser print dialog (user can choose 'Save as PDF')
+    window.print();
+    return;
+  }
+  const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const M = 14; // margin
+  let y = M;
+
+  // ----- HEADER -----
+  doc.setFillColor(11, 34, 62);
+  doc.rect(0, 0, pageW, 22, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('times', 'italic');
+  doc.setFontSize(16);
+  doc.text('REHC Race Programme', M, 11);
+  doc.setFontSize(11);
+  doc.setFont('times', 'normal');
+  doc.text('2026 / 27 Season  ·  Sakhir Racecourse, Bahrain', M, 17);
+  doc.setFontSize(8);
+  doc.setTextColor(200, 163, 92);
+  doc.text(rows.length + ' races  ·  ' + (new Set(rows.map(function(r){return r.date}))).size + ' race days', pageW - M, 11, { align: 'right' });
+  doc.setTextColor(255, 255, 255);
+  doc.text('Generated ' + new Date().toLocaleDateString('en-GB'), pageW - M, 17, { align: 'right' });
+  y = 30;
+
+  // ----- GROUP BY DATE -----
+  const byDate = new Map();
+  rows.forEach(function(r){
+    if (!byDate.has(r.date)) byDate.set(r.date, []);
+    byDate.get(r.date).push(r);
+  });
+  const dates = [...byDate.keys()].sort();
+
+  doc.setTextColor(26, 46, 32);
+
+  function ensureRoom(needed) {
+    if (y + needed > pageH - 18) {
+      // footer
+      doc.setFontSize(7);
+      doc.setTextColor(140, 140, 140);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Royal Equestrian & Horse Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+      doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
+      doc.addPage();
+      y = M;
+      doc.setTextColor(26, 46, 32);
+    }
+  }
+
+  dates.forEach(function(date){
+    const races = byDate.get(date);
+    const dateObj = new Date(date + 'T00:00:00');
+    const dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][dateObj.getDay()];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const programmes = [...new Set(races.map(function(r){return r.programme}))].sort();
+
+    ensureRoom(20 + races.length * 7);
+
+    // Date header band
+    doc.setFillColor(247, 241, 225);
+    doc.rect(M, y, pageW - 2 * M, 9, 'F');
+    doc.setDrawColor(200, 163, 92);
+    doc.setLineWidth(0.6);
+    doc.line(M, y, M, y + 9);
+    doc.setFont('times', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(26, 46, 32);
+    doc.text(dayName + ', ' + String(dateObj.getDate()).padStart(2,'0') + ' ' + months[dateObj.getMonth()] + ' ' + dateObj.getFullYear(), M + 2, y + 6.2);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(110, 110, 110);
+    doc.text(programmes.join(' · '), pageW - M - 2, y + 6, { align: 'right' });
+    y += 12;
+
+    // Group races by programme within this date
+    programmes.forEach(function(prog){
+      const progRaces = races.filter(function(r){return r.programme === prog});
+      // Programme sub-label
+      const progColors = { 'Imported': [11,34,62], 'Bahrain Bred': [156,74,44], 'WAHO': [59,107,107] };
+      const c = progColors[prog] || [100,100,100];
+      doc.setTextColor(c[0], c[1], c[2]);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.text(prog.toUpperCase(), M + 2, y);
+      y += 4;
+
+      // Races
+      progRaces.forEach(function(r){
+        ensureRoom(7);
+        // Distance
+        doc.setTextColor(26, 46, 32);
+        doc.setFont('times', 'bold');
+        doc.setFontSize(10);
+        doc.text(String(r.distance) + 'm', M + 4, y);
+        // Race text
+        doc.setFont('times', 'normal');
+        doc.setFontSize(9.5);
+        const textLines = doc.splitTextToSize(r.text, pageW - 2 * M - 50);
+        doc.text(textLines, M + 18, y);
+        // Category & field
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(120, 120, 120);
+        const meta = r.category + (r.field ? '  ·  ' + r.field + ' runners' : '');
+        doc.text(meta, pageW - M - 2, y, { align: 'right' });
+        y += Math.max(5.5, textLines.length * 4);
+      });
+      y += 1;
+    });
+    y += 3;
+  });
+
+  // ----- FOOTER on last page -----
+  doc.setFontSize(7);
+  doc.setTextColor(140, 140, 140);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Royal Equestrian & Horse Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+  doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
+  doc.text('All races for 3 year olds and upwards except where stated  ·  ** Potential for tiered handicap', M, pageH - 6);
+
+  doc.save('rehc-2026-27.pdf');
+}
+
+
 // =================================================================
 // HOOKS
 // =================================================================
@@ -1034,10 +1188,11 @@ function ShareModal({ onClose }) {
           </div>
           <div style={{ paddingTop: '16px', borderTop: '1px dashed ' + C.forestSoft }}>
             <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em', color: C.forestDim, fontWeight: 700, marginBottom: '10px', textAlign: 'center' }}>Quick exports</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
               {[
                 { label: 'CSV', icon: Download, fn: () => exportCSV(RACES) },
                 { label: 'iCal', icon: CalendarPlus, fn: exportICS },
+                { label: 'PDF', icon: FileDown, fn: () => exportPDF(RACES) },
                 { label: 'Print', icon: Printer, fn: () => window.print() }
               ].map(b => (
                 <button key={b.label} onClick={b.fn} style={{
@@ -1363,6 +1518,10 @@ export default function App() {
               <ToolBtn onClick={exportICS} title="Add all meetings to calendar">
                 <CalendarPlus size={13} strokeWidth={1.8} />
                 {!isMobile && 'iCal'}
+              </ToolBtn>
+              <ToolBtn onClick={() => exportPDF(filtered)} title="Download as PDF">
+                <FileDown size={13} strokeWidth={1.8} />
+                {!isMobile && 'PDF'}
               </ToolBtn>
               <ToolBtn onClick={() => window.print()} title="Print handout">
                 <Printer size={13} strokeWidth={1.8} />
