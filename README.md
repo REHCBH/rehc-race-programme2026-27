@@ -1,6 +1,6 @@
 # REHC Race Programme · 2026/27
 
-Live, interactive dashboard for the Royal Equestrian & Horse Club racing season.
+Live, interactive dashboard for the Rashid Equestrian & Horseracing Club racing season.
 
 ## Features
 - 30 meetings (Imported + Bahrain Bred), all races, live countdown
