@@ -346,6 +346,98 @@ const PROGRAMME = [
     { dist: 1200, text: '0-55 (4yo+)', field: 15 },
     { dist: 1400, text: 'Domestic Grade 2', field: 8 },
     { dist: 2000, text: 'Owners Cup — Domestic Grade 1', field: 7 }
+  ]},
+  // ---------- WAHO (Arabian Horses) ----------
+  { p: 'W', m: 1, d: '2026-10-30', races: [
+    { dist: 1200, text: '4th & Maiden', field: null }
+  ]},
+  { p: 'W', m: 2, d: '2026-11-06', races: [
+    { dist: 1200, text: 'Maidens / 4yo & 5yo', field: null }
+  ]},
+  { p: 'W', m: 3, d: '2026-11-13', races: [
+    { dist: 1200, text: '2nd / 3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 4, d: '2026-11-20', races: [
+    { dist: 1200, text: '4th & Maiden', field: null }
+  ]},
+  { p: 'W', m: 5, d: '2026-11-26', races: [
+    { dist: 1400, text: '2nd / 3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 6, d: '2026-11-27', races: [
+    { dist: 1400, text: '3rd / 4th / Maidens (APP)', field: null }
+  ]},
+  { p: 'W', m: 7, d: '2026-12-04', races: [
+    { dist: 1200, text: 'Maidens / 4yo & 5yo', field: null }
+  ]},
+  { p: 'W', m: 8, d: '2026-12-11', races: [
+    { dist: 1400, text: '2nd / 3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 9, d: '2026-12-17', races: [
+    { dist: 1200, text: '4th & Maiden', field: null }
+  ]},
+  { p: 'W', m: 10, d: '2026-12-18', races: [
+    { dist: 1600, text: 'H H Sh Khalid Bin Hamad Al Khalifa Cup (All Classes & Maidens)', field: null }
+  ]},
+  { p: 'W', m: 11, d: '2026-12-24', races: [
+    { dist: 1400, text: '2nd / 3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 12, d: '2027-01-02', races: [
+    { dist: 1200, text: '4th & Maiden (APP)', field: null }
+  ]},
+  { p: 'W', m: 13, d: '2027-01-08', races: [
+    { dist: 1200, text: 'Maidens / Fillies & Mares', field: null }
+  ]},
+  { p: 'W', m: 14, d: '2027-01-15', races: [
+    { dist: 1400, text: 'H H Sh Isa Bin Salman Al Khalifa Cup (All Classes & Maidens)', field: null }
+  ]},
+  { p: 'W', m: 15, d: '2027-01-22', races: [
+    { dist: 1400, text: '3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 16, d: '2027-01-28', races: [
+    { dist: 1000, text: '4th & Maiden', field: null }
+  ]},
+  { p: 'W', m: 17, d: '2027-01-29', races: [
+    { dist: 1400, text: 'Crown Prince\u2019s Cup — Domestic Grade 2', field: null }
+  ]},
+  { p: 'W', m: 18, d: '2027-02-05', races: [
+    { dist: 1400, text: '3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 19, d: '2027-02-11', races: [
+    { dist: 1000, text: '3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 20, d: '2027-02-18', races: [
+    { dist: 1400, text: 'Domestic Grade 2', field: 18 },
+    { dist: 1600, text: 'H H Sh Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 2', field: null }
+  ]},
+  { p: 'W', m: 21, d: '2027-02-25', races: [
+    { dist: 1200, text: 'Maidens / 4yo & 5yo', field: null }
+  ]},
+  { p: 'W', m: 22, d: '2027-03-04', races: [
+    { dist: 1000, text: '3rd / 4th / Maidens (APP)', field: null }
+  ]},
+  { p: 'W', m: 23, d: '2027-03-05', races: [
+    { dist: 1600, text: 'King\u2019s Cup — Domestic Grade 1', field: null }
+  ]},
+  { p: 'W', m: 24, d: '2027-03-12', races: [
+    { dist: 1200, text: '3rd / 4th / Maidens — Fillies & Mares', field: null }
+  ]},
+  { p: 'W', m: 25, d: '2027-03-19', races: [
+    { dist: 1200, text: '2nd / 3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 26, d: '2027-03-26', races: [
+    { dist: 1200, text: 'Maidens / 4yo & 5yo', field: null }
+  ]},
+  { p: 'W', m: 27, d: '2027-04-02', races: [
+    { dist: 1400, text: '3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 28, d: '2027-04-08', races: [
+    { dist: 1000, text: '3rd / 4th / Maidens', field: null }
+  ]},
+  { p: 'W', m: 29, d: '2027-04-15', races: [
+    { dist: 1400, text: '4th & Maiden (APP)', field: null }
+  ]},
+  { p: 'W', m: 30, d: '2027-04-16', races: [
+    { dist: 1400, text: 'Al Rouda Cup (All Classes & Maidens)', field: null }
   ]}
 ];
 
@@ -370,7 +462,7 @@ function categorize(text) {
 const RACES = PROGRAMME.flatMap((m) =>
   m.races.map((r, ri) => ({
     id: m.p + '-' + m.m + '-' + r.dist + '-' + ri,
-    programme: m.p === 'I' ? 'Imported' : 'Bahrain Bred',
+    programme: m.p === 'I' ? 'Imported' : m.p === 'W' ? 'WAHO' : 'Bahrain Bred',
     meeting: m.m,
     date: m.d,
     distance: r.dist,
@@ -414,6 +506,16 @@ const ACCENTS = {
 const FONT_DISPLAY = "Georgia, 'Times New Roman', serif";
 const FONT_BODY = "system-ui, -apple-system, 'Segoe UI', sans-serif";
 const FONT_MONO = "ui-monospace, 'SF Mono', Menlo, monospace";
+
+// Programme metadata: colour, short label, sort order
+const PROGRAMME_META = {
+  'Imported':     { color: '#1A3D2A', short: 'IMP',  order: 1 },
+  'Bahrain Bred': { color: '#9C4A2C', short: 'BB',   order: 2 },
+  'WAHO':         { color: '#3B6B6B', short: 'WAHO', order: 3 }
+};
+function progColor(p) { return PROGRAMME_META[p]?.color || '#8A857C'; }
+function progShort(p) { return PROGRAMME_META[p]?.short || p; }
+function progOrder(p) { return PROGRAMME_META[p]?.order || 99; }
 
 const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -745,18 +847,21 @@ function MeetingCard({ raceDay, isOpen, onToggle, todayIso, isMobile }) {
               )}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-              {raceDay.programmes.map(p => (
-                <span key={p} style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em',
-                  fontWeight: 700, color: p === 'Imported' ? C.green : C.rust,
-                  padding: '2px 7px', backgroundColor: p === 'Imported' ? 'rgba(26,61,42,0.10)' : 'rgba(156,74,44,0.10)',
-                  borderRadius: '2px', border: '1px solid ' + (p === 'Imported' ? 'rgba(26,61,42,0.25)' : 'rgba(156,74,44,0.25)')
-                }}>
-                  <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: p === 'Imported' ? C.green : C.rust }} />
-                  {isMobile ? (p === 'Imported' ? 'IMP' : 'BB') : p}
-                </span>
-              ))}
+              {raceDay.programmes.map(p => {
+                const pc = progColor(p);
+                return (
+                  <span key={p} style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '5px',
+                    fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em',
+                    fontWeight: 700, color: pc,
+                    padding: '2px 7px', backgroundColor: pc + '1A',
+                    borderRadius: '2px', border: '1px solid ' + pc + '40'
+                  }}>
+                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: pc }} />
+                    {isMobile ? progShort(p) : p}
+                  </span>
+                );
+              })}
             </div>
           </div>
 
@@ -813,22 +918,22 @@ function MeetingCard({ raceDay, isOpen, onToggle, todayIso, isMobile }) {
         <div style={{ backgroundColor: C.cream, borderTop: '1px solid ' + C.forestSoft, padding: isMobile ? '8px 18px 18px' : '12px 24px 22px' }}>
           {raceDay.programmes.map(prog => {
             const races = racesByProgramme[prog] || [];
-            const progColor = prog === 'Imported' ? C.green : C.rust;
+            const progClr = progColor(prog);
             return (
               <div key={prog} style={{ marginTop: '12px' }}>
-                {/* Programme sub-header (only show if both programmes present) */}
+                {/* Programme sub-header (only show if multiple programmes present) */}
                 {hasBoth && (
                   <div style={{
                     display: 'flex', alignItems: 'center', gap: '10px',
                     padding: '8px 12px', marginBottom: '4px',
-                    backgroundColor: prog === 'Imported' ? 'rgba(26,61,42,0.08)' : 'rgba(156,74,44,0.08)',
-                    borderLeft: '3px solid ' + progColor,
+                    backgroundColor: progClr + '14',
+                    borderLeft: '3px solid ' + progClr,
                     borderRadius: '2px'
                   }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: progColor }} />
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: progClr }} />
                     <span style={{
                       fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em',
-                      fontWeight: 700, color: progColor
+                      fontWeight: 700, color: progClr
                     }}>
                       {prog} Programme
                     </span>
@@ -1013,7 +1118,7 @@ export default function App() {
   }, []);
 
   const todayIso = now.toISOString().slice(0, 10);
-  const BLACK_TYPE = ['Group 2','Group 3','Listed','Domestic G1'];
+  const BLACK_TYPE = ['Group 2','Group 3','Listed'];
 
   const onTileMeetings = () => {
     if (activeTile === 'meetings') { setActiveTile(null); return; }
@@ -1067,7 +1172,7 @@ export default function App() {
         meetingNumbers: [...d.meetingNumbers].sort((a, b) => a - b),
         // Sort races: Imported first, then by distance
         races: d.races.sort((a, b) => {
-          if (a.programme !== b.programme) return a.programme === 'Imported' ? -1 : 1;
+          if (a.programme !== b.programme) return progOrder(a.programme) - progOrder(b.programme);
           return a.distance - b.distance;
         })
       }))
@@ -1095,7 +1200,7 @@ export default function App() {
       programmes,
       meetingNumbers,
       races: races.sort((a, b) => {
-        if (a.programme !== b.programme) return a.programme === 'Imported' ? -1 : 1;
+        if (a.programme !== b.programme) return progOrder(a.programme) - progOrder(b.programme);
         return a.distance - b.distance;
       })
     };
@@ -1180,7 +1285,7 @@ export default function App() {
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
           <StatCard label="Race Days" value={stats.totalRaceDays} sub={isMobile ? 'Tap to reset filters' : 'Click to view all race days'} icon={Flag} accentColor={C.green} onClick={onTileMeetings} isActive={activeTile === 'meetings'} />
           <StatCard label="Total Races" value={stats.totalRaces} sub={isMobile ? 'Tap to reset' : 'Click to clear filters'} icon={Sparkles} accentColor={C.gold} onClick={onTileTotal} isActive={false} />
-          <StatCard label="Black-Type" value={stats.blackType} sub={isMobile ? 'Tap for prestige races' : 'Click to filter to G1/G2/G3/Listed'} icon={Award} accentColor={C.burgundy} onClick={onTileBlackType} isActive={activeTile === 'blacktype'} />
+          <StatCard label="Black-Type" value={stats.blackType} sub={isMobile ? 'Tap for prestige races' : 'Click to filter to G2 / G3 / Listed'} icon={Award} accentColor={C.burgundy} onClick={onTileBlackType} isActive={activeTile === 'blacktype'} />
           <StatCard label="Season Days" value={stats.seasonDays} sub="30 Oct → 16 Apr" icon={Calendar} accentColor={C.rust} onClick={onTileSeason} isActive={activeTile === 'season'} />
         </div>
       </section>
@@ -1207,16 +1312,16 @@ export default function App() {
                 </button>
               )}
             </div>
-            <div style={{ display: 'flex', border: '1px solid ' + C.forestSoft, borderRadius: '2px', overflow: 'hidden' }}>
-              {['All','Imported','Bahrain Bred'].map(p => (
+            <div style={{ display: 'flex', border: '1px solid ' + C.forestSoft, borderRadius: '2px', overflow: 'hidden', flexWrap: 'wrap' }}>
+              {['All','Imported','Bahrain Bred','WAHO'].map(p => (
                 <button key={p} onClick={() => setProgramme(p)} style={{
-                  padding: isMobile ? '9px 11px' : '10px 13px',
+                  padding: isMobile ? '9px 10px' : '10px 13px',
                   fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
                   border: 'none', cursor: 'pointer', fontFamily: FONT_BODY,
                   backgroundColor: programme === p ? C.forest : 'transparent',
                   color: programme === p ? C.ivory : C.forestDim
                 }}>
-                  {isMobile ? (p === 'Bahrain Bred' ? 'BB' : p === 'Imported' ? 'IMP' : 'All') : p}
+                  {isMobile && p !== 'All' ? progShort(p) : p}
                 </button>
               ))}
             </div>
