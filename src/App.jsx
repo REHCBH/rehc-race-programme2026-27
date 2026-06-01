@@ -778,7 +778,7 @@ async function exportPDF(rows) {
       doc.setFontSize(7);
       doc.setTextColor(140, 140, 140);
       doc.setFont('helvetica', 'normal');
-      doc.text('Royal Equestrian & Horse Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+      doc.text('Rashid Equestrian & Horseracing Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
       doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
       doc.addPage();
       y = M;
@@ -853,7 +853,7 @@ async function exportPDF(rows) {
   doc.setFontSize(7);
   doc.setTextColor(140, 140, 140);
   doc.setFont('helvetica', 'normal');
-  doc.text('Royal Equestrian & Horse Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+  doc.text('Rashid Equestrian & Horseracing Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
   doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
   doc.text('All races for 3 year olds and upwards except where stated  ·  ** Potential for tiered handicap', M, pageH - 6);
 
@@ -1880,7 +1880,7 @@ export default function App() {
               <Crest size={isMobile ? 48 : 64} />
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '9px', letterSpacing: '0.28em', textTransform: 'uppercase', color: C.forestDim, marginBottom: '4px', fontWeight: 700 }}>
-                  <span>REHC</span>
+                  <span>Rashid Equestrian &amp; Horseracing Club</span>
                   <span style={{ width: '3px', height: '3px', borderRadius: '50%', backgroundColor: C.gold }} />
                   <span>Kingdom of Bahrain</span>
                 </div>
