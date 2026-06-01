@@ -477,6 +477,21 @@ const RACES = PROGRAMME.flatMap((m) =>
   }))
 );
 
+// Designated Feature Days — meetings built around a marquee championship race.
+// Keyed by meeting number; value is the headline race name shown on the ribbon.
+const FEATURE_DAYS = {
+  17: "Crown Prince's Cup",
+  23: "King's Cup"
+};
+// Returns the feature-day label for a race day, or null if it isn't one.
+function featureDayLabel(meetingNumbers) {
+  if (!meetingNumbers) return null;
+  for (const n of meetingNumbers) {
+    if (FEATURE_DAYS[n]) return FEATURE_DAYS[n];
+  }
+  return null;
+}
+
 // =================================================================
 // MOCK ENTRIES & RESULTS DATA
 // In production these would come from an API / database.
@@ -699,7 +714,7 @@ function exportICS() {
       'DTEND;VALUE=DATE:' + endKey,
       'SUMMARY:REHC Meeting ' + m.meeting + ' — ' + m.programme,
       'DESCRIPTION:' + desc,
-      'LOCATION:Sakhir Racecourse, Bahrain',
+      'LOCATION:Bahrain',
       'END:VEVENT'
     );
   });
@@ -754,7 +769,7 @@ async function exportPDF(rows) {
   doc.text('REHC Race Programme', M, 11);
   doc.setFontSize(11);
   doc.setFont('times', 'normal');
-  doc.text('2026 / 27 Season  ·  Sakhir Racecourse, Bahrain', M, 17);
+  doc.text('2026 / 27 Season  ·  Bahrain', M, 17);
   doc.setFontSize(8);
   doc.setTextColor(200, 163, 92);
   doc.text(rows.length + ' races  ·  ' + (new Set(rows.map(function(r){return r.date}))).size + ' race days', pageW - M, 11, { align: 'right' });
@@ -778,7 +793,7 @@ async function exportPDF(rows) {
       doc.setFontSize(7);
       doc.setTextColor(140, 140, 140);
       doc.setFont('helvetica', 'normal');
-      doc.text('Rashid Equestrian & Horseracing Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+      doc.text('Rashid Equestrian & Horseracing Club  ·  Bahrain  ·  Est. 1977', M, pageH - 10);
       doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
       doc.addPage();
       y = M;
@@ -853,7 +868,7 @@ async function exportPDF(rows) {
   doc.setFontSize(7);
   doc.setTextColor(140, 140, 140);
   doc.setFont('helvetica', 'normal');
-  doc.text('Rashid Equestrian & Horseracing Club  ·  Sakhir, Bahrain  ·  Est. 1977', M, pageH - 10);
+  doc.text('Rashid Equestrian & Horseracing Club  ·  Bahrain  ·  Est. 1977', M, pageH - 10);
   doc.text('Page ' + doc.internal.getNumberOfPages(), pageW - M, pageH - 10, { align: 'right' });
   doc.text('All races for 3 year olds and upwards except where stated  ·  ** Potential for tiered handicap', M, pageH - 6);
 
@@ -991,7 +1006,7 @@ function NextUpHero({ daysToNext, nextMeeting, isMobile, todayIso }) {
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: C.gold, fontWeight: 700, marginBottom: '12px' }}>
             <span style={{ width: '20px', height: '1px', backgroundColor: C.gold }} />
-            Next Up
+            {featureDayLabel(nextMeeting.meetingNumbers) ? 'Next Up · Feature Day' : 'Next Up'}
             <span style={{ width: '20px', height: '1px', backgroundColor: C.gold }} />
           </div>
           <div style={{ fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'rgba(242,235,220,0.6)', fontWeight: 600, marginBottom: '8px' }}>
@@ -1059,7 +1074,10 @@ function NextUpHero({ daysToNext, nextMeeting, isMobile, todayIso }) {
 
 function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobile }) {
   const sortedByTier = [...raceDay.races].sort((a, b) => a.tier - b.tier);
-  const spineAccent = ACCENTS[sortedByTier[0].accent];
+  const isFeatureDay = !!featureDayLabel(raceDay.meetingNumbers);
+  const featureLabel = featureDayLabel(raceDay.meetingNumbers);
+  // Feature days always use the gold championship accent.
+  const spineAccent = isFeatureDay ? { bg: C.gold, soft: 'rgba(200,163,92,0.12)' } : ACCENTS[sortedByTier[0].accent];
   const marquee = raceDay.races.find(r => r.tier <= 2);
   const hasBoth = raceDay.programmes.length > 1;
 
@@ -1075,12 +1093,36 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
 
   return (
     <div style={{
-      backgroundColor: isOpen ? C.paper : C.parchment,
-      border: '1px solid ' + (isOpen ? spineAccent.bg : C.forestSoft),
+      backgroundColor: isOpen ? C.paper : (isFeatureDay ? 'rgba(200,163,92,0.08)' : C.parchment),
+      border: '1px solid ' + (isFeatureDay ? C.gold : (isOpen ? spineAccent.bg : C.forestSoft)),
+      borderWidth: isFeatureDay ? '1.5px' : '1px',
       borderRadius: '3px', overflow: 'hidden',
       transition: 'all 0.25s ease',
-      boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : 'none'
+      boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : (isFeatureDay ? '0 2px 14px -8px rgba(200,163,92,0.5)' : 'none')
     }}>
+      {/* Feature Day ribbon */}
+      {isFeatureDay && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          padding: isMobile ? '6px 18px' : '7px 24px',
+          backgroundColor: C.gold,
+          color: '#3A2E12'
+        }}>
+          <Crown size={13} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <span style={{
+            fontSize: '10px', fontWeight: 800, letterSpacing: '0.16em',
+            textTransform: 'uppercase', fontFamily: FONT_BODY
+          }}>
+            Feature Day
+          </span>
+          <span style={{
+            fontSize: '11.5px', fontFamily: FONT_DISPLAY, fontStyle: 'italic',
+            fontWeight: 600, marginLeft: '2px'
+          }}>
+            {featureLabel}
+          </span>
+        </div>
+      )}
       <button onClick={onToggle} style={{
         width: '100%', background: 'none', border: 'none', cursor: 'pointer',
         padding: 0, display: 'block', textAlign: 'left'
