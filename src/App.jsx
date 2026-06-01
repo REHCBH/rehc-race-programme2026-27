@@ -791,7 +791,7 @@ async function exportPDF(rows) {
     const dateObj = new Date(date + 'T00:00:00');
     const dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][dateObj.getDay()];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const programmes = [...new Set(races.map(function(r){return r.programme}))].sort();
+    const programmes = [...new Set(races.map(function(r){return r.programme}))].sort(function(a, b){ return progOrder(a) - progOrder(b); });
 
     ensureRoom(20 + races.length * 7);
 
@@ -1801,7 +1801,7 @@ export default function App() {
     return [...map.values()]
       .map(d => ({
         ...d,
-        programmes: [...d.programmes].sort(),
+        programmes: [...d.programmes].sort((a, b) => progOrder(a) - progOrder(b)),
         meetingNumbers: [...d.meetingNumbers].sort((a, b) => a - b),
         // Sort races: Imported first, then by distance
         races: d.races.sort((a, b) => {
@@ -1829,7 +1829,7 @@ export default function App() {
   const nextMeeting = useMemo(() => {
     if (!stats.nextDate) return null;
     const races = RACES.filter(r => r.date === stats.nextDate);
-    const programmes = [...new Set(races.map(r => r.programme))].sort();
+    const programmes = [...new Set(races.map(r => r.programme))].sort((a, b) => progOrder(a) - progOrder(b));
     const meetingNumbers = [...new Set(races.map(r => r.meeting))].sort((a, b) => a - b);
     return {
       date: stats.nextDate,
