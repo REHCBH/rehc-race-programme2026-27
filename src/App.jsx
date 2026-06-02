@@ -10,7 +10,7 @@ const PROGRAMME = [
     { dist: 1000, text: '0-90', field: null },
     { dist: 1400, text: 'Late HH Sh Rashid Bin Isa Al Khalifa Cup — Domestic Grade 2', field: null },
     { dist: 1600, text: '4th & Maiden', field: null },
-    { dist: 1800, text: 'TBC', field: null }
+    { dist: 1800, text: '0-80 (3yo+)', field: null }
   ]},
   { p: 'I', m: 2, d: '2026-11-06', races: [
     { dist: 1200, text: '0-85', field: null },
@@ -70,7 +70,7 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 11, d: '2026-12-24', races: [
     { dist: 1000, text: '0-90', field: null },
-    { dist: 1200, text: '0-75', field: null },
+    { dist: 1200, text: '0-75 **', field: null },
     { dist: 1400, text: '0-90', field: null },
     { dist: 2000, text: 'Alba Cup — Domestic Grade 2', field: null }
   ]},
@@ -101,9 +101,8 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 16, d: '2027-01-28', races: [
     { dist: 1200, text: 'The Hawar Cup — Turf Series 80-100', field: null },
-    { dist: 1600, text: 'Turf Series 0-100', field: null },
     { dist: 2000, text: 'The Anchorman Cup — Turf Series 80-100', field: null },
-    { dist: 2600, text: '0-100', field: null }
+    { dist: 2400, text: 'Open Handicap', field: null }
   ]},
   { p: 'I', m: 17, d: '2027-01-29', races: [
     { dist: 1000, text: '0-80', field: null },
@@ -120,7 +119,7 @@ const PROGRAMME = [
   { p: 'I', m: 19, d: '2027-02-11', races: [
     { dist: 1200, text: '0-85', field: null },
     { dist: 1400, text: '4th & Maiden (3yo)', field: null },
-    { dist: 2000, text: '0-75', field: null },
+    { dist: 2000, text: '0-75 **', field: null },
     { dist: 2200, text: '0-95', field: null }
   ]},
   { p: 'I', m: 20, d: '2027-02-18', races: [
@@ -132,14 +131,13 @@ const PROGRAMME = [
   { p: 'I', m: 21, d: '2027-02-25', races: [
     { dist: 1000, text: '0-75 APP', field: null },
     { dist: 1200, text: 'Domestic Grade 2', field: null },
-    { dist: 1400, text: '0-75', field: null },
+    { dist: 1400, text: '0-75 **', field: null },
     { dist: 2000, text: '0-80 (3yo+)', field: null },
     { dist: 2400, text: '0-90', field: null }
   ]},
   { p: 'I', m: 22, d: '2027-03-04', races: [
     { dist: 1200, text: 'Al Fateh Cup — Turf Series 80-100', field: null },
     { dist: 1400, text: 'Maiden (3yo+)', field: null },
-    { dist: 1600, text: 'Turf Series 0-100', field: null },
     { dist: 2000, text: 'The International Handicap — Turf Series 80-100', field: null }
   ]},
   { p: 'I', m: 23, d: '2027-03-05', races: [
@@ -313,7 +311,7 @@ const PROGRAMME = [
   { p: 'B', m: 24, d: '2027-03-12', races: [
     { dist: 1000, text: '3rd, 4th & Maiden (3yo) — Challenge Series', field: null },
     { dist: 1400, text: '3rd, 4th & Maiden (3yo) — Challenge Series', field: null },
-    { dist: 2000, text: '0-35', field: null }
+    { dist: 2000, text: '0-35 **', field: null }
   ]},
   { p: 'B', m: 25, d: '2027-03-19', races: [
     { dist: 1000, text: '0-60', field: null },
@@ -477,20 +475,70 @@ const RACES = PROGRAMME.flatMap((m) =>
   }))
 );
 
-// Designated Feature Days — meetings built around a marquee championship race.
-// Keyed by meeting number; value is the headline race name shown on the ribbon.
+// =================================================================
+// MEETING METADATA — festivals, day types, Ramadan, series
+// =================================================================
+// Feature days / festivals. A festival can span more than one meeting.
+// Keyed by meeting number → { label, festival? } where festival groups
+// multiple meetings under one banner.
 const FEATURE_DAYS = {
-  17: "Crown Prince's Cup",
-  23: "King's Cup"
+  3:  { label: 'Bahrain International Trophy', kind: 'international' },
+  16: { label: "Crown Prince's Cup Festival", kind: 'crown', festival: 'crown' },
+  17: { label: "Crown Prince's Cup Festival", kind: 'crown', festival: 'crown' },
+  22: { label: "King's Cup Festival", kind: 'kings', festival: 'kings' },
+  23: { label: "King's Cup Festival", kind: 'kings', festival: 'kings' }
 };
-// Returns the feature-day label for a race day, or null if it isn't one.
-function featureDayLabel(meetingNumbers) {
+
+// Ramadan 2027 falls mid-season (the purple band in the official programme,
+// Meetings 19–23, 11 Feb – 5 Mar 2027). These run under Ramadan timings.
+// Within this block the Thursday fixtures are 19, 20, 21 & 22 (M23 is a Friday).
+const RAMADAN_MEETINGS = [19, 20, 21, 22, 23];
+const RAMADAN_THURSDAY_MEETINGS = [19, 20, 21, 22];
+
+// Returns the feature-day descriptor for a race day, or null.
+function featureDayInfo(meetingNumbers) {
   if (!meetingNumbers) return null;
   for (const n of meetingNumbers) {
     if (FEATURE_DAYS[n]) return FEATURE_DAYS[n];
   }
   return null;
 }
+// Back-compat: just the label string.
+function featureDayLabel(meetingNumbers) {
+  const info = featureDayInfo(meetingNumbers);
+  return info ? info.label : null;
+}
+// Is any meeting on this day within the Ramadan block?
+function isRamadanMeeting(meetingNumbers) {
+  if (!meetingNumbers) return false;
+  return meetingNumbers.some(n => RAMADAN_MEETINGS.includes(n));
+}
+// Is this specifically a Ramadan Thursday fixture?
+function isRamadanThursday(meetingNumbers) {
+  if (!meetingNumbers) return false;
+  return meetingNumbers.some(n => RAMADAN_THURSDAY_MEETINGS.includes(n));
+}
+// Does this day include any Turf Series race?
+function hasTurfSeries(races) {
+  if (!races) return false;
+  return races.some(r => /turf series/i.test(r.text));
+}
+// Day-of-week type from an ISO date → 'thu' | 'fri' | 'sat' | 'other'
+function dayType(iso) {
+  const wd = new Date(iso + 'T00:00:00').getDay(); // 0=Sun..6=Sat
+  if (wd === 4) return 'thu';
+  if (wd === 5) return 'fri';
+  if (wd === 6) return 'sat';
+  return 'other';
+}
+// Colour + short label for each day type (mirrors the official programme legend).
+const DAY_TYPE_META = {
+  thu: { label: 'Thursday', color: '#2F6FB0' },
+  fri: { label: 'Friday',   color: '#E0A21A' },
+  sat: { label: 'Saturday', color: '#D2463A' },
+  other: { label: '', color: '#8A857C' }
+};
+
 
 // =================================================================
 // MOCK ENTRIES & RESULTS DATA
@@ -1074,10 +1122,26 @@ function NextUpHero({ daysToNext, nextMeeting, isMobile, todayIso }) {
 
 function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobile }) {
   const sortedByTier = [...raceDay.races].sort((a, b) => a.tier - b.tier);
-  const isFeatureDay = !!featureDayLabel(raceDay.meetingNumbers);
-  const featureLabel = featureDayLabel(raceDay.meetingNumbers);
-  // Feature days always use the gold championship accent.
-  const spineAccent = isFeatureDay ? { bg: C.gold, soft: 'rgba(200,163,92,0.12)' } : ACCENTS[sortedByTier[0].accent];
+  const featureInfo = featureDayInfo(raceDay.meetingNumbers);
+  const isFeatureDay = !!featureInfo;
+  const featureLabel = featureInfo ? featureInfo.label : null;
+  const featureKind = featureInfo ? featureInfo.kind : null;
+  const isRamadan = isRamadanMeeting(raceDay.meetingNumbers);
+  const isRamadanThu = isRamadanThursday(raceDay.meetingNumbers);
+  const turfSeriesDay = hasTurfSeries(raceDay.races);
+  const dt = dayType(raceDay.date);
+  const dtMeta = DAY_TYPE_META[dt];
+
+  // Ribbon colour scheme by festival kind.
+  const ribbonScheme = featureKind === 'international'
+    ? { bg: '#0B223E', fg: '#F2EBDC', icon: 'flag' }       // navy — International
+    : featureKind === 'crown'
+    ? { bg: '#6B2737', fg: '#F2EBDC', icon: 'crown' }       // burgundy — Crown Prince
+    : featureKind === 'kings'
+    ? { bg: '#C8A35C', fg: '#3A2E12', icon: 'crown' }       // gold — King's
+    : { bg: C.gold, fg: '#3A2E12', icon: 'crown' };
+  // Feature days always use a championship accent on the spine.
+  const spineAccent = isFeatureDay ? { bg: ribbonScheme.bg, soft: 'rgba(200,163,92,0.12)' } : ACCENTS[sortedByTier[0].accent];
   const marquee = raceDay.races.find(r => r.tier <= 2);
   const hasBoth = raceDay.programmes.length > 1;
 
@@ -1094,32 +1158,51 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
   return (
     <div style={{
       backgroundColor: isOpen ? C.paper : (isFeatureDay ? 'rgba(200,163,92,0.08)' : C.parchment),
-      border: '1px solid ' + (isFeatureDay ? C.gold : (isOpen ? spineAccent.bg : C.forestSoft)),
+      border: '1px solid ' + (isFeatureDay ? ribbonScheme.bg : (isOpen ? spineAccent.bg : C.forestSoft)),
       borderWidth: isFeatureDay ? '1.5px' : '1px',
       borderRadius: '3px', overflow: 'hidden',
       transition: 'all 0.25s ease',
-      boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : (isFeatureDay ? '0 2px 14px -8px rgba(200,163,92,0.5)' : 'none')
+      boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : (isFeatureDay ? '0 2px 14px -8px rgba(11,34,62,0.3)' : 'none')
     }}>
-      {/* Feature Day ribbon */}
+      {/* Feature / Festival ribbon */}
       {isFeatureDay && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: '8px',
           padding: isMobile ? '6px 18px' : '7px 24px',
-          backgroundColor: C.gold,
-          color: '#3A2E12'
+          backgroundColor: ribbonScheme.bg,
+          color: ribbonScheme.fg
         }}>
-          <Crown size={13} strokeWidth={2} style={{ flexShrink: 0 }} />
+          {ribbonScheme.icon === 'flag'
+            ? <Flag size={13} strokeWidth={2} style={{ flexShrink: 0 }} />
+            : <Crown size={13} strokeWidth={2} style={{ flexShrink: 0 }} />}
           <span style={{
             fontSize: '10px', fontWeight: 800, letterSpacing: '0.16em',
             textTransform: 'uppercase', fontFamily: FONT_BODY
           }}>
-            Feature Day
+            {featureKind === 'international' ? 'Feature Day' : 'Festival'}
           </span>
           <span style={{
             fontSize: '11.5px', fontFamily: FONT_DISPLAY, fontStyle: 'italic',
             fontWeight: 600, marginLeft: '2px'
           }}>
             {featureLabel}
+          </span>
+        </div>
+      )}
+      {/* Ramadan ribbon (shows alongside festival ribbon when both apply) */}
+      {isRamadan && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          padding: isMobile ? '5px 18px' : '6px 24px',
+          backgroundColor: '#7C5295',
+          color: '#F2EBDC'
+        }}>
+          <Sparkles size={12} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <span style={{
+            fontSize: '10px', fontWeight: 800, letterSpacing: '0.16em',
+            textTransform: 'uppercase', fontFamily: FONT_BODY
+          }}>
+            {isRamadanThu ? 'Ramadan Meeting · Thursday' : 'Ramadan Meeting'}
           </span>
         </div>
       )}
@@ -1160,14 +1243,22 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
             <div style={{
               fontSize: isMobile ? '13px' : '14px',
               fontFamily: FONT_DISPLAY, fontStyle: 'italic',
-              color: C.forest, lineHeight: 1.2, marginBottom: '6px'
+              color: C.forest, lineHeight: 1.2, marginBottom: '6px',
+              display: 'flex', alignItems: 'center', gap: '7px'
             }}>
-              {dayOfWeek(raceDay.date)}
-              {!isMobile && raceDay.meetingNumbers.length > 0 && (
-                <span style={{ color: 'rgba(26,46,32,0.4)', marginLeft: '6px', fontStyle: 'normal' }}>
-                  · Meeting {raceDay.meetingNumbers.map(m => String(m).padStart(2, '0')).join(' / ')}
-                </span>
-              )}
+              <span title={dtMeta.label} style={{
+                width: '9px', height: '9px', borderRadius: '2px',
+                backgroundColor: dtMeta.color, flexShrink: 0,
+                border: dt === 'fri' ? '1px solid rgba(0,0,0,0.15)' : 'none'
+              }} />
+              <span>
+                {dayOfWeek(raceDay.date)}
+                {!isMobile && raceDay.meetingNumbers.length > 0 && (
+                  <span style={{ color: 'rgba(26,46,32,0.4)', marginLeft: '6px', fontStyle: 'normal' }}>
+                    · Meeting {raceDay.meetingNumbers.map(m => String(m).padStart(2, '0')).join(' / ')}
+                  </span>
+                )}
+              </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
               {raceDay.programmes.map(p => {
@@ -1185,6 +1276,18 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
                   </span>
                 );
               })}
+              {turfSeriesDay && (
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '5px',
+                  fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em',
+                  fontWeight: 700, color: '#3B6B6B',
+                  padding: '2px 7px', backgroundColor: 'rgba(59,107,107,0.12)',
+                  borderRadius: '2px', border: '1px solid rgba(59,107,107,0.4)'
+                }}>
+                  <Sparkles size={9} strokeWidth={2} />
+                  Turf Series
+                </span>
+              )}
             </div>
           </div>
 
@@ -2112,6 +2215,37 @@ export default function App() {
 
       {/* RACE DAY LIST */}
       <main style={{ maxWidth: MW, margin: '0 auto', padding: (isMobile ? '16px' : '24px') + ' ' + PX + ' 64px' }}>
+        {/* Legend */}
+        {groupedByDate.length > 0 && (
+          <div className="rehc-no-print" style={{
+            display: 'flex', alignItems: 'center', gap: isMobile ? '10px' : '16px',
+            flexWrap: 'wrap', marginBottom: '16px',
+            padding: '10px 14px', backgroundColor: C.parchment,
+            border: '1px solid ' + C.forestSoft, borderRadius: '3px',
+            fontSize: '10.5px', fontFamily: FONT_BODY
+          }}>
+            <span style={{ textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, color: C.forestDim }}>Legend</span>
+            {[
+              { c: DAY_TYPE_META.thu.color, label: 'Thursday' },
+              { c: DAY_TYPE_META.fri.color, label: 'Friday' },
+              { c: DAY_TYPE_META.sat.color, label: 'Saturday' }
+            ].map(item => (
+              <span key={item.label} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: C.forest }}>
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', backgroundColor: item.c, border: item.label === 'Friday' ? '1px solid rgba(0,0,0,0.15)' : 'none' }} />
+                {item.label}
+              </span>
+            ))}
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#7C5295', fontWeight: 600 }}>
+              <Sparkles size={11} strokeWidth={2} /> Ramadan
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#3B6B6B', fontWeight: 600 }}>
+              <Sparkles size={11} strokeWidth={2} /> Turf Series
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: C.forest, fontWeight: 600 }}>
+              <Crown size={11} strokeWidth={2} style={{ color: C.gold }} /> Feature / Festival
+            </span>
+          </div>
+        )}
         {groupedByDate.length === 0 ? (
           <div style={{ backgroundColor: C.parchment, border: '1px solid ' + C.forestSoft, padding: '64px 24px', textAlign: 'center', borderRadius: '3px' }}>
             <div style={{ fontSize: '20px', marginBottom: '8px', fontFamily: FONT_DISPLAY, fontStyle: 'italic' }}>No races match these filters</div>
