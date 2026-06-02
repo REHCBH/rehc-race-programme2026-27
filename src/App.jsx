@@ -495,6 +495,28 @@ const FEATURE_DAYS = {
 const RAMADAN_MEETINGS = [19, 20, 21, 22, 23];
 const RAMADAN_THURSDAY_MEETINGS = [19, 20, 21, 22];
 
+// Special series days from the Bahrain Bred programme legend.
+//   Champions Day (green) · Future Champions Day (brown) · Future Stars (blue)
+// Keyed by meeting number → series key.
+const SERIES_DAYS = {
+  24: 'futureStars',       // Challenge Series heats
+  26: 'futureStars',       // Challenge Series heats
+  29: 'futureChampions',   // Series Finals
+  30: 'champions'          // Season finale — Champions Day
+};
+const SERIES_META = {
+  champions:       { label: 'Champions Day',        color: '#2E8B57' }, // green
+  futureChampions: { label: 'Future Champions Day', color: '#9C4A2C' }, // brown/rust
+  futureStars:     { label: 'Future Stars',         color: '#2F6FB0' }  // blue
+};
+function seriesInfo(meetingNumbers) {
+  if (!meetingNumbers) return null;
+  for (const n of meetingNumbers) {
+    if (SERIES_DAYS[n]) return SERIES_META[SERIES_DAYS[n]];
+  }
+  return null;
+}
+
 // Returns the feature-day descriptor for a race day, or null.
 function featureDayInfo(meetingNumbers) {
   if (!meetingNumbers) return null;
@@ -1129,6 +1151,7 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
   const isRamadan = isRamadanMeeting(raceDay.meetingNumbers);
   const isRamadanThu = isRamadanThursday(raceDay.meetingNumbers);
   const turfSeriesDay = hasTurfSeries(raceDay.races);
+  const series = seriesInfo(raceDay.meetingNumbers);
   const dt = dayType(raceDay.date);
   const dtMeta = DAY_TYPE_META[dt];
 
@@ -1286,6 +1309,18 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
                 }}>
                   <Sparkles size={9} strokeWidth={2} />
                   Turf Series
+                </span>
+              )}
+              {series && (
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '5px',
+                  fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em',
+                  fontWeight: 700, color: series.color,
+                  padding: '2px 7px', backgroundColor: series.color + '1A',
+                  borderRadius: '2px', border: '1px solid ' + series.color + '66'
+                }}>
+                  <Award size={9} strokeWidth={2} />
+                  {series.label}
                 </span>
               )}
             </div>
@@ -2240,6 +2275,15 @@ export default function App() {
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#3B6B6B', fontWeight: 600 }}>
               <Sparkles size={11} strokeWidth={2} /> Turf Series
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#2F6FB0', fontWeight: 600 }}>
+              <Award size={11} strokeWidth={2} /> Future Stars
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#9C4A2C', fontWeight: 600 }}>
+              <Award size={11} strokeWidth={2} /> Future Champions
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#2E8B57', fontWeight: 600 }}>
+              <Award size={11} strokeWidth={2} /> Champions Day
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: C.forest, fontWeight: 600 }}>
               <Crown size={11} strokeWidth={2} style={{ color: C.gold }} /> Feature / Festival
