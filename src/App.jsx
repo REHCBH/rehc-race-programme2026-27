@@ -505,9 +505,9 @@ const SERIES_DAYS = {
   30: 'champions'          // Season finale — Champions Day
 };
 const SERIES_META = {
-  champions:       { label: 'Champions Day',        color: '#2E8B57' }, // green
-  futureChampions: { label: 'Future Champions Day', color: '#9C4A2C' }, // brown/rust
-  futureStars:     { label: 'Future Stars',         color: '#2F6FB0' }  // blue
+  champions:       { label: 'Champions Day',        color: '#2E8B57', tagline: 'Season finale' },        // green
+  futureChampions: { label: 'Future Champions Day', color: '#9C4A2C', tagline: 'Series finals' },         // brown/rust
+  futureStars:     { label: 'Future Stars',         color: '#2F6FB0', tagline: 'Challenge Series' }       // blue
 };
 function seriesInfo(meetingNumbers) {
   if (!meetingNumbers) return null;
@@ -1180,9 +1180,9 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
 
   return (
     <div style={{
-      backgroundColor: isOpen ? C.paper : (isFeatureDay ? 'rgba(200,163,92,0.08)' : C.parchment),
-      border: '1px solid ' + (isFeatureDay ? ribbonScheme.bg : (isOpen ? spineAccent.bg : C.forestSoft)),
-      borderWidth: isFeatureDay ? '1.5px' : '1px',
+      backgroundColor: isOpen ? C.paper : (isFeatureDay ? 'rgba(200,163,92,0.08)' : (series ? series.color + '0D' : C.parchment)),
+      border: '1px solid ' + (isFeatureDay ? ribbonScheme.bg : (series ? series.color : (isOpen ? spineAccent.bg : C.forestSoft))),
+      borderWidth: (isFeatureDay || series) ? '1.5px' : '1px',
       borderRadius: '3px', overflow: 'hidden',
       transition: 'all 0.25s ease',
       boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : (isFeatureDay ? '0 2px 14px -8px rgba(11,34,62,0.3)' : 'none')
@@ -1226,6 +1226,29 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
             textTransform: 'uppercase', fontFamily: FONT_BODY
           }}>
             {isRamadanThu ? 'Ramadan Meeting · Thursday' : 'Ramadan Meeting'}
+          </span>
+        </div>
+      )}
+      {/* Series ribbon — Champions Day / Future Champions Day / Future Stars */}
+      {series && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          padding: isMobile ? '6px 18px' : '7px 24px',
+          backgroundColor: series.color,
+          color: '#FFFFFF'
+        }}>
+          <Award size={13} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <span style={{
+            fontSize: '10px', fontWeight: 800, letterSpacing: '0.16em',
+            textTransform: 'uppercase', fontFamily: FONT_BODY
+          }}>
+            {series.label}
+          </span>
+          <span style={{
+            fontSize: '11.5px', fontFamily: FONT_DISPLAY, fontStyle: 'italic',
+            fontWeight: 600, marginLeft: '2px', color: 'rgba(255,255,255,0.85)'
+          }}>
+            {series.tagline}
           </span>
         </div>
       )}
@@ -1309,18 +1332,6 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
                 }}>
                   <Sparkles size={9} strokeWidth={2} />
                   Turf Series
-                </span>
-              )}
-              {series && (
-                <span style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em',
-                  fontWeight: 700, color: series.color,
-                  padding: '2px 7px', backgroundColor: series.color + '1A',
-                  borderRadius: '2px', border: '1px solid ' + series.color + '66'
-                }}>
-                  <Award size={9} strokeWidth={2} />
-                  {series.label}
                 </span>
               )}
             </div>
