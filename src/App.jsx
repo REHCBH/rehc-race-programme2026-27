@@ -10,7 +10,7 @@ const PROGRAMME = [
     { dist: 1000, text: '0-90', field: null },
     { dist: 1400, text: 'Late HH Sh Rashid Bin Isa Al Khalifa Cup — Domestic Grade 2', field: null },
     { dist: 1600, text: '4th & Maiden', field: null },
-    { dist: 1800, text: '0-80 (3yo+)', field: null }
+    { dist: 1800, text: '0-80', field: null }
   ]},
   { p: 'I', m: 2, d: '2026-11-06', races: [
     { dist: 1200, text: '0-85', field: null },
@@ -34,7 +34,7 @@ const PROGRAMME = [
   { p: 'I', m: 5, d: '2026-11-26', races: [
     { dist: 1000, text: '0-75', field: null },
     { dist: 1200, text: 'Domestic Grade 2', field: null },
-    { dist: 1400, text: '0-70 (APP)', field: null },
+    { dist: 1400, text: '0-70', field: null },
     { dist: 2000, text: 'Domestic Grade 2', field: null },
     { dist: 2200, text: '0-75', field: null }
   ]},
@@ -45,7 +45,7 @@ const PROGRAMME = [
     { dist: 1800, text: '0-95', field: null }
   ]},
   { p: 'I', m: 7, d: '2026-12-04', races: [
-    { dist: 1200, text: 'Fillies & Mares — Race Type TBC', field: null },
+    { dist: 1400, text: 'Fillies & Mares (TBC)', field: null },
     { dist: 1600, text: '0-80', field: null },
     { dist: 2000, text: '0-80', field: null },
     { dist: 2400, text: '0-75', field: null }
@@ -58,60 +58,61 @@ const PROGRAMME = [
   { p: 'I', m: 9, d: '2026-12-17', races: [
     { dist: 1200, text: 'Bahrain Olympic Committee Cup — Domestic Grade 2 **', field: null },
     { dist: 1400, text: '0-80', field: null },
-    { dist: 1400, text: '4th & Maiden — 2yo', field: null },
-    { dist: 1600, text: '0-90', field: null }
+    { dist: 1400, text: '4th & Maiden (2yo)', field: null },
+    { dist: 1600, text: '0-90', field: null },
+    { dist: 2400, text: 'National Day Cup — Domestic Grade 1', field: null }
   ]},
   { p: 'I', m: 10, d: '2026-12-18', races: [
     { dist: 1000, text: 'Al Manama Cup — Turf Series 84-100', field: null },
     { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup — Listed', field: null },
-    { dist: 1600, text: '0-100 (no guests) — Turf Series', field: null },
-    { dist: 2000, text: 'Al Muharraq Cup — Turf Series 84-100', field: null },
-    { dist: 2400, text: 'National Day Cup — Domestic Grade 1', field: null }
+    { dist: 1600, text: 'Turf Series 84-100', field: null },
+    { dist: 2000, text: 'Al Muharraq Cup — Turf Series 84-100', field: null }
   ]},
   { p: 'I', m: 11, d: '2026-12-24', races: [
     { dist: 1000, text: '0-90', field: null },
     { dist: 1200, text: '0-75 **', field: null },
     { dist: 1400, text: '0-90', field: null },
-    { dist: 2000, text: 'Alba Cup — Domestic Grade 2', field: null }
+    { dist: 2000, text: 'Domestic Grade 2', field: null }
   ]},
   { p: 'I', m: 12, d: '2027-01-02', races: [
     { dist: 1000, text: '4th & Maiden', field: null },
     { dist: 1200, text: 'Al Riffa Cup — Turf Series 80-100', field: null },
-    { dist: 1600, text: 'Turf Series 0-100', field: null },
+    { dist: 1600, text: 'Turf Series 80-100', field: null },
     { dist: 2000, text: 'Al Dana Cup — Turf Series 80-100', field: null }
   ]},
   { p: 'I', m: 13, d: '2027-01-08', races: [
-    { dist: 1200, text: '0-90', field: null },
+    { dist: 1200, text: '0-90 (APP)', field: null },
     { dist: 1400, text: '0-70', field: null },
     { dist: 1800, text: '4th & Maiden', field: null },
     { dist: 2400, text: '0-75', field: null }
   ]},
   { p: 'I', m: 14, d: '2027-01-15', races: [
-    { dist: 1000, text: 'Al Wasmiya Cup 4yo+ — Domestic Grade 1', field: null },
-    { dist: 1400, text: 'Southern Governorate Cup 4yo+ — Domestic Grade 1', field: null },
-    { dist: 1800, text: 'Al Adiyat Cup 4yo+ — Listed', field: null },
+    { dist: 1000, text: 'Al Wasmiya Cup (4yo+) — Domestic Grade 1', field: null },
+    { dist: 1400, text: 'Southern Governorate Cup (4yo+) — Domestic Grade 1', field: null },
+    { dist: 1800, text: 'Al Adiyat Cup (4yo+) — Listed', field: null },
     { dist: 2000, text: '0-85', field: null }
   ]},
   { p: 'I', m: 15, d: '2027-01-22', races: [
     { dist: 1200, text: '4th & Maiden (3yo)', field: null },
-    { dist: 1200, text: '0-75 *', field: null },
-    { dist: 1400, text: '4th & Maiden', field: null },
+    { dist: 1200, text: '0-75 **', field: null },
+    { dist: 1400, text: '4th & Maiden (APP)', field: null },
     { dist: 1600, text: '0-90', field: null },
-    { dist: 2200, text: '0-80 APP', field: null }
+    { dist: 2200, text: '0-80', field: null }
   ]},
   { p: 'I', m: 16, d: '2027-01-28', races: [
     { dist: 1200, text: 'The Hawar Cup — Turf Series 80-100', field: null },
+    { dist: 1600, text: 'Turf Series 80-100', field: null },
     { dist: 2000, text: 'The Anchorman Cup — Turf Series 80-100', field: null },
     { dist: 2400, text: 'Open Handicap', field: null }
   ]},
   { p: 'I', m: 17, d: '2027-01-29', races: [
     { dist: 1000, text: '0-80', field: null },
     { dist: 1200, text: 'Domestic Grade 2', field: null },
-    { dist: 1600, text: 'Bahrain Mile 4yo+ — Domestic Grade 1', field: null },
-    { dist: 2000, text: "Crown Prince's Cup 4yo+ — Group 3", field: null }
+    { dist: 1600, text: 'Bahrain Mile (4yo+) — Domestic Grade 1', field: null },
+    { dist: 2000, text: "The Crown Prince's Cup (4yo+) — Group 3", field: null }
   ]},
   { p: 'I', m: 18, d: '2027-02-05', races: [
-    { dist: 1200, text: '0-70', field: null },
+    { dist: 1200, text: '0-70 (APP)', field: null },
     { dist: 1600, text: '0-75', field: null },
     { dist: 2000, text: '4th & Maiden', field: null },
     { dist: 2400, text: '0-85', field: null }
@@ -129,22 +130,23 @@ const PROGRAMME = [
     { dist: 2200, text: 'HH Sh Nasser Bin Hamad Al Khalifa Cup — Listed', field: null }
   ]},
   { p: 'I', m: 21, d: '2027-02-25', races: [
-    { dist: 1000, text: '0-75 APP', field: null },
+    { dist: 1000, text: '0-75', field: null },
     { dist: 1200, text: 'Domestic Grade 2', field: null },
     { dist: 1400, text: '0-75 **', field: null },
-    { dist: 2000, text: '0-80 (3yo+)', field: null },
+    { dist: 2000, text: '0-80', field: null },
     { dist: 2400, text: '0-90', field: null }
   ]},
   { p: 'I', m: 22, d: '2027-03-04', races: [
     { dist: 1200, text: 'Al Fateh Cup — Turf Series 80-100', field: null },
-    { dist: 1400, text: 'Maiden (3yo+)', field: null },
+    { dist: 1400, text: 'Maiden', field: null },
+    { dist: 1600, text: 'Turf Series 80-100', field: null },
     { dist: 2000, text: 'The International Handicap — Turf Series 80-100', field: null }
   ]},
   { p: 'I', m: 23, d: '2027-03-05', races: [
-    { dist: 1000, text: "Chairman's Cup 4yo+ — Domestic Grade 1", field: null },
-    { dist: 1600, text: 'Al Methaq Cup 4yo+ — Listed', field: null },
+    { dist: 1000, text: "Chairman's Cup (4yo+) — Domestic Grade 1", field: null },
+    { dist: 1600, text: 'Al Methaq Cup (4yo+) — Listed', field: null },
     { dist: 2000, text: '0-90', field: null },
-    { dist: 2400, text: "King's Cup 4yo+ — Group 3", field: null }
+    { dist: 2400, text: "The King's Cup (4yo+) — Group 3", field: null }
   ]},
   { p: 'I', m: 24, d: '2027-03-12', races: [
     { dist: 1200, text: '4th & Maiden', field: null },
@@ -154,7 +156,7 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 25, d: '2027-03-19', races: [
     { dist: 1200, text: 'Domestic Grade 2', field: null },
-    { dist: 1600, text: '0-75 APP', field: null },
+    { dist: 1600, text: '0-75 (APP)', field: null },
     { dist: 1800, text: '0-95', field: null },
     { dist: 2400, text: '0-90', field: null }
   ]},
@@ -162,7 +164,7 @@ const PROGRAMME = [
     { dist: 1200, text: '0-75', field: null },
     { dist: 1400, text: 'Domestic Grade 1', field: null },
     { dist: 1600, text: '4th & Maiden (3yo)', field: null },
-    { dist: 2000, text: 'REHC Cup — Domestic Grade 2', field: null }
+    { dist: 2000, text: 'Domestic Grade 2', field: null }
   ]},
   { p: 'I', m: 27, d: '2027-04-02', races: [
     { dist: 1200, text: '0-95', field: null },
@@ -170,7 +172,7 @@ const PROGRAMME = [
     { dist: 2200, text: '0-65', field: null }
   ]},
   { p: 'I', m: 28, d: '2027-04-08', races: [
-    { dist: 1000, text: '0-65 APP', field: null },
+    { dist: 1000, text: '0-65 (APP)', field: null },
     { dist: 1400, text: '0-75', field: null },
     { dist: 1800, text: '0-85', field: null }
   ]},
@@ -193,7 +195,7 @@ const PROGRAMME = [
   ]},
   { p: 'B', m: 2, d: '2026-11-06', races: [
     { dist: 1200, text: '0-40', field: null },
-    { dist: 1400, text: 'Maiden (F&M)', field: null },
+    { dist: 1400, text: 'Maiden (Fillies & Mares)', field: null },
     { dist: 2200, text: '0-45', field: null }
   ]},
   { p: 'B', m: 3, d: '2026-11-13', races: [
@@ -226,12 +228,12 @@ const PROGRAMME = [
   ]},
   { p: 'B', m: 8, d: '2026-12-11', races: [
     { dist: 1200, text: '0-45 *', field: null },
-    { dist: 1400, text: '4th & Maiden', field: null },
+    { dist: 1400, text: '4th & Maiden (APP)', field: null },
     { dist: 1600, text: '0-40', field: null },
     { dist: 2200, text: '0-50', field: null }
   ]},
   { p: 'B', m: 9, d: '2026-12-17', races: [
-    { dist: 1600, text: 'Maiden (4yo+) (F&M)', field: null },
+    { dist: 1600, text: 'Maiden (4yo+) (Fillies & Mares)', field: null },
     { dist: 1800, text: '4th & Maiden', field: null }
   ]},
   { p: 'B', m: 10, d: '2026-12-18', races: [
@@ -240,15 +242,15 @@ const PROGRAMME = [
     { dist: 2000, text: 'Domestic Grade 2', field: null }
   ]},
   { p: 'B', m: 11, d: '2026-12-24', races: [
-    { dist: 1200, text: 'Maiden (F&M) 4yo+', field: null },
-    { dist: 1400, text: '0-35 (APP)', field: null },
+    { dist: 1200, text: 'Maiden (Fillies & Mares) (4yo)', field: null },
+    { dist: 1400, text: '0-35', field: null },
     { dist: 1800, text: '0-45', field: null }
   ]},
   { p: 'B', m: 12, d: '2027-01-02', races: [
     { dist: 1000, text: '4th & Maiden', field: null },
     { dist: 1800, text: 'Domestic Grade 2 (4yo)', field: null },
     { dist: 1800, text: 'Domestic Grade 2 (4yoF)', field: null },
-    { dist: 2000, text: 'All Classes', field: null },
+    { dist: 2000, text: 'All Classes (5yo+)', field: null },
     { dist: 2000, text: 'Maiden (4yo+)', field: null }
   ]},
   { p: 'B', m: 13, d: '2027-01-08', races: [
@@ -269,33 +271,34 @@ const PROGRAMME = [
   { p: 'B', m: 16, d: '2027-01-28', races: [
     { dist: 1000, text: '0-55', field: null },
     { dist: 1400, text: '4th & Maiden', field: null },
-    { dist: 1800, text: 'Bahrain Oaks — Domestic Grade 1 (4yoF)', field: null },
+    { dist: 1800, text: 'Bahrain Oaks (4yoF) — Domestic Grade 1', field: null },
     { dist: 2200, text: '0-50', field: null }
   ]},
   { p: 'B', m: 17, d: '2027-01-29', races: [
-    { dist: 1000, text: 'Domestic Grade 2', field: null },
-    { dist: 2000, text: "Crown Prince's Cup — Domestic Grade 1", field: null },
-    { dist: 2000, text: 'Derby 4yo — Domestic Grade 1', field: null }
+    { dist: 1000, text: 'Domestic Grade 1', field: null },
+    { dist: 2000, text: "The Crown Prince's Cup — Domestic Grade 1", field: null },
+    { dist: 2000, text: 'Derby (4yo) — Domestic Grade 1', field: null }
   ]},
   { p: 'B', m: 18, d: '2027-02-05', races: [
     { dist: 1000, text: 'Maiden (3yo)', field: null },
-    { dist: 1200, text: '0-40 (APP)', field: null },
+    { dist: 1200, text: '0-40', field: null },
     { dist: 1600, text: '0-60', field: null },
     { dist: 2000, text: '0-40', field: null }
   ]},
   { p: 'B', m: 19, d: '2027-02-11', races: [
     { dist: 1400, text: '0-45', field: null },
-    { dist: 1800, text: 'Maiden (4yo+)', field: null },
+    { dist: 1800, text: 'Maiden (4yo+) (APP)', field: null },
     { dist: 2200, text: 'Domestic Grade 2', field: null }
   ]},
   { p: 'B', m: 20, d: '2027-02-18', races: [
     { dist: 1200, text: 'Open Handicap', field: null },
+    { dist: 1400, text: '4th & Maiden (3yo)', field: null },
     { dist: 1600, text: 'Domestic Grade 2', field: null },
-    { dist: 1600, text: 'Maiden 4yo+', field: null }
+    { dist: 1600, text: 'Maiden (4yo+)', field: null }
   ]},
   { p: 'B', m: 21, d: '2027-02-25', races: [
-    { dist: 1200, text: '0-45 *', field: null },
-    { dist: 1600, text: 'F&M Maiden (3yo+)', field: null },
+    { dist: 1200, text: '0-45* (APP)', field: null },
+    { dist: 1600, text: 'Fillies & Mares Maiden', field: null },
     { dist: 2200, text: '0-35', field: null }
   ]},
   { p: 'B', m: 22, d: '2027-03-04', races: [
@@ -306,17 +309,17 @@ const PROGRAMME = [
   { p: 'B', m: 23, d: '2027-03-05', races: [
     { dist: 1400, text: 'Domestic Grade 2', field: null },
     { dist: 1600, text: '4th & Maiden', field: null },
-    { dist: 2400, text: "King's Cup — Domestic Grade 1", field: null }
+    { dist: 2400, text: "The King's Cup — Domestic Grade 1", field: null }
   ]},
   { p: 'B', m: 24, d: '2027-03-12', races: [
-    { dist: 1000, text: '3rd, 4th & Maiden (3yo) — Challenge Series', field: null },
-    { dist: 1400, text: '3rd, 4th & Maiden (3yo) — Challenge Series', field: null },
+    { dist: 1000, text: '3rd/4th & Maiden (3yo) — Challenge Series', field: null },
+    { dist: 1400, text: '3rd/4th & Maiden (3yo) — Challenge Series', field: null },
     { dist: 2000, text: '0-35 **', field: null }
   ]},
   { p: 'B', m: 25, d: '2027-03-19', races: [
-    { dist: 1000, text: '0-60', field: null },
+    { dist: 1000, text: '0-65', field: null },
     { dist: 1200, text: '0-35', field: null },
-    { dist: 1600, text: 'Maiden', field: null },
+    { dist: 1600, text: 'Maiden (4yo+)', field: null },
     { dist: 2200, text: '0-60', field: null }
   ]},
   { p: 'B', m: 26, d: '2027-03-26', races: [
@@ -334,14 +337,14 @@ const PROGRAMME = [
   ]},
   { p: 'B', m: 28, d: '2027-04-08', races: [
     { dist: 1200, text: '0-55', field: null },
-    { dist: 1400, text: '4yo+ Maiden', field: null },
-    { dist: 1600, text: '0-50 (APP)', field: null },
+    { dist: 1400, text: 'Maiden (4yo+)', field: null },
+    { dist: 1600, text: '0-50', field: null },
     { dist: 2000, text: '0-35', field: null }
   ]},
   { p: 'B', m: 29, d: '2027-04-15', races: [
-    { dist: 1000, text: '0-35', field: null },
-    { dist: 1000, text: 'All Classes 3yo (Series Final)', field: null },
-    { dist: 1200, text: 'All Classes (3yo Fillies)', field: null },
+    { dist: 1000, text: '0-35 (APP)', field: null },
+    { dist: 1000, text: 'All Classes (3yo) (Series Final)', field: null },
+    { dist: 1200, text: 'All Classes (3yoF) (Series Final)', field: null },
     { dist: 1600, text: 'All Classes (3yo) (Series Final)', field: null },
     { dist: 2200, text: '0-55', field: null }
   ]},
@@ -356,43 +359,43 @@ const PROGRAMME = [
     { dist: 1200, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 2, d: '2026-11-06', races: [
-    { dist: 1000, text: 'Maidens — 4yo & 5yo', field: null }
+    { dist: 1000, text: 'Maiden — 4yo & 5yo', field: null }
   ]},
   { p: 'W', m: 3, d: '2026-11-13', races: [
-    { dist: 1200, text: '2nd / 3rd / 4th / Maidens', field: null }
+    { dist: 1200, text: '2nd / 3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 4, d: '2026-11-20', races: [
     { dist: 1200, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 5, d: '2026-11-26', races: [
-    { dist: 1400, text: '3rd / 4th / Maidens', field: null }
+    { dist: 1400, text: '3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 6, d: '2026-11-27', races: [
-    { dist: 1200, text: '2nd / 3rd / 4th / Maidens', field: null }
+    { dist: 1400, text: '2nd / 3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 7, d: '2026-12-04', races: [
-    { dist: 1000, text: 'Maidens — 4yo & 5yo', field: null }
+    { dist: 1200, text: 'Maiden — 4yo & 5yo', field: null }
   ]},
   { p: 'W', m: 8, d: '2026-12-11', races: [
-    { dist: 1400, text: '3rd / 4th / Maidens', field: null }
+    { dist: 1400, text: '3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 9, d: '2026-12-17', races: [
     { dist: 1200, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 10, d: '2026-12-18', races: [
-    { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup (All Classes & Maidens)', field: null }
+    { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup (All Classes & Maiden)', field: null }
   ]},
   { p: 'W', m: 11, d: '2026-12-24', races: [
     { dist: 1200, text: 'Maidens — Fillies & Mares', field: null }
   ]},
   { p: 'W', m: 12, d: '2027-01-02', races: [
-    { dist: 1200, text: '4th & Maidens', field: null }
+    { dist: 1200, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 13, d: '2027-01-08', races: [
-    { dist: 1200, text: '3rd / 4th / Maidens', field: null }
+    { dist: 1200, text: '3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 14, d: '2027-01-15', races: [
-    { dist: 1400, text: 'HH Sh Isa Bin Salman Al Khalifa Cup (All Classes & Maidens)', field: null }
+    { dist: 1400, text: 'HH Sh Isa Bin Salman Al Khalifa Cup (All Classes & Maiden)', field: null }
   ]},
   { p: 'W', m: 15, d: '2027-01-22', races: [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }
@@ -401,37 +404,37 @@ const PROGRAMME = [
     { dist: 1000, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 17, d: '2027-01-29', races: [
-    { dist: 1400, text: "Crown Prince's Cup — Domestic Grade 2", field: null }
+    { dist: 1400, text: "The Crown Prince's Cup — Domestic Grade 2", field: null }
   ]},
   { p: 'W', m: 18, d: '2027-02-05', races: [
-    { dist: 1200, text: '3rd / 4th / Maidens', field: null }
+    { dist: 1200, text: '3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 19, d: '2027-02-11', races: [
-    { dist: 1000, text: '3rd / 4th / Maidens', field: null }
+    { dist: 1000, text: '3rd / 4th / Maiden', field: null }
   ]},
   { p: 'W', m: 20, d: '2027-02-18', races: [
     { dist: 1600, text: 'HH Sh Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 2', field: null }
   ]},
   { p: 'W', m: 21, d: '2027-02-25', races: [
-    { dist: 1000, text: 'Maidens — 4yo & 5yo', field: null }
+    { dist: 1000, text: 'Maiden — 4yo & 5yo', field: null }
   ]},
   { p: 'W', m: 22, d: '2027-03-04', races: [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }
   ]},
   { p: 'W', m: 23, d: '2027-03-05', races: [
-    { dist: 1600, text: "King's Cup — Domestic Grade 1", field: null }
+    { dist: 1600, text: "The King's Cup — Domestic Grade 1", field: null }
   ]},
   { p: 'W', m: 24, d: '2027-03-12', races: [
-    { dist: 1200, text: '3rd / 4th / Maidens — Fillies & Mares', field: null }
+    { dist: 1200, text: '3rd / 4th / Maiden — Fillies & Mares', field: null }
   ]},
   { p: 'W', m: 25, d: '2027-03-19', races: [
     { dist: 1400, text: '2nd / 3rd / 4th / Maidens', field: null }
   ]},
   { p: 'W', m: 26, d: '2027-03-26', races: [
-    { dist: 1200, text: 'Maidens — 4yo & 5yo', field: null }
+    { dist: 1200, text: 'Maiden — 4yo & 5yo', field: null }
   ]},
   { p: 'W', m: 27, d: '2027-04-02', races: [
-    { dist: 1600, text: 'Al Rouda Cup (All Classes & Maidens)', field: null }
+    { dist: 1600, text: 'Al Rouda Cup (All Classes & Maiden)', field: null }
   ]},
   { p: 'W', m: 28, d: '2027-04-08', races: [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }

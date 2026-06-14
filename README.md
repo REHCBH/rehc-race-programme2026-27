@@ -1,30 +1,14 @@
 # REHC Race Programme · 2026/27
 
 Live, interactive dashboard for the Rashid Equestrian & Horseracing Club racing season.
-
-## Features
-- 30 meetings (Imported + Bahrain Bred), all races, live countdown
-- Click-to-filter stat tiles
-- Search, programme toggle, race-type filters
-- Mobile-first responsive design
-- Exports: CSV, JSON, iCal (.ics)
-- Print-ready handout with QR code
-- Shareable QR & link
+90 meetings across Imported, Bahrain Bred & WAHO programmes, with click-through to live entries & results on the Bahrain Turf Club.
 
 ## Local development
 ```bash
 npm install
 npm run dev
 ```
-
-Open http://localhost:5173
-
-## Build for production
+## Build
 ```bash
 npm run build
 ```
-
-Static files are output to `dist/`.
-
-## Deploy
-This project is configured for one-click deployment on Vercel.
