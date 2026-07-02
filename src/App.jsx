@@ -23,8 +23,8 @@ const PROGRAMME = [
     { dist: 1000, text: 'Domestic Grade 1', field: null },
     { dist: 1200, text: '0-90', field: null },
     { dist: 1600, text: 'Open Handicap', field: null },
-    { dist: 2000, text: 'Bahrain International Trophy — Group 2', field: null },
-    { dist: 2400, text: 'Open Handicap (TBC)', field: null }
+    { dist: 2000, text: 'Bahrain International Trophy — Group 1', field: null },
+    { dist: 2800, text: 'Bahrain Long Distance Cup (Open Handicap)', field: null }
   ]},
   { p: 'I', m: 4, d: '2026-11-20', races: [
     { dist: 1400, text: '4th & Maiden', field: null },
@@ -56,7 +56,7 @@ const PROGRAMME = [
     { dist: 2200, text: '0-90', field: null }
   ]},
   { p: 'I', m: 9, d: '2026-12-17', races: [
-    { dist: 1200, text: 'Bahrain Olympic Committee Cup — Domestic Grade 2 **', field: null },
+    { dist: 1200, text: 'Domestic Grade 2 *', field: null },
     { dist: 1400, text: '0-80', field: null },
     { dist: 1400, text: '4th & Maiden (2yo)', field: null },
     { dist: 1600, text: '0-90', field: null },
@@ -65,7 +65,7 @@ const PROGRAMME = [
   { p: 'I', m: 10, d: '2026-12-18', races: [
     { dist: 1000, text: 'Al Manama Cup — Turf Series 84-100', field: null },
     { dist: 1600, text: 'HH Sh Khalid Bin Hamad Al Khalifa Cup — Listed', field: null },
-    { dist: 1600, text: 'Turf Series 84-100', field: null },
+    { dist: 1600, text: 'Al Jasra Cup — Turf Series 84-100', field: null },
     { dist: 2000, text: 'Al Muharraq Cup — Turf Series 84-100', field: null }
   ]},
   { p: 'I', m: 11, d: '2026-12-24', races: [
@@ -76,9 +76,9 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 12, d: '2027-01-02', races: [
     { dist: 1000, text: '4th & Maiden', field: null },
-    { dist: 1200, text: 'Al Riffa Cup — Turf Series 80-100', field: null },
-    { dist: 1600, text: 'Turf Series 80-100', field: null },
-    { dist: 2000, text: 'Al Dana Cup — Turf Series 80-100', field: null }
+    { dist: 1200, text: 'Al Riffa Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 1600, text: 'Al Seef Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 2000, text: 'Al Dana Cup — Turf Series (4yo+) 80-100', field: null }
   ]},
   { p: 'I', m: 13, d: '2027-01-08', races: [
     { dist: 1200, text: '0-90 (APP)', field: null },
@@ -100,9 +100,9 @@ const PROGRAMME = [
     { dist: 2200, text: '0-80', field: null }
   ]},
   { p: 'I', m: 16, d: '2027-01-28', races: [
-    { dist: 1200, text: 'The Hawar Cup — Turf Series 80-100', field: null },
-    { dist: 1600, text: 'Turf Series 80-100', field: null },
-    { dist: 2000, text: 'The Anchorman Cup — Turf Series 80-100', field: null },
+    { dist: 1200, text: 'The Hawar Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 1600, text: 'Bahrain Bay Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 2000, text: 'The Anchorman Cup — Turf Series (4yo+) 80-100', field: null },
     { dist: 2400, text: 'Open Handicap', field: null }
   ]},
   { p: 'I', m: 17, d: '2027-01-29', races: [
@@ -124,9 +124,9 @@ const PROGRAMME = [
     { dist: 2200, text: '0-95', field: null }
   ]},
   { p: 'I', m: 20, d: '2027-02-18', races: [
-    { dist: 1000, text: 'Al Sakhir Cup — Turf Series 80-100', field: null },
-    { dist: 1400, text: 'HH Sheema Bint Nasser Bin Hamad Al Khalifa Cup — Domestic Grade 1', field: null },
-    { dist: 1800, text: 'Bahrain Vision Cup — Turf Series 80-100', field: null },
+    { dist: 1000, text: 'Al Sakhir Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 1400, text: 'HH Sheema Bint Nasser Bin Hamad Al Khalifa Cup (4yo+) — Domestic Grade 1', field: null },
+    { dist: 1800, text: 'Bahrain Vision Cup — Turf Series (4yo+) 80-100', field: null },
     { dist: 2200, text: 'HH Sh Nasser Bin Hamad Al Khalifa Cup — Listed', field: null }
   ]},
   { p: 'I', m: 21, d: '2027-02-25', races: [
@@ -137,10 +137,10 @@ const PROGRAMME = [
     { dist: 2400, text: '0-90', field: null }
   ]},
   { p: 'I', m: 22, d: '2027-03-04', races: [
-    { dist: 1200, text: 'Al Fateh Cup — Turf Series 80-100', field: null },
+    { dist: 1200, text: 'Al Fateh Cup — Turf Series (4yo+) 80-100', field: null },
     { dist: 1400, text: 'Maiden', field: null },
-    { dist: 1600, text: 'Turf Series 80-100', field: null },
-    { dist: 2000, text: 'The International Handicap — Turf Series 80-100', field: null }
+    { dist: 1600, text: 'Golden Jubilee Cup — Turf Series (4yo+) 80-100', field: null },
+    { dist: 2000, text: 'The International Handicap — Turf Series (4yo+) 80-100', field: null }
   ]},
   { p: 'I', m: 23, d: '2027-03-05', races: [
     { dist: 1000, text: "Chairman's Cup (4yo+) — Domestic Grade 1", field: null },
@@ -277,7 +277,7 @@ const PROGRAMME = [
   { p: 'B', m: 17, d: '2027-01-29', races: [
     { dist: 1000, text: 'Domestic Grade 1', field: null },
     { dist: 2000, text: "The Crown Prince's Cup — Domestic Grade 1", field: null },
-    { dist: 2000, text: 'Derby (4yo) — Domestic Grade 1', field: null }
+    { dist: 2000, text: 'Bahrain Derby (4yo) — Domestic Grade 1', field: null }
   ]},
   { p: 'B', m: 18, d: '2027-02-05', races: [
     { dist: 1000, text: 'Maiden (3yo)', field: null },
@@ -298,7 +298,7 @@ const PROGRAMME = [
   ]},
   { p: 'B', m: 21, d: '2027-02-25', races: [
     { dist: 1200, text: '0-45* (APP)', field: null },
-    { dist: 1600, text: 'Fillies & Mares Maiden', field: null },
+    { dist: 1800, text: 'Maiden (Fillies & Mares)', field: null },
     { dist: 2200, text: '0-35', field: null }
   ]},
   { p: 'B', m: 22, d: '2027-03-04', races: [
@@ -449,6 +449,7 @@ const PROGRAMME = [
 
 function categorize(text) {
   const t = text.toUpperCase();
+  if (t.includes('GROUP 1')) return { category: 'Group 1', tier: 1, accent: 'gold' };
   if (t.includes('GROUP 2')) return { category: 'Group 2', tier: 1, accent: 'gold' };
   if (t.includes('GROUP 3')) return { category: 'Group 3', tier: 1, accent: 'gold' };
   if (t.includes('LISTED')) return { category: 'Listed', tier: 2, accent: 'burgundy' };
@@ -1942,7 +1943,7 @@ export default function App() {
   }, []);
 
   const todayIso = now.toISOString().slice(0, 10);
-  const BLACK_TYPE = ['Group 2','Group 3','Listed'];
+  const BLACK_TYPE = ['Group 1','Group 2','Group 3','Listed'];
 
   // Tile click handlers — each filters dashboard to a specific programme or to black-type
   const onTileImported = () => {
