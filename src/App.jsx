@@ -661,7 +661,7 @@ function btcUrlForRace(race, todayIso) {
   const dd = String(d.getDate()).padStart(2, '0');
   const mm = String(d.getMonth() + 1).padStart(2, '0');
   const yyyy = d.getFullYear();
-  return 'https://bahrainturfclub.com/racecards-results?date=' + dd + '-' + mm + '-' + yyyy;
+  return 'https://www.bahrainturfclub.com/racecards-results?date=' + dd + '-' + mm + '-' + yyyy;
 }
 
 function btcUrlLabel(race, todayIso) {
