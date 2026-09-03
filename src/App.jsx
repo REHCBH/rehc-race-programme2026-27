@@ -24,7 +24,7 @@ const PROGRAMME = [
     { dist: 1200, text: '0-90', field: null },
     { dist: 1600, text: 'Open Handicap', field: null },
     { dist: 2000, text: 'Bahrain International Trophy — Group 1', field: null },
-    { dist: 2800, text: 'Bahrain Long Distance Cup (Open Handicap)', field: null }
+    { dist: 2800, text: 'Gulf of Bahrain Cup (Open Handicap)', field: null }
   ]},
   { p: 'I', m: 4, d: '2026-11-20', races: [
     { dist: 1400, text: '4th & Maiden', field: null },
@@ -109,7 +109,7 @@ const PROGRAMME = [
     { dist: 1000, text: '0-80', field: null },
     { dist: 1200, text: 'Domestic Grade 2', field: null },
     { dist: 1600, text: 'Bahrain Mile (4yo+) — Domestic Grade 1', field: null },
-    { dist: 2000, text: "The Crown Prince's Cup (4yo+) — Group 3", field: null }
+    { dist: 2000, text: "HRH The Crown Prince's Cup (4yo+) — Group 3", field: null }
   ]},
   { p: 'I', m: 18, d: '2027-02-05', races: [
     { dist: 1200, text: '0-70 (APP)', field: null },
@@ -144,9 +144,9 @@ const PROGRAMME = [
   ]},
   { p: 'I', m: 23, d: '2027-03-05', races: [
     { dist: 1000, text: "Chairman's Cup (4yo+) — Domestic Grade 1", field: null },
-    { dist: 1600, text: 'Al Methaq Cup (4yo+) — Listed', field: null },
+    { dist: 1600, text: 'Al Methaq Mile (4yo+) — Listed', field: null },
     { dist: 2000, text: '0-90', field: null },
-    { dist: 2400, text: "The King's Cup (4yo+) — Group 3", field: null }
+    { dist: 2400, text: "HM The King's Cup (4yo+) — Group 3", field: null }
   ]},
   { p: 'I', m: 24, d: '2027-03-12', races: [
     { dist: 1200, text: '4th & Maiden', field: null },
@@ -182,7 +182,7 @@ const PROGRAMME = [
     { dist: 2200, text: '0-95', field: null }
   ]},
   { p: 'I', m: 30, d: '2027-04-16', races: [
-    { dist: 1200, text: 'Champions Sprint — Domestic Grade 1', field: null },
+    { dist: 1200, text: 'Champions Sprint Cup — Domestic Grade 1', field: null },
     { dist: 1600, text: 'REHC Mile Cup — Domestic Grade 1', field: null },
     { dist: 2000, text: 'Bahrain Gold Cup — Domestic Grade 1', field: null },
     { dist: 2400, text: 'Stewards Cup — Domestic Grade 2', field: null }
@@ -242,7 +242,7 @@ const PROGRAMME = [
     { dist: 2000, text: 'Domestic Grade 2', field: null }
   ]},
   { p: 'B', m: 11, d: '2026-12-24', races: [
-    { dist: 1200, text: 'Maiden (Fillies & Mares) (4yo)', field: null },
+    { dist: 1200, text: 'Maiden (Fillies & Mares) (4yo+)', field: null },
     { dist: 1400, text: '0-35', field: null },
     { dist: 1800, text: '0-45', field: null }
   ]},
@@ -404,7 +404,7 @@ const PROGRAMME = [
     { dist: 1000, text: '4th & Maiden', field: null }
   ]},
   { p: 'W', m: 17, d: '2027-01-29', races: [
-    { dist: 1400, text: "The Crown Prince's Cup — Domestic Grade 2", field: null }
+    { dist: 1400, text: "HRH The Crown Prince's Cup — Domestic Grade 2", field: null }
   ]},
   { p: 'W', m: 18, d: '2027-02-05', races: [
     { dist: 1200, text: '3rd / 4th / Maiden', field: null }
@@ -422,7 +422,7 @@ const PROGRAMME = [
     { dist: 1400, text: '3rd / 4th / Maidens', field: null }
   ]},
   { p: 'W', m: 23, d: '2027-03-05', races: [
-    { dist: 1600, text: "The King's Cup — Domestic Grade 1", field: null }
+    { dist: 1600, text: "HM The King's Cup — Domestic Grade 1", field: null }
   ]},
   { p: 'W', m: 24, d: '2027-03-12', races: [
     { dist: 1200, text: '3rd / 4th / Maiden — Fillies & Mares', field: null }
