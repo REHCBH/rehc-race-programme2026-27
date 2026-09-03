@@ -654,14 +654,8 @@ function getRaceStatus(raceDateIso, todayIso) {
 // day's racecard listing (which shows all races on that date). The "view"
 // argument selects whether the user sees entries or results on landing.
 function btcUrlForRace(race, todayIso) {
-  const status = getRaceStatus(race.date, todayIso);
-  // Use date-only racecards page; users pick the specific race from there.
-  // Append ?date=DD-MM-YYYY which is the format the BTC site uses for the date filter.
-  const d = new Date(race.date + 'T00:00:00');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  return 'https://www.bahrainturfclub.com/racecards-results?date=' + dd + '-' + mm + '-' + yyyy;
+  // All "View on BTC" buttons link to the Bahrain Turf Club homepage.
+  return 'https://bahrainturfclub.com';
 }
 
 function btcUrlLabel(race, todayIso) {
@@ -2143,9 +2137,9 @@ export default function App() {
             isActive={activeTile === 'waho'}
           />
           <StatCard
-            label="International Listed Races"
+            label="International Group & Listed Races"
             value={stats.blackType}
-            sub={isMobile ? 'Tap for prestige races' : 'Click for G2 / G3 / Listed'}
+            sub={isMobile ? 'Tap for prestige races' : 'Click for Group & Listed races'}
             icon={Award}
             accentColor={C.burgundy}
             onClick={onTileBlackType}
