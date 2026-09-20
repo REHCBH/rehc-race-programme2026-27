@@ -479,6 +479,13 @@ const RACES = PROGRAMME.flatMap((m) =>
   }))
 );
 
+// Per-race conditions from the REHC Condition Book 2026/27 (prize money, eligibility,
+// entry fee, top weight). Keyed by race id (programme-meeting-distance-index).
+const CONDITIONS = {"I-1-1000-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-1-1400-1":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-1-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"I-1-1800-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"Maidens","entry":"25","tw":"58","name":null},"I-2-1400-1":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-2-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-2-1800-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) (FILLIES &MARES ONLY) 3YO & UP","entry":"15","tw":"62","name":null},"I-2-2000-4":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-3-1000-0":{"prize":40000,"cur":"US$","bd":"24,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP","entry":"200","tw":"62","name":null},"I-3-1200-1":{"prize":16000,"cur":"US$","bd":"9600, 3200, 1920, 1280","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"80","tw":"62","name":null},"I-3-1600-2":{"prize":30000,"cur":"US$","bd":"18,000, 6000, 3600, 2400","elig":"Open Handicap 3YO & UP- Weight for Age","entry":"150","tw":"62","name":null},"I-3-2000-3":{"prize":null,"cur":null,"bd":null,"elig":null,"entry":null,"tw":null,"name":"BAHRAIN INTERNATIONAL TROPHY"},"I-3-2800-4":{"prize":null,"cur":null,"bd":null,"elig":"Open Handicap 3YO & UP- Weight for Age","entry":null,"tw":"62","name":"GULF OF BAHRAIN CUP"},"I-4-1400-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"62","name":null},"I-4-1600-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-4-2000-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-5-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-5-1200-1":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP","entry":"25","tw":null,"name":null},"I-5-1400-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 70 (Horses Rated 71 & 72 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-5-2000-3":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-5-2200-4":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-6-1000-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-6-1400-1":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":null,"name":null},"I-6-1600-2":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-6-1800-3":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-7-1400-0":{"prize":null,"cur":null,"bd":null,"elig":null,"entry":null,"tw":null,"name":null},"I-7-1600-1":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-7-2000-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-7-2400-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-8-1200-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-8-1800-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"I-8-2200-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-9-1200-0":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP","entry":"25","tw":null,"name":null},"I-9-1400-1":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-9-1400-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 2YO","entry":"10","tw":null,"name":null},"I-9-1600-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-9-2400-4":{"prize":20000,"cur":"BHD","bd":"12,000, 4000, 2400, 1600","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"100","tw":null,"name":null},"I-10-1000-0":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated (84 \u2013 100) (Horses Rated 101 & 102 may enter) 3YO & UP","entry":null,"tw":"62","name":"AL MANAMA CUP"},"I-10-1600-1":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated (84 \u2013 100) 3YO & UP","entry":null,"tw":"62","name":"AL JASRA CUP"},"I-10-1600-2":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 LISTED 3YO & UP - Weight for Age","entry":"400","tw":null,"name":"HH SH KHALID BIN HAMAD AL KHALIFA CUP"},"I-10-2000-3":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated (84 \u2013 100) (Horses Rated 101 & 102 may enter) 3YO & UP","entry":null,"tw":null,"name":"AL MUHARRAQ CUP"},"I-11-1000-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-11-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-11-1400-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP RACE 4: (IMPORTED) BHD 2000 (1200, 400, 240, 160) 1200M(STR) Thursday For 24th horses ra","entry":"10","tw":"62","name":null},"I-11-2000-3":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-12-1000-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"40","tw":"62","name":null},"I-12-1200-1":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated (80 \u2013 100) (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"AL RIFFA CUP"},"I-12-1600-2":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated (80 \u2013 100) (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"AL SEEF CUP"},"I-12-2000-3":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"AL DANA CUP"},"I-13-1200-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP (FOR BAHRAINI APPRENTICE ONLY)","entry":"15","tw":"62","name":null},"I-13-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 70 (Horses Rated 71 & 72 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-13-1800-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"I-13-2400-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-14-1000-0":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1, 4YO & UP","entry":"400","tw":null,"name":"AL WASMIYA CUP"},"I-14-1400-1":{"prize":25000,"cur":"US$","bd":"15,000, 5000, 3000, 2000","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO & UP","entry":"125","tw":null,"name":"SOUTHERN GOVERNORATE CUP"},"I-14-1800-2":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 LISTED, 4YO & UP - Weight for Age","entry":"400","tw":null,"name":"AL ADIYAT CUP"},"I-14-2000-3":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"I-15-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-15-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO","entry":"10","tw":null,"name":null},"I-15-1400-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":null,"name":null},"I-15-1600-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-15-2200-4":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-16-1200-0":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"THE HAWAR CUP"},"I-16-1600-1":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"BAHRAIN BAY CUP"},"I-16-2000-2":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"THE ANCHORMAN CUP"},"I-16-2400-3":{"prize":12000,"cur":"US$","bd":"7200, 2400, 1440, 960","elig":"Open Handicap 3YO & UP- Weight for Age","entry":"60","tw":"62","name":null},"I-17-1000-0":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"horses rated 0 \u2013 80 (Horses Rated 81 & 82 may enter) 3YO & UP","entry":"70","tw":"62","name":null},"I-17-1200-1":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"70","tw":null,"name":null},"I-17-1600-2":{"prize":50000,"cur":"US$","bd":"30,000, 10,000, 6000, 4000","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO & UP","entry":"250","tw":null,"name":"BAHRAIN MILE CUP"},"I-17-2000-3":{"prize":200000,"cur":"US$","bd":"120,000, 40,000, 20,000, 12,000, 8000","elig":"CLASS 1 \u2013 GROUP 3 4YO & UP - Weight for Age","entry":"1000","tw":null,"name":null},"I-18-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 70 (Horses Rated 71 & 72 may enter) 3YO & UP (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"I-18-1600-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76& 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-18-2000-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"I-18-2400-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86& 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-19-1200-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-19-2000-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-19-2200-3":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96& 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-20-1000-0":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"AL SAKHIR CUP"},"I-20-1400-1":{"prize":30000,"cur":"US$","bd":"18,000, 6000, 3600, 2400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO & UP","entry":"150","tw":null,"name":"HH SH SHEEMA BINT NASSER BIN HAMAD AL KHALIFA CUP"},"I-20-1800-2":{"prize":80000,"cur":"US$","bd":"48,000, 16,000, 8000, 4800, 3200","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"BAHRAIN VISION CUP"},"I-20-2200-3":{"prize":135000,"cur":"US$","bd":"81,000, 27,000, 16,200, 10,800","elig":"CLASS 1 \u2013 LISTED 4YO & UP - Weight for Age","entry":"675","tw":null,"name":"HH SH NASSER BIN HAMAD AL KHALIFA CUP (SPONSORED BY BAPCO ENERGIES)"},"I-21-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-21-1200-1":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-21-1400-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-21-2400-4":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-22-1200-0":{"prize":100000,"cur":"US$","bd":"60,000, 20,000, 10,000, 6000, 4000","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"AL FATEH CUP"},"I-22-1400-1":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"MAIDENS 3YO & UP - Weight for Age","entry":"40","tw":"58","name":null},"I-22-1600-2":{"prize":100000,"cur":"US$","bd":"60,000, 20,000, 10,000, 6000, 4000","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"GOLDEN JUBILEE CUP"},"I-22-2000-3":{"prize":100000,"cur":"US$","bd":"60,000, 20,000, 10,000, 6000, 4000","elig":"horses rated 80 \u2013 100 (Horses Rated 101 & 102 may enter) 4YO & UP","entry":null,"tw":"62","name":"THE INTERNATIONAL HANDICAP"},"I-23-1000-0":{"prize":50000,"cur":"US$","bd":"30,000, 10,000, 6000, 4000","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO & UP","entry":"250","tw":null,"name":"THE CHAIRMAN\u2019S CUP"},"I-23-1600-1":{"prize":120000,"cur":"US$","bd":"72,000, 24,000, 12,000, 7200, 4800","elig":"CLASS 1 \u2013 LISTED 4YO & UP","entry":"600","tw":null,"name":"AL METHAQ MILE"},"I-23-2000-2":{"prize":16000,"cur":"US$","bd":"9600, 3200, 1920, 1280","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"80","tw":"62","name":null},"I-23-2400-3":{"prize":400000,"cur":"US$","bd":"240,000, 80,000, 40,000, 24,000, 16,000","elig":"CLASS 1 \u2013 GROUP 3 4YO & UP - Weight for Age","entry":"2000","tw":null,"name":null},"I-24-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"62","name":null},"I-24-1400-1":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-24-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"I-24-2200-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-25-1200-0":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":"62","name":null},"I-25-1600-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP (BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"I-25-1800-2":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-25-2400-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 90 (Horses Rated 91 & 92 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-26-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-26-1400-1":{"prize":10000,"cur":"BHD","bd":"6000, 2000, 1200, 800","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"50","tw":null,"name":null},"I-26-1600-2":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"Maidens","entry":null,"tw":null,"name":null},"I-26-2000-3":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"I-27-1200-0":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-27-1600-1":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-27-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 65 (Horses Rated 66 & 67 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-28-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 65 (Horses Rated 66 & 67 may enter) 3YO & UP (BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"I-28-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76 & 77 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"I-28-1800-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"horses rated 0 \u2013 85 (Horses Rated 86 & 87 may enter) 3YO & UP","entry":"15","tw":"62","name":null},"I-29-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"62","name":null},"I-29-2200-2":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"horses rated 0 \u2013 95 (Horses Rated 96 & 97 may enter) 3YO & UP","entry":"20","tw":"62","name":null},"I-30-1200-0":{"prize":15000,"cur":"BHD","bd":"9000, 3000, 1800, 1200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"75","tw":null,"name":"CHAMPIONS SPRINT CUP"},"I-30-1600-1":{"prize":15000,"cur":"BHD","bd":"9000, 3000, 1800, 1200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"75","tw":null,"name":"REHC MILE CUP"},"I-30-2000-2":{"prize":15000,"cur":"BHD","bd":"9000, 3000, 1800, 1200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"75","tw":null,"name":"BAHRAIN GOLD CUP"},"I-30-2400-3":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":"STEWARDS CUP"},"B-1-1200-0":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"ALL CLASSES & MAIDENS 3YO & UP - Weight for Age","entry":"15","tw":"62","name":null},"B-1-1600-1":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"MAIDENS 3YO & UP - Weight for Age","entry":"25","tw":"58","name":"LATE HH SH RASHID BIN ISA AL KHALIFA (OPENING DAY CUP)"},"B-1-1800-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-2-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-2-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS (FILLIES &MARES ONLY) 3YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-2-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-3-1000-0":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"horses rated 0 \u2013 60 (Horses Rated 61 & 62 may enter) 3YO & UP","entry":"70","tw":"62","name":null},"B-3-1400-1":{"prize":16000,"cur":"US$","bd":"9600, 3200, 1920, 1280","elig":"ALL CLASSES & MAIDENS 3YO & UP - Weight for Age","entry":"80","tw":null,"name":null},"B-3-1800-2":{"prize":40000,"cur":"US$","bd":"24,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"200","tw":"62","name":null},"B-4-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-4-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-4-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"B-4-1600-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 &37 may enter) 3YO & UP (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"B-5-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"62","name":null},"B-5-1600-1":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"B-5-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 -60 (Horses Rated 61 & 62 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-6-1200-0":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"B-6-1800-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-6-2000-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-7-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-7-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-7-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-7-2000-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"B-8-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-8-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"B-8-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41& 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-8-2200-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 50 (Horses Rated 51 & 52 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-9-1600-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS (FILLIES &MARES ONLY) 4YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-9-1800-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"10","tw":"61","name":null},"B-10-1000-0":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"70","tw":null,"name":null},"B-10-1400-1":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 65 (Horses Rated 66 & 67 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-10-2000-2":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"70","tw":null,"name":null},"B-11-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS (FILLIES & MARES ONLY) 4YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-11-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-11-1800-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-12-1000-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"40","tw":"62","name":null},"B-12-1800-1":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 (4 Years Only)","entry":null,"tw":null,"name":null},"B-12-1800-2":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 (4 Years Only) (Fillies Only)","entry":"70","tw":null,"name":null},"B-12-2000-3":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"MAIDENS 4YO & UP - Weight for Age","entry":"40","tw":"58","name":null},"B-12-2000-4":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"ALL CLASSES & MAIDENS 5YO& UP - Weight for Age","entry":"40","tw":null,"name":null},"B-13-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-13-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 3YO ONLY","entry":"10","tw":"58","name":null},"B-13-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-14-1200-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"40","tw":"62","name":null},"B-14-1600-1":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"40","tw":"61","name":"AL ADIYAT BAHRAIN BRED CUP"},"B-14-2400-2":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-15-1400-0":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"B-15-2000-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 &37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-15-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 60 (Horses Rated 61 &62 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-16-1000-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 55 (Horses Rated 56 &57 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-16-1400-1":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 3YO & UP","entry":"40","tw":null,"name":null},"B-16-1800-2":{"prize":20000,"cur":"US$","bd":"12,000, 4000, 2400, 1600","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO ONLY (FILLIES ONLY)","entry":"100","tw":null,"name":"BAHRAIN OAKS (SPONSORED BY AL MUZDAHER STUD)"},"B-16-2200-3":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 50 (Horses Rated 51 &52 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-17-1000-0":{"prize":30000,"cur":"US$","bd":"18,000, 6000, 3600, 2400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"150","tw":"62","name":null},"B-17-2000-1":{"prize":30000,"cur":"US$","bd":"18,000, 6000, 3600, 2400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO ONLY (Colts- Geldings- Fillies)","entry":"150","tw":null,"name":"BAHRAIN DERBY"},"B-17-2000-2":{"prize":40000,"cur":"US$","bd":"24,000, 8000, 4800, 3200","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"200","tw":null,"name":null},"B-18-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 3YO ONLY","entry":"10","tw":"58","name":null},"B-18-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 75 (Horses Rated 76& 77 may enter) 3YO & UP Friday 5th February","entry":"10","tw":"62","name":null},"B-18-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 60 (Horses Rated 61 & 62 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-18-2000-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 &42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-19-1400-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 &47 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-19-1800-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 4YO & UP - Weight for Age (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"58","name":null},"B-19-2200-2":{"prize":5000,"cur":"BHD","bd":"3000, 1000, 600, 400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"25","tw":null,"name":null},"B-20-1200-0":{"prize":12000,"cur":"US$","bd":"7200, 2400, 1440, 960","elig":"Open Handicap 3YO & UP- Weight for Age","entry":"60","tw":"62","name":null},"B-20-1600-2":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"MAIDENS 4YO & UP - Weight for Age","entry":"40","tw":"58","name":null},"B-20-1600-3":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"70","tw":null,"name":null},"B-21-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 45 (Horses Rated 46 & 47 may enter) 3YO & UP (FOR BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"B-21-2200-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-22-1000-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-22-1200-1":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"40","tw":"62","name":null},"B-22-1800-2":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 3YO & UP","entry":"40","tw":"62","name":null},"B-23-1400-0":{"prize":55000,"cur":"US$","bd":"33,000, 11,000, 6600, 4400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 3YO & UP - Weight for Age","entry":"275","tw":null,"name":null},"B-23-1600-1":{"prize":16000,"cur":"US$","bd":"9600, 3200, 1920, 1280","elig":"4th CLASS & MAIDENS 3YO & UP - Weight for Age","entry":"80","tw":"61","name":null},"B-23-2400-2":{"prize":55000,"cur":"US$","bd":"33,000, 11,000, 6600, 4400","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"275","tw":null,"name":null},"B-24-1000-0":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"3rd, 4th CLASS & MAIDENS 3YO ONLY","entry":"20","tw":null,"name":"FUTURE STARS SPRINT LEG 1"},"B-24-1400-1":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"3rd, 4th CLASS & MAIDENS 3YO ONLY","entry":"20","tw":null,"name":"FUTURE STARS CHAMPIONS LEG 1"},"B-25-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 65 (Horses Rated 66 &67 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-25-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 &37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-25-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-25-2200-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 60 (Horses Rated 61 &62 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-26-1200-0":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"4th CLASS & MAIDENS 3YO ONLY","entry":"20","tw":null,"name":"FUTURE STARS SPRINT LEG 2"},"B-26-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-26-1600-2":{"prize":4000,"cur":"BHD","bd":"2400, 800, 480, 320","elig":"4th CLASS & MAIDENS 3YO ONLY","entry":"20","tw":null,"name":"FUTURE STARS CHAMPIONS LEG 2"},"B-26-1600-3":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"Open Handicap 3YO & UP- Weight for Age","entry":"15","tw":"62","name":null},"B-27-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-27-1200-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"62","name":null},"B-27-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-27-2000-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-27-2400-4":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 40 (Horses Rated 41 & 42 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-28-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-28-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"58","name":null},"B-28-1600-2":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 50 (Horses Rated 51 & 52 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-28-2000-3":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-29-1000-0":{"prize":8000,"cur":"BHD","bd":"4800, 1600, 960, 640","elig":"ALL CLASSES & MAIDENS 3YO ONLY","entry":"40","tw":null,"name":"FUTURE STARS SPRINT CUP"},"B-29-1000-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 35 (Horses Rated 36 & 37 may enter) 3YO & UP (BAHRAINI APPRENTICE ONLY)","entry":"10","tw":"62","name":null},"B-29-1200-2":{"prize":3000,"cur":"BHD","bd":"1800, 600, 360, 240","elig":"ALL CLASSES & MAIDENS 3YO ONLY (FILLIES ONLY)","entry":"15","tw":null,"name":null},"B-29-1600-3":{"prize":8000,"cur":"BHD","bd":"4800, 1600, 960, 640","elig":"ALL CLASSES & MAIDENS 3YO ONLY","entry":"40","tw":null,"name":"FUTURE STARS CHAMPIONS CUP"},"B-29-2200-4":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 3YO & UP","entry":"10","tw":"62","name":null},"B-30-1200-0":{"prize":10000,"cur":"BHD","bd":"6000, 2000, 1200, 800","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"50","tw":null,"name":null},"B-30-1400-1":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"horses rated 0 \u2013 55 (Horses Rated 56 & 57 may enter) 4YO & UP","entry":"10","tw":"62","name":null},"B-30-1600-2":{"prize":10000,"cur":"BHD","bd":"6000, 2000, 1200, 800","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"50","tw":null,"name":null},"B-30-2000-3":{"prize":10000,"cur":"BHD","bd":"6000, 2000, 1200, 800","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 3YO & UP - Weight for Age","entry":"50","tw":null,"name":"OWNERS CUP"},"W-1-1200-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"57","name":null},"W-2-1000-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"MAIDENS (4 & 5 Years Only) - Weight for Age","entry":"7.5","tw":"57","name":null},"W-3-1200-0":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"2nd, 3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"70","tw":"58","name":null},"W-4-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"57","name":null},"W-5-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-6-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"2nd, 3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-7-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"MAIDENS (4 & 5 Years Only) - Weight for Age","entry":"7.5","tw":"57","name":null},"W-8-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-9-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"10","tw":"57","name":null},"W-10-1600-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"ALL CLASSES & MAIDENS 4YO & UP- Weight for Age","entry":"40","tw":"58","name":null},"W-11-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"MAIDENS (FILLIES & MARES ONLY) - Weight for Age","entry":"7.5","tw":"57","name":null},"W-12-1200-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"40","tw":"57","name":null},"W-13-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-14-1400-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"ALL CLASSES & MAIDENS 4YO & UP- Weight for Age","entry":"40","tw":"59","name":null},"W-15-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-16-1000-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"4th CLASS & MAIDENS 4YO & UP","entry":"40","tw":"57","name":null},"W-17-1400-0":{"prize":14000,"cur":"US$","bd":"8400, 2800, 1680, 1120","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 4YO & UP - Weight for Age","entry":"70","tw":null,"name":null},"W-18-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":"FATEES AL HAJERI CUP"},"W-19-1000-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":"SAFRA CUP"},"W-20-1600-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"CLASS 1 \u2013 DOMESTIC GRADE 2 4YO & UP - Weight for Age","entry":"40","tw":null,"name":null},"W-21-1000-0":{"prize":2000,"cur":"BHD","bd":"1200, 400, 240, 160","elig":"MAIDENS (4 & 5 Years Only) - Weight for Age","entry":"10","tw":"57","name":null},"W-22-1400-0":{"prize":8000,"cur":"US$","bd":"4800, 1600, 960, 640","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"40","tw":"58","name":null},"W-23-1600-0":{"prize":20000,"cur":"US$","bd":"12,000, 4000, 2400, 1600","elig":"CLASS 1 \u2013 DOMESTIC GRADE 1 4YO & UP - Weight for Age","entry":"100","tw":null,"name":null},"W-24-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS (FILLIES & MARES ONLY) 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-25-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"2nd, 3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-26-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"MAIDENS (4 & 5 Years Only) - Weight for Age","entry":"7.5","tw":"57","name":null},"W-27-1600-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"ALL CLASSES & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":"AL ROUDA CUP"},"W-28-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-29-1200-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null},"W-30-1400-0":{"prize":1500,"cur":"BHD","bd":"900, 300, 180, 120","elig":"3rd, 4th CLASS & MAIDENS 4YO & UP - Weight for Age","entry":"7.5","tw":"58","name":null}};
+// Helper: fetch conditions for a race object.
+function raceConditions(race) { return CONDITIONS[race.id] || null; }
+
+
 // =================================================================
 // MEETING METADATA — festivals, day types, Ramadan, series
 // =================================================================
@@ -671,14 +678,16 @@ function btcUrlLabel(race, todayIso) {
 // TOKENS
 // =================================================================
 const C = {
-  cream: '#ECE3D0',
-  parchment: '#F7F1E1',
-  paper: '#FBF7EA',
-  forest: '#1A2E20',
-  forestSoft: 'rgba(26,46,32,0.15)',
-  forestDim: 'rgba(26,46,32,0.6)',
-  ivory: '#F2EBDC',
-  gold: '#C8A35C',
+  cream: '#F0EADC',
+  parchment: '#F6F0E2',
+  paper: '#FCFAF3',
+  forest: '#16271C',
+  forestSoft: 'rgba(226,216,194,0.9)',
+  forestDim: 'rgba(22,39,28,0.55)',
+  ivory: '#F5F0E4',
+  gold: '#B08D4F',
+  goldSoft: '#EFE4CC',
+  line: '#E4DAC5',
   burgundy: '#6B2737',
   rust: '#9C4A2C',
   green: '#0B223E'
@@ -698,8 +707,8 @@ const ACCENTS = {
   gray:     { bg: '#8A857C', fg: '#F2EBDC', soft: 'rgba(138,133,124,0.16)' }
 };
 
-const FONT_DISPLAY = "Georgia, 'Times New Roman', serif";
-const FONT_BODY = "system-ui, -apple-system, 'Segoe UI', sans-serif";
+const FONT_DISPLAY = "'Fraunces', Georgia, 'Times New Roman', serif";
+const FONT_BODY = "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif";
 const FONT_MONO = "ui-monospace, 'SF Mono', Menlo, monospace";
 
 // Programme metadata: colour, short label, sort order
@@ -1028,7 +1037,7 @@ function StatCard({ label, value, sub, icon: Icon, accentColor, onClick, isActiv
         position: 'relative', textAlign: 'left',
         backgroundColor: isActive ? C.paper : C.parchment,
         border: '1px solid ' + (isActive ? accentColor : C.forestSoft),
-        borderRadius: '3px', padding: '18px 18px 16px', overflow: 'hidden',
+        borderRadius: '6px', padding: '18px 18px 16px', overflow: 'hidden',
         transition: 'all 0.2s ease', cursor: 'pointer', fontFamily: FONT_BODY,
         transform: hover ? 'translateY(-2px)' : 'none',
         boxShadow: isActive ? '0 6px 20px -8px ' + accentColor + '60' : (hover ? '0 4px 12px -6px rgba(26,46,32,0.18)' : 'none'),
@@ -1181,7 +1190,7 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
       backgroundColor: isOpen ? C.paper : (isFeatureDay ? 'rgba(200,163,92,0.08)' : (series ? series.color + '0D' : C.parchment)),
       border: '1px solid ' + (isFeatureDay ? ribbonScheme.bg : (series ? series.color : (isOpen ? spineAccent.bg : C.forestSoft))),
       borderWidth: (isFeatureDay || series) ? '1.5px' : '1px',
-      borderRadius: '3px', overflow: 'hidden',
+      borderRadius: '6px', overflow: 'hidden',
       transition: 'all 0.25s ease',
       boxShadow: isOpen ? '0 4px 20px -8px rgba(26,46,32,0.15)' : (isFeatureDay ? '0 2px 14px -8px rgba(11,34,62,0.3)' : 'none')
     }}>
@@ -1580,7 +1589,7 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               gap: '12px', padding: '14px 16px', marginBottom: '20px',
               backgroundColor: '#0B223E', color: C.ivory,
-              borderRadius: '3px', textDecoration: 'none',
+              borderRadius: '6px', textDecoration: 'none',
               border: '1px solid ' + C.gold,
               transition: 'transform 0.15s'
             }}
@@ -1601,6 +1610,59 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
             <ExternalLink size={16} strokeWidth={1.5} style={{ color: C.gold, flexShrink: 0 }} />
           </a>
 
+          {/* Race Conditions — real data from the REHC Condition Book 2026/27 */}
+          {(() => {
+            const cond = raceConditions(race);
+            if (!cond) return null;
+            const rows = [];
+            if (cond.prize) {
+              rows.push(['Total Prize', (cond.cur || 'BHD') + ' ' + cond.prize.toLocaleString()]);
+            }
+            if (cond.bd) rows.push(['Breakdown', (cond.cur || 'BHD') + ' ' + cond.bd]);
+            if (cond.elig) rows.push(['Eligibility', cond.elig]);
+            if (cond.entry) rows.push(['Entry / Declaration', (cond.cur || 'BHD') + ' ' + cond.entry + ' each']);
+            if (cond.tw) rows.push(['Top Weight', cond.tw + ' kg']);
+            if (rows.length === 0) return null;
+            return (
+              <div style={{ marginBottom: '18px' }}>
+                <div style={{
+                  fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase',
+                  fontWeight: 700, color: C.forestDim, marginBottom: '10px',
+                  display: 'flex', alignItems: 'center', gap: '8px'
+                }}>
+                  <Award size={13} strokeWidth={2} style={{ color: C.gold }} />
+                  Race Conditions
+                  <span style={{ fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: C.forestDim, fontSize: '11px' }}>
+                    · Condition Book 2026/27
+                  </span>
+                </div>
+                <div style={{
+                  border: '1px solid ' + C.forestSoft, borderRadius: '6px',
+                  backgroundColor: C.paper, overflow: 'hidden'
+                }}>
+                  {rows.map(([k, v], i) => (
+                    <div key={k} style={{
+                      display: 'flex', gap: '12px', padding: '9px 14px',
+                      borderTop: i === 0 ? 'none' : '1px solid ' + C.forestSoft,
+                      alignItems: 'baseline'
+                    }}>
+                      <div style={{
+                        flex: '0 0 130px', fontSize: '10.5px', textTransform: 'uppercase',
+                        letterSpacing: '0.08em', color: C.forestDim, fontWeight: 600
+                      }}>{k}</div>
+                      <div style={{
+                        flex: 1, fontSize: '13px', color: C.forest,
+                        fontFamily: (k === 'Total Prize') ? FONT_DISPLAY : FONT_BODY,
+                        fontWeight: (k === 'Total Prize') ? 700 : 400,
+                        fontStyle: (k === 'Total Prize') ? 'italic' : 'normal'
+                      }}>{v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Sample-data notice for non-past races */}
           {!isPast && (
             <div style={{
@@ -1611,7 +1673,7 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
               fontSize: '11.5px', color: C.forest,
               fontFamily: FONT_DISPLAY, fontStyle: 'italic'
             }}>
-              The runners and weights shown below are sample data for demonstration. Tap the gold button above to see the live entries and declarations from the Bahrain Turf Club.
+              The race conditions above are official. The runners and weights below are sample data — tap the gold button for live entries and declarations from the Bahrain Turf Club.
             </div>
           )}
           {isPast && (
@@ -1842,7 +1904,7 @@ function ShareModal({ onClose }) {
         </div>
         <div style={{ padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
-            <div style={{ padding: '8px', backgroundColor: '#fff', border: '1px solid ' + C.forestSoft, borderRadius: '3px' }}>
+            <div style={{ padding: '8px', backgroundColor: '#fff', border: '1px solid ' + C.forestSoft, borderRadius: '6px' }}>
               <img src={qr} alt="QR code" width={140} height={140} style={{ display: 'block' }} />
             </div>
           </div>
@@ -1911,8 +1973,66 @@ function ToolBtn({ onClick, title, children }) {
 // =================================================================
 // MAIN APP
 // =================================================================
-export default function App() {
-  const { isMobile, isTablet } = useViewport();
+function SeriesModal({ onClose, isMobile }) {
+  const Section = ({ color, tag, title, children }) => (
+    <div style={{ marginBottom: '20px', border: '1px solid ' + C.forestSoft, borderRadius: '4px', overflow: 'hidden' }}>
+      <div style={{ backgroundColor: color, color: '#fff', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '9px' }}>
+        <Award size={15} strokeWidth={2} />
+        <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{tag}</span>
+        <span style={{ fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontWeight: 600, fontSize: '14px' }}>{title}</span>
+      </div>
+      <div style={{ padding: '14px 16px', backgroundColor: C.paper, fontSize: '13px', color: C.forest, lineHeight: 1.55 }}>
+        {children}
+      </div>
+    </div>
+  );
+  const Row = ({ k, v }) => (
+    <div style={{ display: 'flex', gap: '10px', padding: '4px 0', alignItems: 'baseline' }}>
+      <div style={{ flex: '0 0 auto', fontWeight: 700, color: C.forest }}>{k}</div>
+      <div style={{ flex: 1, color: C.forestDim, borderBottom: '1px dotted ' + C.forestSoft }} />
+      <div style={{ flex: '0 0 auto', color: C.forest }}>{v}</div>
+    </div>
+  );
+  return (
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(26,46,32,0.55)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: isMobile ? 'flex-start' : 'center', padding: isMobile ? '0' : '24px', backdropFilter: 'blur(2px)' }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ backgroundColor: C.parchment, width: '100%', maxWidth: '640px', maxHeight: isMobile ? '100%' : '90vh', overflowY: 'auto', borderRadius: isMobile ? '0' : '6px', boxShadow: '0 20px 60px -15px rgba(0,0,0,0.5)' }}>
+        <div style={{ padding: '20px 24px', backgroundColor: C.forest, color: C.ivory, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 2, borderBottom: '3px solid ' + C.gold }}>
+          <div>
+            <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: C.gold, fontWeight: 700 }}>Condition Book 2026/27</div>
+            <div style={{ fontSize: '18px', fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontWeight: 500, marginTop: '2px' }}>Series & Championships</div>
+          </div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(242,235,220,0.7)', padding: '4px', display: 'flex' }}>
+            <X size={22} strokeWidth={1.5} />
+          </button>
+        </div>
+        <div style={{ padding: '20px 24px' }}>
+          <Section color="#2F6FB0" tag="Future Stars" title="Series 2026/27">
+            <p style={{ marginTop: 0 }}>Second edition of Bahrain's flagship series for <strong>3-year-old Bahrain-bred</strong> horses — six races across three meetings, culminating on Future Champions Day.</p>
+            <div style={{ margin: '12px 0', padding: '10px 12px', backgroundColor: C.parchment, borderRadius: '6px' }}>
+              <Row k="Meeting 24 · 12 Mar" v="Sprint 1000m · Mile 1400m" />
+              <Row k="Meeting 26 · 26 Mar" v="Sprint 1200m · Mile 1600m" />
+              <Row k="Meeting 29 · 15 Apr" v="Finals: 1000m & 1600m" />
+            </div>
+            <p style={{ margin: '8px 0 4px', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: C.forestDim }}>Points</p>
+            <p style={{ margin: 0 }}>15 / 10 / 7 / 5 / 3 for the top five, 1 for completing. Finals score <strong>double</strong>.</p>
+            <p style={{ margin: '8px 0 0' }}>Category winners on Future Champions Day earn a <strong>BHD 5,000</strong> bonus (Owner 2,500 · Trainer 1,500 · Jockey 1,000), on top of prize money.</p>
+          </Section>
+          <Section color="#9C4A2C" tag="Apprentice Championship" title="Bahraini Apprentices 2026/27">
+            <p style={{ marginTop: 0 }}>Ten races for <strong>Bahraini apprentices only</strong>, over varied distances and abilities across the season.</p>
+            <p style={{ margin: '8px 0 4px', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: C.forestDim }}>Points</p>
+            <p style={{ margin: 0 }}>Races 1–8: 10 / 8 / 6 / 4 / 2 to the top five. The final two rounds (<strong>Meetings 28 & 29</strong>) score <strong>double</strong>: 20 / 16 / 12 / 8 / 4.</p>
+            <p style={{ margin: '8px 0 0' }}>Top three jockeys by points are prized; ties broken by race wins. Using the whip more than eight times forfeits that race's points, plus a suspension and fine.</p>
+          </Section>
+          <p style={{ fontSize: '11px', color: C.forestDim, fontStyle: 'italic', fontFamily: FONT_DISPLAY, textAlign: 'center', margin: '4px 0 0' }}>
+            Full conditions in the REHC Condition Book 2026/27.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {  const { isMobile, isTablet } = useViewport();
   const [now, setNow] = useState(new Date());
   const [search, setSearch] = useState('');
   const [programme, setProgramme] = useState('All');
@@ -1921,11 +2041,36 @@ export default function App() {
   const [selectedRace, setSelectedRace] = useState(null);
   const [activeTile, setActiveTile] = useState(null);
   const [showShare, setShowShare] = useState(false);
+  const [showSeries, setShowSeries] = useState(false);
+  const [installEvt, setInstallEvt] = useState(null);
+  const [showIosHelp, setShowIosHelp] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 60000);
     return () => clearInterval(t);
   }, []);
+
+  // Capture the browser's install prompt (Android/Chrome/Edge) for an in-app button.
+  useEffect(() => {
+    const onPrompt = (e) => { e.preventDefault(); setInstallEvt(e); };
+    window.addEventListener('beforeinstallprompt', onPrompt);
+    return () => window.removeEventListener('beforeinstallprompt', onPrompt);
+  }, []);
+
+  // Detect iOS Safari (no install API — needs manual Add to Home Screen).
+  const isIOS = typeof navigator !== 'undefined' && /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = typeof window !== 'undefined' && (window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone);
+
+  const handleInstall = async () => {
+    if (installEvt) {
+      installEvt.prompt();
+      await installEvt.userChoice;
+      setInstallEvt(null);
+    } else if (isIOS) {
+      setShowIosHelp(true);
+    }
+  };
+  const canInstall = !isStandalone && (installEvt || isIOS);
 
   // Print stylesheet
   useEffect(() => {
@@ -2058,6 +2203,32 @@ export default function App() {
       fontFamily: FONT_BODY, color: C.forest
     }}>
       {showShare && <ShareModal onClose={() => setShowShare(false)} />}
+      {showSeries && <SeriesModal onClose={() => setShowSeries(false)} isMobile={isMobile} />}
+      {showIosHelp && (
+        <div onClick={() => setShowIosHelp(false)} style={{
+          position: 'fixed', inset: 0, backgroundColor: 'rgba(26,46,32,0.55)', zIndex: 1000,
+          display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '24px',
+          backdropFilter: 'blur(2px)'
+        }}>
+          <div onClick={(e) => e.stopPropagation()} style={{
+            backgroundColor: C.parchment, width: '100%', maxWidth: '400px', borderRadius: '6px',
+            overflow: 'hidden', boxShadow: '0 20px 60px -15px rgba(0,0,0,0.5)'
+          }}>
+            <div style={{ padding: '18px 22px', backgroundColor: C.forest, color: C.ivory, borderBottom: '3px solid ' + C.gold, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: '16px', fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontWeight: 500 }}>Install on iPhone</div>
+              <button onClick={() => setShowIosHelp(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(242,235,220,0.7)', padding: '2px', display: 'flex' }}><X size={20} strokeWidth={1.5} /></button>
+            </div>
+            <div style={{ padding: '20px 22px', fontSize: '14px', color: C.forest, lineHeight: 1.6 }}>
+              <p style={{ marginTop: 0 }}>To add this to your home screen so it opens like an app:</p>
+              <ol style={{ margin: '0 0 4px', paddingLeft: '20px' }}>
+                <li style={{ marginBottom: '8px' }}>Tap the <strong>Share</strong> icon in Safari&rsquo;s toolbar.</li>
+                <li style={{ marginBottom: '8px' }}>Scroll down and tap <strong>&ldquo;Add to Home Screen&rdquo;</strong>.</li>
+                <li>Tap <strong>Add</strong> — the REHC icon appears on your home screen.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
       {selectedRace && <RaceDetailDrawer race={selectedRace} todayIso={todayIso} onClose={() => setSelectedRace(null)} />}
 
       {/* HEADER */}
@@ -2084,6 +2255,31 @@ export default function App() {
                 </h1>
               </div>
             </div>
+            <div style={{ display: 'flex', gap: '8px', alignSelf: isMobile ? 'stretch' : 'flex-start' }}>
+            {canInstall && (
+              <button onClick={handleInstall} style={{
+                display: 'flex', alignItems: 'center', gap: '8px',
+                padding: '10px 16px', backgroundColor: 'transparent', color: C.ivory,
+                border: '1px solid rgba(242,235,220,0.4)', borderRadius: '2px', cursor: 'pointer',
+                fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em',
+                textTransform: 'uppercase', fontFamily: FONT_BODY,
+                flex: isMobile ? 1 : 'none', justifyContent: 'center'
+              }}>
+                <Download size={14} strokeWidth={2} />
+                Install
+              </button>
+            )}
+            <button onClick={() => setShowSeries(true)} style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '10px 16px', backgroundColor: 'transparent', color: C.gold,
+              border: '1px solid ' + C.gold, borderRadius: '2px', cursor: 'pointer',
+              fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em',
+              textTransform: 'uppercase', fontFamily: FONT_BODY,
+              flex: isMobile ? 1 : 'none', justifyContent: 'center'
+            }}>
+              <Award size={14} strokeWidth={2} />
+              Series
+            </button>
             <button onClick={() => setShowShare(true)} style={{
               display: 'flex', alignItems: 'center', gap: '8px',
               padding: '10px 16px', backgroundColor: C.gold, color: C.forest,
@@ -2091,12 +2287,13 @@ export default function App() {
               fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em',
               textTransform: 'uppercase', fontFamily: FONT_BODY,
               boxShadow: '0 2px 8px -3px rgba(200,163,92,0.6)',
-              alignSelf: isMobile ? 'stretch' : 'flex-start',
+              flex: isMobile ? 1 : 'none',
               justifyContent: 'center'
             }}>
               <Share2 size={14} strokeWidth={2} />
               Share
             </button>
+            </div>
           </div>
         </div>
       </header>
@@ -2150,7 +2347,7 @@ export default function App() {
 
       {/* FILTERS */}
       <section className="rehc-no-print" style={{ maxWidth: MW, margin: '0 auto', padding: (isMobile ? '20px' : '28px') + ' ' + PX + ' 0' }}>
-        <div style={{ backgroundColor: C.parchment, border: '1px solid ' + C.forestSoft, padding: isMobile ? '16px' : '20px', borderRadius: '3px' }}>
+        <div style={{ backgroundColor: C.parchment, border: '1px solid ' + C.forestSoft, padding: isMobile ? '16px' : '20px', borderRadius: '6px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', flex: '1 1 220px', minWidth: '180px' }}>
               <Search size={15} strokeWidth={1.5} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(26,46,32,0.4)' }} />
@@ -2265,7 +2462,7 @@ export default function App() {
             display: 'flex', alignItems: 'center', gap: isMobile ? '10px' : '16px',
             flexWrap: 'wrap', marginBottom: '16px',
             padding: '10px 14px', backgroundColor: C.parchment,
-            border: '1px solid ' + C.forestSoft, borderRadius: '3px',
+            border: '1px solid ' + C.forestSoft, borderRadius: '6px',
             fontSize: '10.5px', fontFamily: FONT_BODY
           }}>
             <span style={{ textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, color: C.forestDim }}>Legend</span>
@@ -2300,7 +2497,7 @@ export default function App() {
           </div>
         )}
         {groupedByDate.length === 0 ? (
-          <div style={{ backgroundColor: C.parchment, border: '1px solid ' + C.forestSoft, padding: '64px 24px', textAlign: 'center', borderRadius: '3px' }}>
+          <div style={{ backgroundColor: C.parchment, border: '1px solid ' + C.forestSoft, padding: '64px 24px', textAlign: 'center', borderRadius: '6px' }}>
             <div style={{ fontSize: '20px', marginBottom: '8px', fontFamily: FONT_DISPLAY, fontStyle: 'italic' }}>No races match these filters</div>
             <div style={{ fontSize: '13px', color: C.forestDim }}>Try clearing your search or selecting different race types</div>
           </div>

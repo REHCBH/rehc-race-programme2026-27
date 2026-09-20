@@ -1,7 +1,44 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="theme-color" content="#0B223E"/><title>REHC Race Programme · 2026/27</title>
-<meta name="description" content="Rashid Equestrian & Horseracing Club race programme for the 2026/27 season."/>
-<meta property="og:title" content="REHC Race Programme · 2026/27"/>
-<meta property="og:image" content="/rehc-logo.png"/><link rel="icon" type="image/png" href="/favicon.png"/></head>
-<body style="margin:0;"><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B223E" />
+    <title>REHC Race Programme · 2026/27</title>
+    <meta name="description" content="Rashid Equestrian & Horseracing Club race programme for the 2026/27 season — 90 meetings, per-race conditions, live countdown, search and filter, exports." />
+
+    <!-- Display + body fonts (fall back to Georgia / system if offline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="REHC Racing" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Social preview -->
+    <meta property="og:title" content="REHC Race Programme · 2026/27" />
+    <meta property="og:description" content="Rashid Equestrian & Horseracing Club 2026/27 season — Imported, Bahrain Bred & WAHO programmes, per-race conditions, live dashboard." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/rehc-logo.png" />
+  </head>
+  <body style="margin:0;">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Register the service worker for offline + installable PWA.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function (e) {
+            console.warn('SW registration failed:', e);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
