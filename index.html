@@ -1,44 +1,521 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0B223E" />
-    <title>REHC Race Programme · 2026/27</title>
-    <meta name="description" content="Rashid Equestrian & Horseracing Club race programme for the 2026/27 season — 90 meetings, per-race conditions, live countdown, search and filter, exports." />
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Silk Designer | REHC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#11202E; --gold:#AC9C71; --maroon:#980B2C; --slate:#384459; --ivory:#D8D2C0;
+  --bg:#FFFFFF; --panel:#F5F4F1; --ink:#11202E; --muted:#5A6470; --line:#DCD8CF;
+  --chip:#FFFFFF; --focus:#384459; --warn-bg:#FBF3E2; --warn-ink:#6A4A0C; --err-bg:#F8E7EA; --err-ink:#980B2C;
+  --hd:'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bd:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1414; --panel:#142020; --ink:#ECE8DD; --muted:#A6AEB3; --line:#2A3838; --chip:#1A2828; --focus:#D8D2C0;
+    --warn-bg:#2E2614; --warn-ink:#F0D9A4; --err-bg:#341A1A; --err-ink:#F5C2C2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1414; --panel:#142020; --ink:#ECE8DD; --muted:#A6AEB3; --line:#2A3838; --chip:#1A2828; --focus:#D8D2C0;
+  --warn-bg:#2E2614; --warn-ink:#F0D9A4; --err-bg:#341A1A; --err-ink:#F5C2C2;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--bd);-webkit-font-smoothing:antialiased}
+header{background:var(--navy);color:#FFFFFF;padding:18px 20px 16px;border-bottom:3px solid var(--gold)}
+header .club{font-size:12.5px;letter-spacing:.02em;color:var(--gold);margin:0;font-weight:500}
+header h1{font:700 26px/1.15 var(--hd);letter-spacing:-.01em;margin:4px 0 0}
+main{max-width:1180px;margin:0 auto;padding:20px;display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){ main{grid-template-columns:minmax(0,440px) minmax(0,1fr);align-items:start} .stage{position:sticky;top:20px} }
 
-    <!-- Display + body fonts (fall back to Georgia / system if offline) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px}
+.preview{display:flex;gap:10px;align-items:flex-end;justify-content:center}
+.preview .main-svg{width:100%;max-width:330px;height:auto;display:block}
+@media (max-width:899px){ .preview .main-svg{max-width:220px} .stage{padding:14px} }
+.spare{display:none;flex-direction:column;align-items:center;gap:4px;width:84px;flex:none}
+.spare.on{display:flex}
+.spare svg{width:84px;height:auto}
+.spare span{font-size:12px;color:var(--muted);text-align:center}
+.entry{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.entry h2{font:600 13px/1.3 var(--bd);color:var(--muted);margin:0 0 6px}
+.entry p{font:500 16.5px/1.5 var(--hd);margin:0}
+.entry .valid{font:13px/1.45 var(--bd);color:var(--muted);margin-top:8px}
+.msgs{display:grid;gap:8px;margin-top:12px}
+.msg{font-size:13.5px;line-height:1.45;padding:9px 11px;border-radius:4px}
+.msg.err{background:var(--err-bg);color:var(--err-ink)}
+.msg.warn{background:var(--warn-bg);color:var(--warn-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+button{font:inherit;color:inherit}
+.btn{border:1px solid var(--navy);background:var(--navy);color:#FFFFFF;border-radius:4px;padding:9px 14px;font-weight:500;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dl-note{font-size:12.5px;color:var(--muted);margin:8px 0 0}
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="REHC Racing" />
-    <meta name="mobile-web-app-capable" content="yes" />
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--muted);font:600 14px/1.3 var(--hd);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+:root[data-theme="dark"] .tab[aria-selected="true"]{border-bottom-color:var(--gold)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tab[aria-selected="true"]{border-bottom-color:var(--gold)} :root:not([data-theme="light"]) .btn{background:var(--gold);color:#11202E;border-color:var(--gold)} :root:not([data-theme="light"]) header{background:#0A141D} }
+.panel{padding:18px 0 0}
+.group{margin-bottom:22px}
+.group h3{font:600 14px/1.3 var(--hd);margin:0 0 10px;display:flex;gap:8px;align-items:baseline}
+.group h3 .val{font-weight:400;color:var(--muted)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.25);cursor:pointer;padding:0;position:relative}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.patterns{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px}
+.pt{border:1px solid var(--line);background:var(--chip);border-radius:4px;padding:6px 4px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:118px}
+.pt svg{width:100%;height:76px}
+.pt .nm{font-size:12px;line-height:1.25;text-align:center}
+.pt .sb{font-size:10.5px;color:var(--muted);line-height:1.2}
+.pt[aria-pressed="true"]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.toggle{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-bottom:18px}
+.toggle input{width:18px;height:18px;margin-top:2px}
+.hint{font-size:13px;color:var(--muted);margin:-4px 0 14px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+footer{max-width:1180px;margin:0 auto;padding:4px 20px 28px;font-size:12.5px;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink"><defs id="defs"></defs></svg>
+<header>
+  <p class="club">Rashid Equestrian &amp; Horseracing Club</p>
+  <h1>Silk Designer</h1>
+</header>
+<main>
+  <section class="stage" aria-label="Preview">
+    <div class="preview">
+      <svg class="main-svg" id="preview" viewBox="-6 -4 440 612" role="img" aria-labelledby="desc" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+      <div class="spare" id="spareWrap"><svg id="sparePrev" viewBox="150 -4 128 142" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink"></svg><span>Second cap</span></div>
+    </div>
+    <div class="entry">
+      <h2>Colours description</h2>
+      <p id="desc"></p>
+      <p class="valid" id="valid"></p>
+    </div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn" id="dlSheet">Download design sheet</button>
+      <button class="btn ghost" id="dlSvg">Download silks (SVG)</button>
+      <button class="btn ghost" id="reset">Start again</button>
+    </div>
+    <p class="dl-note" id="dlNote" hidden></p>
+  </section>
 
-    <!-- Social preview -->
-    <meta property="og:title" content="REHC Race Programme · 2026/27" />
-    <meta property="og:description" content="Rashid Equestrian & Horseracing Club 2026/27 season — Imported, Bahrain Bred & WAHO programmes, per-race conditions, live dashboard." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/rehc-logo.png" />
-  </head>
-  <body style="margin:0;">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script>
-      // Register the service worker for offline + installable PWA.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function (e) {
-            console.warn('SW registration failed:', e);
-          });
-        });
-      }
-    </script>
-  </body>
+  <section aria-label="Design controls">
+    <div class="tabs" role="tablist" id="tabs">
+      <button class="tab" role="tab" data-t="body" aria-selected="true">Body</button>
+      <button class="tab" role="tab" data-t="sleeves" aria-selected="false">Sleeves</button>
+      <button class="tab" role="tab" data-t="cap" aria-selected="false">Cap</button>
+      <button class="tab" role="tab" data-t="spare" aria-selected="false">Second cap</button>
+    </div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </section>
+</main>
+<footer>Patterns follow the Rules of Racing, Annexe 6 (Figures 4 to 6). This tool prepares a design; registration is made with the Racing Director under Article 34.</footer>
+
+<script>
+const GEO = {"cap": "M 658.06 63.58 C 658.06 29.24 634.01 1.40 604.33 1.40 C 574.66 1.40 550.60 29.24 550.60 63.58 C 550.60 73.73 552.72 83.31 556.45 91.78 C 556.45 91.78 556.45 91.78 556.45 91.78 C 563.85 116.70 582.49 134.40 604.33 134.40 C 626.17 134.40 644.81 116.70 652.21 91.78 C 655.94 83.31 658.06 73.73 658.06 63.58", "body": "M 736.47 213.49 L 663.58 185.12 C 658.02 158.97 636.88 156.19 636.88 156.19 L 571.78 156.19 C 571.78 156.19 550.64 158.97 545.08 185.12 L 472.19 213.49 L 488.33 581.07 C 488.33 581.07 510.33 598.66 603.5 598.87 L 603.5 598.88 C 603.78 598.88 604.05 598.88 604.33 598.88 C 604.61 598.88 604.88 598.88 605.17 598.88 L 605.17 598.87 C 698.33 598.66 720.33 581.07 720.33 581.07 L 736.47 213.49", "slvL": "M 865.88 392.08 L 877.01 379.85 L 863.66 213.49 C 845.85 213.49 828.05 268.57 828.05 268.57 L 783.54 463.30 L 782.98 557.88 L 788.92 562.64 C 786.57 568.64 785.58 575.97 789.10 581.25 C 797.01 593.11 824.32 589.66 838.62 577.35 C 841.44 574.93 848.35 568.98 848.63 560.11 C 848.64 559.75 848.71 555.65 846.87 551.49 C 847.64 551.66 848.08 551.76 848.08 551.76 Z", "slvR": "M 1124.59 392.08 L 1113.46 379.85 L 1126.81 213.49 C 1144.62 213.49 1162.42 268.57 1162.42 268.57 L 1206.93 463.30 L 1207.49 557.88 L 1201.55 562.64 C 1203.89 568.64 1204.89 575.97 1201.37 581.25 C 1193.46 593.11 1166.15 589.66 1151.85 577.35 C 1149.03 574.93 1142.11 568.98 1141.83 560.11 C 1141.82 559.75 1141.75 555.65 1143.60 551.49 C 1142.83 551.66 1142.39 551.76 1142.39 551.76 L 1124.59 392.08", "a1": "M 2.67 556.50 L 8.10 560.85 C 8.56 561.22 8.73 561.83 8.51 562.38 C 7.23 565.66 4.66 573.91 8.56 579.76 C 10.83 583.17 15.07 585.39 20.82 586.18 C 32.30 587.76 47.14 583.30 56.10 575.60 C 58.88 573.21 65.39 567.60 65.65 559.32 C 65.65 559.16 65.75 555.24 64 551.29 C 63.79 550.83 63.86 550.30 64.17 549.91 C 64.44 549.58 64.82 549.38 65.26 549.42 L 82.90 391.19 C 82.93 390.91 83.05 390.65 83.24 390.44 L 91.35 381.52 C 91.71 381.12 92.28 380.99 92.78 381.16 C 93.29 381.34 93.64 381.80 93.67 382.34 L 99.43 579.60 C 103.04 581.96 128.96 596.60 213.31 596.80 C 213.35 596.80 213.38 596.80 213.42 596.80 L 214.86 596.80 C 214.90 596.80 214.93 596.80 214.97 596.80 C 262.65 596.69 291.19 591.93 306.75 587.97 C 320.96 584.34 327.20 580.69 328.85 579.61 L 334.54 383.49 C 334.57 382.95 334.92 382.49 335.42 382.31 C 335.93 382.13 336.49 382.27 336.85 382.67 L 343.92 390.44 C 344.11 390.65 344.23 390.91 344.26 391.19 L 361.90 549.42 C 362.31 549.37 362.72 549.58 362.99 549.91 C 363.30 550.30 363.37 550.83 363.17 551.29 C 361.42 555.23 361.51 559.16 361.52 559.32 C 361.77 567.60 368.29 573.21 371.07 575.60 C 380.03 583.30 394.86 587.76 406.35 586.18 C 412.09 585.39 416.33 583.17 418.60 579.76 C 422.51 573.91 419.94 565.66 418.65 562.38 C 418.44 561.83 418.60 561.22 419.06 560.85 L 424.50 556.50 L 423.95 462.71 L 379.47 268.12 C 379.46 268.10 375.18 254.94 368.84 241.70 C 360.62 224.51 352.75 214.99 346.10 214.15 C 345.83 214.12 345.60 214.00 345.40 213.84 L 272.91 185.62 C 272.49 185.45 272.18 185.09 272.08 184.65 C 266.91 160.34 248.19 157.01 246.59 156.78 L 181.69 156.78 C 180.08 157.01 161.36 160.34 156.19 184.65 C 156.10 185.09 155.79 185.45 155.37 185.62 L 82.49 213.99 C 82.33 214.05 82.17 214.08 82.00 214.08 C 68.20 214.08 52.53 253.17 47.66 268.24 L 3.22 462.71 Z M 25.55 589.16 C 23.80 589.16 22.10 589.05 20.46 588.82 C 13.93 587.93 9.05 585.31 6.34 581.25 C 3.23 576.58 3.00 569.73 5.68 562.33 L 0.5 558.18 C 0.18 557.92 -0.00 557.54 0 557.13 L 0.55 462.55 C 0.55 462.45 0.56 462.35 0.58 462.26 L 45.09 267.53 C 45.17 267.28 49.68 253.40 56.32 239.71 C 65.32 221.14 73.88 211.62 81.74 211.42 L 153.74 183.39 C 156.80 169.90 164.02 162.68 169.59 158.99 C 175.76 154.90 181.19 154.15 181.42 154.12 C 181.48 154.11 181.53 154.11 181.59 154.11 L 246.69 154.11 C 246.75 154.11 246.80 154.11 246.86 154.12 C 247.09 154.15 252.52 154.90 258.69 158.99 C 264.26 162.68 271.48 169.90 274.54 183.39 L 346.76 211.50 C 346.81 211.53 346.86 211.55 346.91 211.57 C 364.79 214.67 381.34 265.25 382.04 267.42 L 426.58 462.26 C 426.60 462.35 426.61 462.45 426.61 462.55 L 427.17 557.13 C 427.17 557.54 426.99 557.92 426.67 558.18 L 421.48 562.33 C 424.16 569.73 423.93 576.58 420.83 581.25 C 418.12 585.31 413.23 587.93 406.71 588.82 C 394.54 590.5 378.81 585.78 369.33 577.62 C 366.54 575.23 359.14 568.86 358.85 559.41 C 358.84 559 358.79 555.80 360 552.12 C 359.99 552.12 359.98 552.12 359.98 552.11 C 359.66 551.89 359.46 551.55 359.41 551.16 L 341.66 391.92 L 337.01 386.80 L 331.47 580.41 C 331.45 580.79 331.27 581.14 330.97 581.37 C 330.06 582.10 307.56 599.24 215.09 599.46 C 215.05 599.47 215.01 599.47 214.97 599.47 L 214.14 599.46 L 213.30 599.47 C 213.26 599.47 213.22 599.47 213.18 599.46 C 120.71 599.24 98.22 582.10 97.30 581.37 C 97.01 581.14 96.83 580.79 96.80 580.41 L 91.20 385.66 L 85.50 391.92 L 67.75 551.16 C 67.71 551.55 67.50 551.89 67.19 552.11 C 67.18 552.12 67.17 552.12 67.17 552.12 C 68.38 555.80 68.33 559.00 68.31 559.41 C 68.02 568.86 60.62 575.23 57.83 577.62 C 49.63 584.68 36.76 589.16 25.55 589.16 Z M 214.34 244.19 L 213.79 589.23 L 211.56 585.90 L 209.33 242.42 Z M 224.36 242.42 L 222.69 590.72 L 219.35 589.98 L 219.35 244.28 Z M 272.60 185.67 L 274.07 185.67 C 274.86 188.94 275.29 192.31 275.29 195.77 C 275.29 223.78 247.87 246.48 214.05 246.48 C 180.22 246.48 152.80 223.78 152.80 195.77 C 152.80 192.31 153.23 188.94 154.03 185.67 L 156.06 184.73 C 155.65 187 154.85 190.26 154.85 192.62 C 154.85 218.88 181.35 240.17 214.05 240.17 C 246.74 240.17 273.24 218.88 273.24 192.62 C 273.24 190.26 273.01 187.94 272.60 185.67 Z M 359.26 517.64 C 359.05 519.26 360.00 520.80 361.55 521.32 C 363.69 522.04 365.83 522.77 367.92 522.61 C 372.06 522.29 376.14 520.60 380.24 519.50 C 377.35 524.58 373.39 525.86 370.61 529.09 C 368.07 532.04 366.81 537.10 364.98 541.24 L 361.80 552.18 C 360.12 544.58 357.53 524.73 356.76 514.97 C 355.73 501.90 354.17 488.63 353.28 475.54 C 351.69 452.24 346.62 429.32 345.28 406 C 344.69 395.91 343.78 392.45 336.61 384.43 L 335.97 394.87 L 330.94 581.07 C 330.94 581.07 302.19 599.99 214.51 598.88 C 123.5 599.44 98.09 581.07 98.09 581.07 L 91.39 377.06 L 96.73 384.25 C 98.00 386.84 101.57 387.22 103.36 384.94 L 124.55 358.08 C 125.08 357.40 126.17 357.96 125.92 358.80 L 110.59 409.56 C 109.71 412.48 113.30 414.66 115.50 412.53 L 141.61 387.28 C 141.84 387.05 142.19 387.38 141.98 387.62 L 109.39 425.53 C 107.09 428.21 106.54 431.97 107.98 435.19 L 119.19 460.28 C 123.10 466.08 106.13 571.89 112.81 578.85 C 112.81 578.85 156.76 583.85 174.57 585.80 C 192.37 587.75 230.22 588.54 232.02 588.45 L 267.59 586.72 C 268.69 586.67 269.78 586.55 270.87 586.38 L 310.76 580.10 C 314.63 579.50 317.89 474.17 319.38 470.57 L 321.14 466.32 C 322.24 463.65 322.34 460.68 321.43 457.95 L 307.43 416.10 C 307.20 415.41 308.12 414.94 308.54 415.53 L 318.80 429.84 C 320.18 431.77 323.22 430.93 323.42 428.58 L 326.71 388.57 C 326.92 385.91 326.83 383.25 326.42 380.62 L 319.36 334.85 C 319.26 334.19 320.19 333.92 320.46 334.55 L 327.96 352.19 C 328.62 353.73 330.91 353.41 331.11 351.74 L 331.98 344.36 C 332.37 345.07 332.73 345.73 333.05 346.31 C 333.48 347.10 334.66 346.91 334.83 346.03 C 335.12 344.51 335.37 342.55 335.69 341.36 C 335.95 340.44 336.02 339.48 335.86 338.53 C 335.25 334.83 334.64 331.10 334.00 327.24 C 333.12 321.88 332.19 316.24 331.16 309.95 C 330.76 307.58 329.85 305.31 328.48 303.33 L 322.10 294.15 C 321.29 292.72 320.50 291.33 319.69 289.89 C 319.45 289.47 319.69 288.94 320.16 288.82 C 321.26 288.55 322.27 288.29 323.28 288.04 C 323.34 288.03 323.39 288.00 323.44 287.98 C 323.54 287.95 323.64 287.92 323.73 287.88 C 323.94 287.85 324.16 287.90 324.33 288.10 L 333.33 298.56 C 335.12 300.64 336.57 302.98 337.67 305.50 L 344.71 241.14 L 346.30 226.57 L 341.35 307.24 C 341.76 307.46 342.22 307.59 342.71 307.60 L 342.74 307.60 C 342.10 309.08 341.55 310.58 341.05 312.08 L 338.52 353.33 C 338.76 356.96 339 360.58 339.14 364.18 C 339.41 370.93 343.12 377.53 345.38 384.13 C 347.65 390.78 351.41 397.09 352.15 403.99 C 353.93 420.58 350.42 438.76 361.36 452.09 C 361.88 452.72 362.83 452.74 363.33 452.10 C 368.05 446.19 373.26 439.66 378.47 433.13 C 379.79 434.03 379.29 433.69 380.61 434.58 C 377.75 439.58 374.84 444.54 372.02 449.59 C 365.29 461.65 355.69 472.56 362.72 489.79 C 363.21 490.98 364.44 491.68 365.71 491.49 C 375.37 490.05 385.16 488.58 394.95 487.11 C 395.45 489.42 395.25 488.49 395.75 490.80 C 392.09 491.87 388.36 492.62 384.75 493.97 C 377.25 496.78 369.30 498.56 362.58 503.48 C 360.30 505.16 360.01 512.01 359.26 517.64 Z M 38.13 339.53 C 39.54 331.93 40.95 324.33 42.42 316.42 C 43.85 317.59 46.44 319.07 46.26 319.64 C 44.04 326.52 41.41 333.26 38.89 340.04 C 38.64 339.87 38.38 339.70 38.13 339.53 Z M 46.70 300.51 C 42.97 289.76 47.24 280.99 52.21 272.70 C 50.37 281.97 48.53 291.24 46.70 300.51 Z M 8.18 456.00 C 17.01 454.70 25.83 453.41 34.65 452.10 C 34.78 453 34.92 453.88 35.06 454.77 C 26.28 456.35 17.51 457.92 8.73 459.49 C 8.55 458.33 8.37 457.17 8.18 456.00 Z M 64.23 244.61 C 63.12 233.28 69.32 225.75 76.08 218.84 C 72.13 227.43 68.18 236.02 64.23 244.61 Z M 15.56 434.73 C 19.06 398.37 30.11 350.72 34.59 346.78 C 28.37 375.53 21.97 405.14 15.56 434.73 Z M 61.70 550.17 C 59.28 551.08 56.23 553.42 54.55 552.67 C 37.98 545.33 23.98 550.16 10.92 560.83 C 10.35 561.30 9.49 561.39 6.96 562.32 C 6.31 560.35 2.59 560.00 1.81 558.07 C 0.75 555.43 1.89 551.62 1.81 548.98 C 1.31 530.92 1.36 512.17 2.37 494.08 C 2.37 510.79 3.42 527.77 3.42 545.18 C 5.21 544.51 6.64 543.97 8.19 543.38 C 7.53 547.51 6.93 551.23 6.39 554.62 C 13.63 552.01 20.08 549.63 26.57 547.37 C 38.68 543.16 50.10 548.05 61.71 550.18 C 61.71 550.18 61.70 550.17 61.70 550.17 Z M 108.58 289.89 C 107.78 291.32 106.99 292.72 106.19 294.15 L 99.85 303.33 C 98.48 305.31 97.57 307.58 97.18 309.95 C 95.41 320.77 93.94 329.71 92.50 338.53 C 92.34 339.48 92.41 340.44 92.67 341.36 C 92.99 342.55 93.23 344.51 93.53 346.03 C 93.69 346.91 94.87 347.10 95.30 346.31 C 98.91 339.69 107.27 324.12 108.37 324.66 C 102.58 344.08 101.5 359.27 96.33 377.96 C 95.94 379.37 95.20 380.67 94.20 381.74 C 84.79 391.82 83.77 394.85 83.14 405.99 C 81.80 429.32 76.75 452.23 75.17 475.54 C 74.28 488.63 72.74 501.90 71.71 514.97 C 70.95 524.73 68.37 544.57 66.70 552.18 L 63.53 541.23 C 61.71 537.10 60.46 532.04 57.93 529.09 C 55.17 525.86 51.24 524.58 48.36 519.50 C 52.44 520.60 56.5 522.29 60.62 522.61 C 62.69 522.77 64.82 522.04 66.94 521.32 C 68.49 520.80 69.44 519.26 69.22 517.64 C 68.47 512.01 68.19 505.16 65.92 503.48 C 59.25 498.56 51.34 496.78 43.88 493.97 C 40.29 492.62 36.58 491.87 32.93 490.80 C 33.43 488.49 33.23 489.42 33.73 487.11 C 43.47 488.58 53.20 490.04 62.81 491.49 C 64.07 491.68 65.30 490.97 65.78 489.79 C 72.78 472.56 63.23 461.64 56.53 449.59 C 53.73 444.54 50.84 439.58 48 434.58 C 49.31 433.69 48.81 434.03 50.12 433.13 C 55.30 439.66 60.48 446.19 65.17 452.10 C 65.68 452.74 66.62 452.72 67.14 452.09 C 78.02 438.76 74.53 420.58 76.30 403.99 C 77.03 397.08 80.78 390.78 83.04 384.12 C 85.28 377.53 88.96 370.93 89.24 364.17 C 90.00 345.19 93.34 325.57 85.66 307.60 L 85.69 307.60 C 87.27 307.57 88.59 306.33 88.67 304.75 C 88.84 301.25 88.54 297.87 87.95 294.72 C 85.78 283.03 84.59 239.88 84.60 240.04 C 88.42 278.77 91.01 285.82 94.83 287.48 C 95.85 287.93 96.65 288.64 97.16 287.64 C 100.22 281.61 102.86 276.41 105.5 271.21 C 106.03 271.42 104.15 279.67 102.86 284.35 C 102.41 285.96 103.39 287.63 105.01 288.04 C 106.02 288.29 107.03 288.54 108.12 288.82 C 108.59 288.93 108.82 289.47 108.58 289.89 Z M 352.05 218.84 C 358.82 225.75 365.01 233.28 363.90 244.61 C 359.95 236.02 356.00 227.43 352.05 218.84 Z M 393.54 346.78 C 398.02 350.72 409.07 398.37 412.57 434.73 C 406.16 405.14 399.76 375.53 393.54 346.78 Z M 366.42 550.18 C 378.04 548.05 389.45 543.16 401.56 547.37 C 408.05 549.63 414.50 552.01 421.74 554.62 C 421.20 551.23 420.60 547.51 419.94 543.38 C 421.49 543.97 422.92 544.51 424.71 545.18 C 424.71 527.77 425.76 510.79 425.76 494.08 C 426.77 512.17 426.82 530.92 426.32 548.98 C 426.25 551.62 427.38 555.43 426.32 558.07 C 425.54 560.00 421.82 560.35 421.17 562.32 C 418.64 561.39 417.78 561.30 417.21 560.83 C 404.16 550.16 390.15 545.33 373.58 552.67 C 371.90 553.42 368.85 551.08 366.43 550.17 C 366.43 550.17 366.42 550.18 366.42 550.18 Z M 51.41 478.46 C 44.69 477.62 37.96 476.78 31.24 475.94 C 38.30 473.69 45.38 470.64 51.75 475.40 C 51.64 476.42 51.52 477.44 51.41 478.46 Z M 385.90 466.78 C 392.36 466.72 398.82 466.67 405.28 466.61 C 398.23 464.33 391.10 461.46 385.31 464.47 C 385.51 465.24 385.71 466.01 385.90 466.78 Z M 169.57 185.80 C 169.32 184.52 169.19 183.21 169.19 181.87 C 169.19 159.99 186.62 159.25 186.62 159.25 L 245.22 159.25 C 245.22 159.25 262.66 159.99 262.66 181.87 C 262.66 183.21 262.52 184.52 262.27 185.80 C 259.74 169.05 245.22 168.42 245.22 168.42 L 186.62 168.42 C 186.62 168.42 172.10 169.05 169.57 185.80", "a2": "M 260.25 91.24 C 260.03 91.71 259.82 92.18 259.60 92.65 C 250.73 111.50 233.52 124.34 213.77 124.42 C 213.77 124.42 213.77 124.42 213.77 124.42 C 213.75 124.42 213.72 124.42 213.71 124.42 C 213.69 124.42 213.68 124.42 213.67 124.42 C 213.66 124.42 213.66 124.42 213.64 124.42 C 213.64 124.42 213.62 124.42 213.62 124.42 C 213.60 124.42 213.59 124.42 213.58 124.42 C 213.57 124.42 213.57 124.42 213.56 124.42 C 213.55 124.42 213.54 124.42 213.53 124.42 C 213.52 124.42 213.51 124.42 213.5 124.42 C 213.49 124.42 213.48 124.42 213.47 124.42 C 213.46 124.42 213.45 124.42 213.45 124.42 C 213.43 124.42 213.41 124.42 213.39 124.42 C 193.47 124.33 176.14 111.28 167.34 92.17 C 167.20 91.86 167.06 91.55 166.92 91.24 C 163.25 82.94 161.18 73.53 161.18 63.58 C 161.18 30.03 184.69 2.74 213.58 2.74 C 242.48 2.74 265.98 30.03 265.98 63.58 C 265.98 73.53 263.91 82.94 260.25 91.24 Z M 213.58 133.07 C 198.15 133.07 183.71 123.55 174.36 108.19 C 184.51 120.10 198.44 127.04 213.44 127.08 C 213.45 127.08 213.46 127.08 213.47 127.08 C 213.48 127.08 213.48 127.08 213.49 127.08 C 213.50 127.08 213.51 127.08 213.53 127.08 C 213.53 127.08 213.54 127.08 213.55 127.08 C 213.57 127.08 213.59 127.08 213.61 127.08 C 213.62 127.08 213.63 127.08 213.64 127.08 C 213.65 127.08 213.66 127.08 213.67 127.08 C 213.68 127.08 213.69 127.08 213.70 127.08 C 213.71 127.08 213.71 127.08 213.72 127.08 C 228.72 127.04 242.66 120.10 252.80 108.19 C 243.46 123.55 229.01 133.07 213.58 133.07 Z M 213.58 0.07 C 183.22 0.07 158.51 28.56 158.51 63.58 C 158.51 73.87 160.65 83.60 164.44 92.21 C 172.19 118.25 191.93 135.73 213.58 135.73 C 235.23 135.73 254.97 118.25 262.73 92.21 C 266.51 83.60 268.65 73.87 268.65 63.58 C 268.65 28.56 243.94 0.07 213.58 0.07", "a3": "M 390.40 579.01 C 392.66 579.63 396.33 580.31 400.73 579.58 C 402.39 579.30 410.30 578 411.85 572.91 C 413.20 568.51 409.01 563.97 408.51 563.44 C 405.55 560.31 401.51 559.08 392.94 558.44 C 378.20 557.34 369.17 556.67 367.90 560.11 C 366.08 565.04 378.53 575.77 390.40 579.01 Z M 60.23 560.11 C 58.96 556.67 49.93 557.34 35.19 558.44 C 26.62 559.08 22.58 560.31 19.62 563.44 C 19.12 563.97 14.93 568.51 16.28 572.91 C 17.83 578 25.74 579.30 27.41 579.58 C 31.80 580.31 35.47 579.63 37.73 579.01 C 49.60 575.77 62.05 565.04 60.23 560.11 Z M 169.56 185.52 C 172.09 168.78 186.61 168.15 186.61 168.15 L 245.21 168.15 C 245.21 168.15 259.73 168.78 262.26 185.52 C 258.47 205.28 227.41 218.68 227.41 218.68 L 220.73 233.89 C 220.49 233.89 217.66 233.89 216.28 233.89 C 216.28 233.89 215.98 233.89 215.54 233.89 C 214.16 233.89 211.33 233.89 211.09 233.89 L 204.41 218.68 C 204.41 218.68 173.35 205.28 169.56 185.52"};
+</script>
+<script>
+// Racing colours pattern library — REHC Rules of Racing, Annexe 6 (pp.78–82).
+// All coordinates are in the REHC silks template space (front view, viewBox -6 -4 440 612).
+const X0 = 213.6;            // centre line of the jacket (zip)
+const SL = 380;              // sleeve length in local sleeve units
+
+const f = n => Math.round(n * 10) / 10;
+const pts = a => a.map(p => f(p[0]) + ',' + f(p[1])).join(' ');
+const P = (a, c) => `<polygon points="${pts(a)}" fill="${c}"/>`;
+const R = (x, y, w, h, c) => `<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" fill="${c}"/>`;
+const C = (x, y, r, c) => `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="${c}"/>`;
+const E = (x, y, rx, ry, c) => `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(rx)}" ry="${f(ry)}" fill="${c}"/>`;
+const LN = (a, c, w) => `<polyline points="${pts(a)}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="miter" stroke-miterlimit="10"/>`;
+const D = (x, y, hw, hh, c) => P([[x, y - hh], [x + hw, y], [x, y + hh], [x - hw, y]], c);
+function S(cx, cy, R0, c) {
+  const a = [];
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 ? R0 * 0.4 : R0, t = -Math.PI / 2 + i * Math.PI / 5;
+    a.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]);
+  }
+  return P(a, c);
+}
+const zig = (cy, amp, step, x0, x1, c, w) => {
+  const a = []; let up = true;
+  for (let x = x0; x <= x1 + step; x += step) { a.push([x, cy + (up ? -amp : amp)]); up = !up; }
+  return LN(a, c, w);
+};
+const mirror = a => a.map(p => [2 * X0 - p[0], p[1]]);
+
+// ---------- MAIN BODY (Figure 4) ----------
+const BODY = [
+  { id: 'plain', name: 'Plain', note: 'Shown as "White" in Annexe 6', d: () => '' },
+  // p.78
+  { id: 'large-spots', name: 'Large Spots', d: c => C(140, 295, 31, c) + C(X0, 370, 31, c) + C(287, 445, 31, c) },
+  { id: 'diablo', name: 'Diablo', d: c => { const l = [[30, 133.5], [X0, 400], [30, 698]]; return P(l, c) + P(mirror(l), c); } },
+  { id: 'inverted-triangle', name: 'Inverted Triangle', d: c => P([[166, 292], [261.2, 292], [X0, 374]], c) },
+  { id: 'disc', name: 'Disc', d: c => E(X0, 372, 74, 80, c) },
+  { id: 'star', name: 'Star', d: c => S(X0, 388, 80, c) },
+  { id: 'diamond', name: 'Diamond', d: c => D(X0, 375, 46, 78, c) },
+  { id: 'cross-of-loraine', name: 'Cross of Loraine', d: c => R(X0 - 14, 285, 28, 205, c) + R(X0 - 34, 318, 68, 30, c) + R(X0 - 50, 392, 100, 36, c) },
+  { id: 'stars', name: 'Stars', d: c => {
+      let s = ''; const rows = [250, 318, 386, 454, 522, 590];
+      rows.forEach((y, j) => { const xs = j % 2 ? [80, 169, 258, 347] : [125, X0, 302]; xs.forEach(x => s += S(x, y, 23, c)); });
+      return s; } },
+  { id: 'spots', name: 'Spots', d: c => {
+      let s = ''; for (let j = 0; j < 8; j++) { const y = 228 + j * 56; for (let i = -3; i <= 3; i++) s += C(X0 + i * 70 + (j % 2 ? 35 : 0), y, 19, c); } return s; } },
+  { id: 'diamonds', name: 'Diamonds', sub: 'p.78', d: c => {
+      let s = ''; for (let j = -1; j < 7; j++) for (let i = -3; i <= 3; i++) s += D(X0 + i * 52, 200 + j * 80, 26, 40, c); return s; } },
+  { id: 'check', name: 'Check', d: c => {
+      let s = ''; for (let j = 0; j < 10; j++) for (let i = -4; i < 4; i++) if ((i + j) % 2 === 0) s += R(X0 + i * 44, 200 + j * 44, 44, 44, c); return s; } },
+  { id: 'chevrons', name: 'Chevrons', d: c => [215, 305, 395, 485, 575].map(a => LN([[30, a + 122], [X0, a], [397, a + 122]], c, 36)).join('') },
+  { id: 'cheveron', name: 'Cheveron', d: c => LN([[85.8, 150], [X0, 510], [341.4, 150]], c, 40) },
+  { id: 'cross-belts', name: 'Cross Belts', d: c => LN([[70, 165], [357, 625]], c, 36) + LN([[357, 165], [70, 625]], c, 36) },
+  { id: 'sash', name: 'Sash', d: c => LN([[363, 166], [77, 627]], c, 40) },
+  { id: 'quartered', name: 'Quartered', d: c => R(X0, 140, 160, 256, c) + R(50, 396, X0 - 50, 220, c) },
+  // p.79
+  { id: 'hoops', name: 'Hoops', d: c => [256, 368, 480].map(y => R(50, y, 330, 56, c)).join('') },
+  { id: 'hoop', name: 'Hoop', sub: 'p.79, first', d: c => R(50, 320, 330, 52, c) },
+  { id: 'stripes', name: 'Stripes', d: c => { let s = ''; for (let k = -3; k <= 2; k++) s += R(X0 + 14 + 52 * k, 150, 24, 460, c); return s; } },
+  { id: 'epaulettes', name: 'Epaulettes', d: c => { const l = [[86, 211], [150, 182], [163, 207], [99, 238]]; return P(l, c) + P(mirror(l), c); } },
+  { id: 'seems', name: 'Seems', seam: true },
+  { id: 'braces', name: 'Braces', d: c => R(X0 - 86, 190, 24, 420, c) + R(X0 + 62, 190, 24, 420, c) },
+  { id: 'stripe', name: 'Stripe', d: c => R(X0 - 26, 150, 52, 460, c) },
+  { id: 'birdseye', name: 'Birdseye', d: c => {
+      let s = ''; for (let j = 0; j < 26; j++) { const y = 200 + j * 16; for (let i = -8; i <= 8; i++) s += C(X0 + i * 20 + (j % 2 ? 10 : 0), y, 5.2, c); } return s; } },
+  { id: 'triangular-thirds', name: 'Triangular Thirds', d: c => P([[X0, 150], [91.9, 610], [335.3, 610]], c) },
+  { id: 'angled-halves', name: 'Angled Halves', d: c => P([[40, 440], [X0, 300], [387, 440], [387, 620], [40, 620]], c) },
+  { id: 'horseshoe', name: 'Horseshoe', d: c => `<path d="M${X0 - 38} 332 L${X0 - 38} 372 A38 38 0 0 0 ${X0 + 38} 372 L${X0 + 38} 332" fill="none" stroke="${c}" stroke-width="14" stroke-linecap="round"/>` },
+  { id: 'george-cross', name: 'George Cross', d: c => R(X0 - 17, 300, 34, 175, c) + R(X0 - 65, 352, 130, 34, c) },
+  { id: 'diamonds-row', name: 'Diamonds', sub: 'p.79', d: c => [-2, -1, 0, 1, 2].map(k => D(X0 + 52 * k, 360, 26, 46, c)).join('') },
+  { id: 'hoop-double', name: 'Hoop', sub: 'p.79, second', d: c => R(50, 335, 330, 18, c) + R(50, 372, 330, 18, c) },
+  { id: 'inverted-chevrons', name: 'Inverted Chevrons', d: c => [250, 292].map(a => LN([[30, a + 122], [X0, a], [397, a + 122]], c, 18)).join('') },
+  // p.80
+  { id: 'inverted-chevron', name: 'Inverted Chevron', d: c => LN([[30, 372], [X0, 250], [397, 372]], c, 42) },
+  { id: 'diamond-frame', name: 'Diamond Frame', d: c => `<path fill-rule="evenodd" fill="${c}" d="M${X0} 302 L${X0 + 42} 372 L${X0} 442 L${X0 - 42} 372 Z M${X0} 326 L${X0 + 22} 372 L${X0} 418 L${X0 - 22} 372 Z"/>` },
+  { id: 'diagonal-stripes', name: 'Diagonal Stripes', d: c => { let s = ''; for (let x = -260; x < 700; x += 64) s += R(x, -200, 30, 1200, c); return `<g transform="rotate(35 ${X0} 380)">${s}</g>`; } },
+  { id: 'checked-sash', name: 'Checked Sash', d: c => {
+      let s = ''; for (let j = -3; j < 13; j++) for (const i of [-1, 0]) if (((i + j) % 2 + 2) % 2 === 0) s += R(i * 40, j * 40, 40, 40, c);
+      return `<g transform="translate(125 190) rotate(-25.7)">${s}</g>`; } },
+  { id: 'chevron-hoop', name: 'Chevron Hoop', d: c => zig(365, 30, 44, 40, 390, c, 34) },
+  { id: 'two-chevron-hoops', name: '2 Chevron Hoops', d: c => zig(328, 24, 40, 40, 390, c, 16) + zig(383, 24, 40, 40, 390, c, 16) },
+  { id: 'three-inverted-chevrons', name: '3 Inverted Chevrons', d: c => [320, 420, 520].map(a => LN([[30, a - 150], [X0, a], [397, a - 150]], c, 44)).join('') },
+  { id: 'three-chevron-hoops', name: '3 Chevron Hoops', d: c => [290, 385, 480].map(y => zig(y, 32, 50, 40, 390, c, 30)).join('') },
+  { id: 'hollow-box', name: 'Hollow Box', d: c => `<path fill-rule="evenodd" fill="${c}" d="M${X0 - 62} 305 h124 v130 h-124 Z M${X0 - 30} 337 h60 v66 h-60 Z"/>` },
+  { id: 'triple-diamond', name: 'Triple Diamond', d: c => [-1, 0, 1].map(k => D(X0 + 74 * k, 365, 37, 48, c)).join('') },
+  { id: 'triangular-panel', name: 'Triangular Panel', d: c => P([[X0 - 40, 150], [X0 + 40, 150], [X0, 592]], c) },
+];
+
+// ---------- SLEEVES (Figure 5) ----------
+// Local sleeve frame: u across the sleeve (negative = outer edge), v down the sleeve from the shoulder.
+// side 'L' = viewer's left (wearer's right arm); side 'R' = viewer's right (wearer's left arm).
+const SLEEVES = [
+  { id: 'plain', name: 'Plain', note: 'Shown as "White" in Annexe 6', d: () => '' },
+  { id: 'checked', name: 'Checked', d: c => { let s = ''; for (let j = -1; j < 21; j++) for (let i = -3; i < 3; i++) if (((i + j) % 2 + 2) % 2 === 0) s += R(i * 22, j * 22, 22, 22, c); return s; } },
+  { id: 'diamonds', name: 'Diamonds', sub: 'p.81, first', d: c => { let s = ''; for (let j = -1; j < 15; j += 2) for (let i = -4; i <= 4; i += 2) s += D(i * 19, j * 30 + 30, 19, 30, c); return s; } },
+  { id: 'diablo', name: 'Diablo', d: c => P([[-70, -10], [0, 190], [-70, 390]], c) + P([[70, -10], [0, 190], [70, 390]], c) },
+  { id: 'halves', name: 'Halves', d: c => R(-80, 190, 160, 230, c) },
+  { id: 'spots', name: 'Spots', d: c => [110, 200, 290].map(v => C(0, v, 15, c)).join('') },
+  { id: 'stars', name: 'Stars', d: c => [110, 200, 290].map(v => S(0, v, 18, c)).join('') },
+  { id: 'seems', name: 'Seems', seam: true },
+  { id: 'chevrons', name: 'Chevrons', d: c => { let s = ''; for (let v = 30; v <= 400; v += 50) s += LN([[-62, v + 40], [0, v], [62, v + 40]], c, 22); return s; } },
+  { id: 'stripes', name: 'Stripes', d: c => { let s = ''; for (let u = -49.5; u < 50; u += 22) s += R(u, -30, 11, 450, c); return s; } },
+  { id: 'hooped', name: 'Hooped', d: c => { const h = SL / 9; let s = ''; for (let k = 0; k < 4; k++) s += R(-80, h * (2 * k + 1), 160, h, c); return s; } },
+  { id: 'armlet', name: 'Armlet', d: c => R(-80, 120, 160, 32, c) },
+  { id: 'alternate', name: 'Alternate', d: (c, side) => side === 'R' ? R(-80, -40, 160, 460, c) : '' },
+  { id: 'diamonds-column', name: 'Diamonds', sub: 'p.81, second', d: c => { let s = ''; for (let k = 0; k < 7; k++) s += D(0, 30 + 60 * k, 22, 30, c); return s; } },
+  { id: 'alternate-halves', name: 'Alternate Halves', d: (c, side) => side === 'R' ? R(-80, -40, 160, 230, c) : R(-80, 190, 160, 230, c) },
+  { id: 'hoops', name: 'Hoops', d: c => R(-80, 118, 160, 13, c) + R(-80, 140, 160, 13, c) },
+  { id: 'birdseye', name: 'Birdseye', sub: 'p.80', d: c => { let s = ''; for (let j = -1; j < 31; j++) for (let i = -4; i <= 4; i++) s += C(i * 13 + (j % 2 ? 6.5 : 0), j * 13, 4.2, c); return s; } },
+];
+
+// ---------- CAPS (Figure 6) ----------
+const CY = 63.5;
+const CAPS = [
+  { id: 'plain', name: 'Plain', d: () => '' },
+  { id: 'check', name: 'Check', d: c => { let s = ''; for (let j = -1; j < 8; j++) for (let i = -4; i < 4; i++) if (((i + j) % 2 + 2) % 2 === 0) s += R(X0 + i * 18, j * 18, 18, 18, c); return s; } },
+  { id: 'stripes', name: 'Stripes', d: c => { let s = ''; for (let k = -3; k <= 2; k++) s += R(X0 + 6.5 + 26 * k, 0, 13, 140, c); return s; } },
+  { id: 'hoops', name: 'Hoops', d: c => { let s = ''; for (let y = 6; y < 130; y += 26) s += R(150, y, 130, 13, c); return s; } },
+  { id: 'star', name: 'Star', d: c => S(X0, 64, 32, c) },
+  { id: 'hoop', name: 'Hoop', d: c => R(150, 54, 130, 24, c) },
+  { id: 'stripe', name: 'Stripe', d: c => R(X0 - 14, 0, 28, 140, c) },
+  { id: 'diamonds', name: 'Diamonds', d: c => { let s = ''; for (let j = -1; j < 8; j++) for (let i = -6; i <= 6; i++) if ((i + j) % 2 === 0 && i % 2 === 0) s += D(X0 + i * 13, j * 20, 13, 20, c); return s; } },
+  { id: 'stars', name: 'Stars', d: c => [[190, 34], [237, 34], [172, 68], [X0, 68], [255, 68], [190, 102], [237, 102]].map(p => S(p[0], p[1], 10, c)).join('') },
+  { id: 'diamond', name: 'Diamond', d: c => D(X0, 58, 26, 40, c) },
+  { id: 'quartered', name: 'Quartered', d: c => R(X0, 0, 70, CY, c) + R(150, CY, X0 - 150, 80, c) },
+  { id: 'spots', name: 'Spots', d: c => { let s = ''; for (let j = 0; j < 6; j++) for (let i = -3; i <= 3; i++) s += C(X0 + i * 26 + (j % 2 ? 13 : 0), 10 + j * 23, 7, c); return s; } },
+];
+
+// Frames for each sleeve (template coordinates)
+const SLEEVE_FRAME = {
+  L: 'translate(78 212) rotate(7.7)',
+  R: `translate(${f(2 * X0 - 78)} 212) scale(-1 1) rotate(7.7)`,
+};
+
+if (typeof module !== 'undefined') module.exports = { BODY, SLEEVES, CAPS, SLEEVE_FRAME, X0, SL };
+
+</script>
+<script>
+// Builds silks SVG markup from the REHC template geometry (GEO) and the pattern library.
+function buildDefs(GEO) {
+  const tb = 'translate(-390.75 0)', ts = 'translate(-781.66 0)';
+  const outL = [[1.4, 181.5], [80.7, 192.2], [31.1, 558.9], [-48.2, 548.2]];
+  const outR = outL.map(p => [Math.round((2 * X0 - p[0]) * 10) / 10, p[1]]);
+  const poly = a => a.map(p => p.join(',')).join(' ');
+  return `
+<path id="pBody" transform="${tb}" d="${GEO.body}"/>
+<path id="pCap" transform="${tb}" d="${GEO.cap}"/>
+<path id="pSlvL" transform="${ts}" d="${GEO.slvL}"/>
+<path id="pSlvR" transform="${ts}" d="${GEO.slvR}"/>
+<clipPath id="cBody"><path transform="${tb}" d="${GEO.body}"/></clipPath>
+<clipPath id="cCap"><path transform="${tb}" d="${GEO.cap}"/></clipPath>
+<clipPath id="cSlvL"><path transform="${ts}" d="${GEO.slvL}"/></clipPath>
+<clipPath id="cSlvR"><path transform="${ts}" d="${GEO.slvR}"/></clipPath>
+<clipPath id="cCrown"><ellipse cx="${X0}" cy="63.6" rx="53" ry="61.6"/></clipPath>
+<clipPath id="cSeamB"><polygon points="-20,-20 150,-20 150,208 277,208 277,-20 450,-20 450,586 -20,586"/></clipPath>
+<clipPath id="cSeamOutL"><polygon points="${poly(outL)}"/></clipPath>
+<clipPath id="cSeamOutR"><polygon points="${poly(outR)}"/></clipPath>
+<g id="art"><path fill="#231f20" d="${GEO.a1}"/><path fill="#231f20" d="${GEO.a2}"/><path fill="#393536" d="${GEO.a3}"/></g>`;
+}
+
+const U = id => `href="#${id}" xlink:href="#${id}"`;
+const find = (list, id) => list.find(p => p.id === id) || list[0];
+
+function sleeveMarkup(side, s, hex) {
+  const p = find(SLEEVES, s.p), pc = hex(s.pc);
+  let pat = '';
+  if (p.seam) pat = '';
+  else
+  if (p.id !== 'plain') pat = `<g transform="${SLEEVE_FRAME[side]}">${p.d(pc, side)}</g>`;
+  return `<g clip-path="url(#cSlv${side})"><use ${U('pSlv' + side)} fill="${hex(s.c)}"/>${pat}</g>`;
+}
+// Seams are piping along the edge, drawn above the line art so they stay visible
+function sleeveSeam(side, s, hex) {
+  return `<g clip-path="url(#cSlv${side})"><g clip-path="url(#cSeamOut${side})"><use ${U('pSlv' + side)} fill="none" stroke="${hex(s.pc)}" stroke-width="12"/></g></g>`;
+}
+function bodySeam(b, hex) {
+  return `<g clip-path="url(#cBody)"><g clip-path="url(#cSeamB)"><use ${U('pBody')} fill="none" stroke="${hex(b.pc)}" stroke-width="14"/></g></g>`;
+}
+function bodyMarkup(b, hex) {
+  const p = find(BODY, b.p);
+  return `<g clip-path="url(#cBody)"><use ${U('pBody')} fill="${hex(b.c)}"/>${p.id === 'plain' || p.seam ? '' : p.d(hex(b.pc))}</g>`;
+}
+function capMarkup(k, hex) {
+  const p = find(CAPS, k.p);
+  return `<g clip-path="url(#cCap)"><use ${U('pCap')} fill="${hex(k.c)}"/><g clip-path="url(#cCrown)">${p.id === 'plain' ? '' : p.d(hex(k.pc))}</g></g>`;
+}
+// parts: which regions to draw (thumbnails can skip some); cap override for the spare cap
+function silksInner(st, hex, opts = {}) {
+  const cap = opts.cap || st.cap;
+  let m = '';
+  if (!opts.capOnly) m += sleeveMarkup('L', st.sleeves, hex) + sleeveMarkup('R', st.sleeves, hex) + bodyMarkup(st.body, hex);
+  m += capMarkup(cap, hex);
+  m += `<use ${U('art')}/>`;
+  if (!opts.capOnly) {
+    if (find(SLEEVES, st.sleeves.p).seam) m += sleeveSeam('L', st.sleeves, hex) + sleeveSeam('R', st.sleeves, hex);
+    if (find(BODY, st.body.p).seam) m += bodySeam(st.body, hex);
+  }
+  return m;
+}
+
+if (typeof module !== 'undefined') module.exports = { buildDefs, silksInner };
+
+</script>
+<script>
+const COLOURS = [
+  ['beige','Beige','#D8C9A3'],['black','Black','#161616'],['brown','Brown','#6B3E1F'],['dark-blue','Dark Blue','#1B2A5C'],
+  ['dark-green','Dark Green','#1F4D2B'],['emerald-green','Emerald Green','#0F8A55'],['grey','Grey','#8C8C8C'],['light-blue','Light Blue','#8EC5E8'],
+  ['light-green','Light Green','#9ACD6B'],['maroon','Maroon','#6E1027'],['mauve','Mauve','#B49AC4'],['orange','Orange','#EE7A1E'],
+  ['pink','Pink','#F2A6C0'],['purple','Purple','#5B2A86'],['red','Red','#D21F2B'],['royal-blue','Royal Blue','#2346A8'],
+  ['white','White','#FFFFFF'],['yellow','Yellow','#F6D30F']
+].map(([id,name,hex])=>({id,name,hex}));
+const hex = id => (COLOURS.find(c=>c.id===id)||COLOURS[16]).hex;
+const cname = id => (COLOURS.find(c=>c.id===id)||{name:id}).name;
+
+const DEFAULT = () => ({
+  body:{c:'royal-blue',p:'plain',pc:'white'},
+  sleeves:{c:'royal-blue',p:'plain',pc:'white'},
+  cap:{c:'royal-blue',p:'plain',pc:'white'},
+  spare:{on:false,c:'white',p:'plain',pc:'royal-blue'}
+});
+let st = DEFAULT();
+let tab = 'body';
+
+document.getElementById('defs').innerHTML = buildDefs(GEO);
+const $ = id => document.getElementById(id);
+
+// ---------- description ----------
+function patLabel(list,id){ const p=list.find(x=>x.id===id); return p ? p.name + (p.sub ? ' ('+p.sub+')' : '') : id; }
+function part(k, region, list){
+  const base = cname(k.c) + ' ' + region;
+  return k.p==='plain' ? base : base + ' with ' + cname(k.pc).toLowerCase() + ' ' + patLabel(list,k.p);
+}
+function description(){
+  let d = part(st.body,'body',BODY) + '; ' + part(st.sleeves,'sleeves',SLEEVES) + '; ' + part(st.cap,'cap',CAPS) + '.';
+  return d.charAt(0).toUpperCase()+d.slice(1);
+}
+function spareText(){ return st.spare.on ? 'Second cap: ' + part(st.spare,'cap',CAPS) + '.' : ''; }
+function validUntil(){
+  const n=new Date(); const y = n.getMonth()>=9 ? n.getFullYear()+1 : n.getFullYear();
+  return '30 September ' + y;
+}
+
+// ---------- checks ----------
+function checks(){
+  const m=[];
+  const same=(k,label,list)=>{ if(k.p!=='plain' && k.c===k.pc) m.push(['err',`The ${label} pattern (${patLabel(list,k.p)}) is the same colour as the ${label}, so it won't show. Choose a different pattern colour.`]); };
+  same(st.body,'body',BODY); same(st.sleeves,'sleeve',SLEEVES); same(st.cap,'cap',CAPS);
+  if(st.spare.on){
+    same(st.spare,'second cap',CAPS);
+    if(st.spare.c===st.cap.c && st.spare.p===st.cap.p && (st.spare.p==='plain' || st.spare.pc===st.cap.pc))
+      m.push(['err','The second cap matches the main cap. Article 34.4 needs a different coloured cap for a second runner.']);
+  }
+  const allBlack = [st.body,st.sleeves,st.cap].every(k=>k.c==='black' && (k.p==='plain' || k.pc==='black'));
+  if(allBlack) m.push(['warn','All black is the colours a horse runs in when declared colours are unavailable (Article 34.5). Check with the Racing Director before applying for these.']);
+  return m;
+}
+
+// ---------- rendering ----------
+function render(){
+  $('preview').innerHTML = silksInner(st, hex);
+  $('spareWrap').classList.toggle('on', st.spare.on);
+  if(st.spare.on) $('sparePrev').innerHTML = silksInner(st, hex, {cap:st.spare, capOnly:true});
+  $('desc').textContent = description() + (st.spare.on ? ' ' + spareText() : '');
+  $('valid').textContent = 'A registration made now would run until ' + validUntil() + ' (Article 34.1).';
+  const m = checks();
+  $('msgs').innerHTML = m.map(([t,x])=>`<div class="msg ${t}">${x}</div>`).join('');
+  const blocked = m.some(x=>x[0]==='err');
+  $('dlSheet').disabled = blocked || !dlReady; $('dlSvg').disabled = blocked || !dlReady;
+  renderPanel();
+}
+
+function swatchRow(key, field, label){
+  const k = key==='spare' ? st.spare : st[key];
+  return `<div class="group"><h3>${label} <span class="val">${cname(k[field])}</span></h3><div class="swatches">` +
+    COLOURS.map(c=>`<button class="sw" style="background:${c.hex}" aria-pressed="${k[field]===c.id}" aria-label="${c.name}" title="${c.name}" data-k="${key}" data-f="${field}" data-v="${c.id}"></button>`).join('') + '</div></div>';
+}
+const VB = { body:'60 140 310 470', sleeves:'-6 180 440 420', cap:'150 -4 128 142', spare:'150 -4 128 142' };
+function thumb(key, p){
+  const s = JSON.parse(JSON.stringify(st));
+  const region = key==='spare' ? 'cap' : key;
+  const k = key==='spare' ? Object.assign({}, st.spare) : s[key];
+  k.p = p.id;
+  if(k.c===k.pc) k.pc = k.c==='white' ? 'black' : 'white';
+  if(key==='spare'){ return `<svg viewBox="${VB.cap}" aria-hidden="true">${silksInner(s, hex, {cap:k, capOnly:true})}</svg>`; }
+  s[region] = k;
+  return `<svg viewBox="${VB[key]}" aria-hidden="true">${silksInner(s, hex, region==='cap'?{capOnly:true}:{})}</svg>`;
+}
+function patternGrid(key, list){
+  const k = key==='spare' ? st.spare : st[key];
+  return `<div class="group"><h3>Pattern <span class="val">${patLabel(list,k.p)}</span></h3><div class="patterns">` +
+    list.map(p=>`<button class="pt" aria-pressed="${k.p===p.id}" data-k="${key}" data-p="${p.id}" title="${p.note||p.name}">${thumb(key,p)}<span class="nm">${p.name}</span>${p.sub?`<span class="sb">${p.sub}</span>`:''}</button>`).join('') + '</div></div>';
+}
+function renderPanel(){
+  const list = tab==='body'?BODY:tab==='sleeves'?SLEEVES:CAPS;
+  let h='';
+  if(tab==='spare'){
+    h += `<label class="toggle"><input type="checkbox" id="spareOn" ${st.spare.on?'checked':''}><span>Add a second cap for when two of your horses run in the same race. Article 34.4 asks for a different coloured cap.</span></label>`;
+    if(!st.spare.on){ $('panel').innerHTML = h; bindPanel(); return; }
+  }
+  const k = tab==='spare'?st.spare:st[tab];
+  const lbl = {body:'Body colour',sleeves:'Sleeve colour',cap:'Cap colour',spare:'Cap colour'}[tab];
+  h += swatchRow(tab,'c',lbl);
+  if(k.p!=='plain') h += swatchRow(tab,'pc', tab==='body' ? 'Pattern or symbol colour' : 'Pattern colour');
+  else h += `<p class="hint">Pick a pattern below, then choose its colour here.</p>`;
+  h += patternGrid(tab,list);
+  $('panel').innerHTML = h; bindPanel();
+}
+function bindPanel(){
+  $('panel').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k==='spare'?st.spare:st[b.dataset.k]; k[b.dataset.f]=b.dataset.v; render();
+  });
+  $('panel').querySelectorAll('.pt').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k==='spare'?st.spare:st[b.dataset.k]; k.p=b.dataset.p;
+    if(k.p!=='plain' && k.pc===k.c) k.pc = k.c==='white'?'black':'white';
+    render();
+  });
+  const t=$('spareOn'); if(t) t.onchange=()=>{ st.spare.on=t.checked; if(t.checked && st.spare.c===st.cap.c) st.spare.c = st.cap.c==='white'?'red':'white'; render(); };
+}
+$('tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  tab=b.dataset.t; $('tabs').querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected', x===b)); renderPanel();
+});
+$('reset').onclick=()=>{ st=DEFAULT(); render(); };
+
+// ---------- export ----------
+function standaloneSVG(inner, vb, w, h){
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="${vb}" width="${w}" height="${h}"><defs>${buildDefs(GEO)}</defs>${inner}</svg>`;
+}
+function loadImg(svg){
+  return new Promise((res,rej)=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); });
+}
+function wrap(ctx, text, x, y, maxW, lh){
+  const words=text.split(' '); let line='';
+  for(const w of words){ const t=line?line+' '+w:w; if(ctx.measureText(t).width>maxW && line){ ctx.fillText(line,x,y); y+=lh; line=w; } else line=t; }
+  if(line){ ctx.fillText(line,x,y); y+=lh; } return y;
+}
+async function sheetBlob(){
+  await document.fonts.ready;
+  const W=1240,H=1754, cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const c=cv.getContext('2d');
+  c.fillStyle='#FFFFFF'; c.fillRect(0,0,W,H);
+  c.fillStyle='#11202E'; c.fillRect(0,0,W,150); c.fillStyle='#AC9C71'; c.fillRect(0,150,W,6);
+  c.fillStyle='#AC9C71'; c.font='500 24px Inter, sans-serif'; c.fillText('Rashid Equestrian & Horseracing Club',80,62);
+  c.fillStyle='#FFFFFF'; c.font='700 44px Montserrat, Inter, sans-serif'; c.fillText('Racing colours design',80,118);
+  c.fillStyle='#F5F4F1'; c.fillRect(80,190,W-160,820);
+  const main = await loadImg(standaloneSVG(silksInner(st,hex),'-6 -4 440 612',528,734));
+  const mx = st.spare.on ? 290 : (W-528)/2;
+  c.drawImage(main, mx, 232, 528, 734);
+  if(st.spare.on){
+    const sp = await loadImg(standaloneSVG(silksInner(st,hex,{cap:st.spare,capOnly:true}),'150 -4 128 142',220,244));
+    c.drawImage(sp, 860, 700, 220, 244);
+    c.fillStyle='#55606A'; c.font='400 22px Inter, sans-serif'; c.textAlign='center'; c.fillText('Second cap',970,975); c.textAlign='left';
+  }
+  let y=1080;
+  c.fillStyle='#55606A'; c.font='600 22px Inter, sans-serif'; c.fillText('Colours description',80,y); y+=48;
+  c.fillStyle='#11202E'; c.font='600 30px Montserrat, Inter, sans-serif'; y=wrap(c, description(), 80, y, W-160, 44);
+  if(st.spare.on){ y=wrap(c, spareText(), 80, y+6, W-160, 46); }
+  y+=20; c.fillStyle='#55606A'; c.font='400 22px Inter, sans-serif';
+  y=wrap(c,'Registration runs to '+validUntil()+' (Article 34.1). Patterns as Rules of Racing, Annexe 6. Submit to the Racing Director with the registration fee.',80,y,W-160,32);
+  y=Math.max(y+40,1440);
+  c.strokeStyle='#9AA0A6'; c.lineWidth=1.5; c.fillStyle='#11202E'; c.font='500 22px Inter, sans-serif';
+  [['Owner or partnership name',80,W-80],['Signature',80,600],['Date',660,W-80]].forEach(([l,x0,x1],i)=>{
+    const yy = i===0 ? y : y+110;
+    c.fillText(l,x0,yy); c.beginPath(); c.moveTo(x0,yy+50); c.lineTo(x1,yy+50); c.stroke();
+  });
+  return await new Promise(r=>cv.toBlob(r,'image/png'));
+}
+function fileBase(){ return 'REHC-colours-' + [st.body.c,st.body.p,st.sleeves.c,st.cap.c].join('-'); }
+
+// downloads: claude.ai viewer uses the downloads capability; a plain hosted copy uses a normal link
+let dl=null, dlReady=false;
+const inViewer = !!(window.claude && window.claude.use);
+if(inViewer){
+  window.claude.use('downloads').then(d=>{ dl=d; dlReady=!!d; if(!d){ $('dlNote').hidden=false; $('dlNote').textContent='Downloads are not available in this view.'; } render(); });
+} else { dlReady=true; }
+async function save(name, blob){
+  try{
+    if(dl){ await dl.save({filename:name, data:blob}); }
+    else if(!inViewer){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }
+  }catch(e){
+    if(e && e.code==='declined') return;
+    $('dlNote').hidden=false; $('dlNote').textContent = e && e.code==='rate_limited' ? 'A save prompt is already open. Finish that one first.' : 'The file could not be saved here.';
+  }
+}
+$('dlSheet').onclick=async()=>{ const b=await sheetBlob(); save(fileBase()+'.png', b); };
+$('dlSvg').onclick=()=>{
+  const svg = standaloneSVG(silksInner(st,hex),'-6 -4 440 612',880,1224);
+  save(fileBase()+'.svg', new Blob([svg],{type:'image/svg+xml'}));
+};
+
+render();
+</script>
+</body>
 </html>
