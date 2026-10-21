@@ -594,76 +594,6 @@ const DAY_TYPE_META = {
 };
 
 
-// =================================================================
-// MOCK ENTRIES & RESULTS DATA
-// In production these would come from an API / database.
-// Keys are race IDs (programme-meeting-distance-index).
-// =================================================================
-const MOCK_TRAINERS = ['F. Al Khalifa', 'A. Al Sabah', 'M. Al Mansouri', 'H. Bin Huzaim', 'S. Khalifa', 'Y. Al Rumaihi', 'N. Al Maktoum'];
-const MOCK_JOCKEYS = ['L. Steward', 'A. Al Balushi', 'C. Lemaire', 'P. Cosgrave', 'R. Hornby', 'O. Murphy', 'F. Berry', 'T. Marquand', 'A. Atzeni'];
-const MOCK_OWNERS = ['REHC Racing', 'Al Adiyat Racing', 'KHK Racing', 'Victorious Racing', 'Bahrain Racing Club', 'Al Mohamediya Racing', 'Yas Racing'];
-const MOCK_HORSE_NAMES = ['Sakhir Star', 'Pearl of Manama', 'Desert Falcon', 'Riffa Dream', 'Adliya Spirit', 'Golden Hawar', 'Awal Thunder', 'Muharraq Prince', 'Royal Standard', 'Bahrain Glory', 'Saar Lightning', 'Tubli Bay', 'Janabiya Rose', 'Coral Coast', 'Arabian Knight', 'Hidd Hero', 'Budaiya Breeze', 'Jasra Storm', 'Bilad Al Qadeem', 'Sitra Sands'];
-
-// Deterministic pseudo-random based on string hash — so same race always gets same field
-function seededRand(seed) {
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = ((h << 5) - h + seed.charCodeAt(i)) | 0;
-  return function() {
-    h = Math.imul(48271, h) | 0;
-    return Math.abs(h) / 2147483647;
-  };
-}
-
-function generateMockField(raceId, fieldSize) {
-  const rand = seededRand(raceId);
-  const size = fieldSize || (5 + Math.floor(rand() * 10));
-  const horses = [];
-  const usedNames = new Set();
-  for (let i = 0; i < size; i++) {
-    let name;
-    let attempt = 0;
-    do {
-      name = MOCK_HORSE_NAMES[Math.floor(rand() * MOCK_HORSE_NAMES.length)];
-      attempt++;
-    } while (usedNames.has(name) && attempt < 30);
-    if (usedNames.has(name)) name = name + ' II';
-    usedNames.add(name);
-    horses.push({
-      draw: i + 1,
-      number: i + 1,
-      horse: name,
-      age: 3 + Math.floor(rand() * 5),
-      weight: (54 + rand() * 8).toFixed(1),
-      jockey: MOCK_JOCKEYS[Math.floor(rand() * MOCK_JOCKEYS.length)],
-      trainer: MOCK_TRAINERS[Math.floor(rand() * MOCK_TRAINERS.length)],
-      owner: MOCK_OWNERS[Math.floor(rand() * MOCK_OWNERS.length)],
-      rating: 50 + Math.floor(rand() * 45),
-      sp: rand() < 0.3 ? (2 + Math.floor(rand() * 8)) + '/1' : null
-    });
-  }
-  return horses;
-}
-
-function generateMockResult(raceId, fieldSize) {
-  const field = generateMockField(raceId, fieldSize);
-  const rand = seededRand(raceId + '-result');
-  // Shuffle for finishing positions
-  const finishers = [...field].sort(() => rand() - 0.5);
-  return {
-    finishers: finishers.map((h, i) => ({
-      position: i + 1,
-      ...h,
-      margin: i === 0 ? null : (i === 1 ? (rand() * 2).toFixed(2) + ' L' : (rand() * 4 + 0.5).toFixed(2) + ' L'),
-      time: i === 0 ? Math.floor(rand() * 30 + 60) + ':' + (rand() * 60).toFixed(2).padStart(5, '0') : null
-    })),
-    winningTime: (60 + rand() * 90).toFixed(2) + 's',
-    going: ['Good', 'Good to Firm', 'Firm', 'Soft'][Math.floor(rand() * 4)],
-    weather: ['Sunny', 'Clear', 'Overcast', 'Light Breeze'][Math.floor(rand() * 4)],
-    photo: rand() < 0.2,
-    stewards: rand() < 0.15 ? 'Stewards enquiry — no change' : null
-  };
-}
-
 // Race lifecycle status based on date vs. today
 function getRaceStatus(raceDateIso, todayIso) {
   const raceDate = new Date(raceDateIso + 'T00:00:00');
@@ -1565,12 +1495,6 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
   if (!race) return null;
   const status = getRaceStatus(race.date, todayIso);
   const isPast = status === 'concluded';
-  const isToday = status === 'raceday';
-  const isFuture = !isPast && !isToday;
-
-  // Resolve data: results for past, entries for declared/raceday, draft for entries-open
-  const data = isPast ? generateMockResult(race.id, race.field) : null;
-  const entries = !isPast ? generateMockField(race.id, race.field) : null;
 
   const statusMeta = {
     'concluded':     { label: 'Concluded',     bg: '#4A5568',  fg: '#F2EBDC' },
@@ -1721,49 +1645,29 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
             );
           })()}
 
-          {/* Sample-data notice for non-past races */}
-          {!isPast && (
-            <div style={{
-              padding: '10px 14px', marginBottom: '18px',
-              backgroundColor: 'rgba(200,163,92,0.10)',
-              border: '1px dashed ' + C.gold,
-              borderRadius: '2px',
-              fontSize: '11.5px', color: C.forest,
-              fontFamily: FONT_DISPLAY, fontStyle: 'italic'
+          {/* Entries & results are maintained live on the Bahrain Turf Club site. */}
+          <div style={{ textAlign: 'center', padding: '44px 20px 48px', color: C.forestDim }}>
+            <Trophy size={34} strokeWidth={1} style={{ marginBottom: '14px', opacity: 0.4 }} />
+            <div style={{ fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '17px', color: C.forest, marginBottom: '8px' }}>
+              {isPast ? 'Result on the Bahrain Turf Club' : 'Entries on the Bahrain Turf Club'}
+            </div>
+            <div style={{ fontSize: '13px', maxWidth: '320px', margin: '0 auto 20px', lineHeight: 1.5 }}>
+              {isPast
+                ? 'The official result, sectional timings and stewards\u2019 report are published on the BTC racecards & results page.'
+                : 'Entries and declared runners are published and kept up to date on the BTC racecards & results page.'}
+            </div>
+            <a href={btcUrlForRace(race, todayIso)} target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '11px 20px', backgroundColor: C.gold, color: C.forest,
+              border: 'none', borderRadius: '4px', textDecoration: 'none',
+              fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em',
+              textTransform: 'uppercase', fontFamily: FONT_BODY,
+              boxShadow: '0 2px 8px -3px rgba(176,141,79,0.6)'
             }}>
-              The race conditions above are official. The runners and weights below are sample data — tap the gold button for live entries and declarations from the Bahrain Turf Club.
-            </div>
-          )}
-          {isPast && (
-            <div style={{
-              padding: '10px 14px', marginBottom: '18px',
-              backgroundColor: 'rgba(200,163,92,0.10)',
-              border: '1px dashed ' + C.gold,
-              borderRadius: '2px',
-              fontSize: '11.5px', color: C.forest,
-              fontFamily: FONT_DISPLAY, fontStyle: 'italic'
-            }}>
-              The result shown below is sample data. Tap the gold button above for the official result, sectional timings, photo finish, and stewards' report from the Bahrain Turf Club.
-            </div>
-          )}
-
-          {isPast && data && <ResultsView data={data} race={race} />}
-          {isToday && entries && <EntriesView entries={entries} race={race} live={true} />}
-          {isFuture && status === 'declared' && entries && <EntriesView entries={entries} race={race} live={false} />}
-          {isFuture && (status === 'entries-closed' || status === 'entries-open') && entries && (
-            <EntriesView entries={entries} race={race} live={false} draft={status === 'entries-open'} />
-          )}
-          {isFuture && status === 'scheduled' && (
-            <div style={{ textAlign: 'center', padding: '60px 20px', color: C.forestDim }}>
-              <Calendar size={36} strokeWidth={1} style={{ marginBottom: '14px', opacity: 0.4 }} />
-              <div style={{ fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '17px', marginBottom: '8px' }}>
-                Entries not yet open
-              </div>
-              <div style={{ fontSize: '13px' }}>
-                Entries typically open 21 days before each meeting. Check back closer to {fmtShort(race.date)}.
-              </div>
-            </div>
-          )}
+              {isPast ? 'View result on BTC' : 'View entries on BTC'}
+              <ExternalLink size={14} strokeWidth={2} />
+            </a>
+          </div>
         </div>
 
         {/* Drawer Footer */}
@@ -1773,159 +1677,13 @@ function RaceDetailDrawer({ race, todayIso, onClose }) {
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: FONT_BODY
         }}>
           <span style={{ fontStyle: 'italic', fontFamily: FONT_DISPLAY }}>
-            {isPast ? 'Official result' : isToday ? 'Live · refreshes every minute' : 'Provisional — subject to declarations'}
+            Conditions from the REHC Condition Book 2026/27
           </span>
           <span style={{ fontFamily: FONT_MONO, fontSize: '10px' }}>
             REHC · {race.id}
           </span>
         </div>
       </div>
-    </div>
-  );
-}
-
-function EntriesView({ entries, race, live, draft }) {
-  return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
-        <div style={{ fontSize: '14px', fontFamily: FONT_DISPLAY, fontStyle: 'italic', color: C.forest }}>
-          {draft ? 'Provisional entries' : live ? 'Today\u2019s field' : 'Declared runners'}
-          <span style={{ color: C.gold, margin: '0 8px' }}>·</span>
-          <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600, fontStyle: 'normal' }}>{entries.length} runners</span>
-        </div>
-        {live && (
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: C.burgundy, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: C.burgundy, animation: 'pulse 1.5s infinite' }} />
-            Live
-          </span>
-        )}
-      </div>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: FONT_BODY, fontSize: '12.5px' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid ' + C.forest, color: C.forestDim, textAlign: 'left' }}>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>No.</th>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>Horse</th>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>Jockey</th>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>Trainer</th>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, textAlign: 'right' }}>Wt</th>
-              <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, textAlign: 'right' }}>OR</th>
-              {live && <th style={{ padding: '8px 6px', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, textAlign: 'right' }}>SP</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {entries.map((h, i) => (
-              <tr key={i} style={{ borderBottom: '1px dashed ' + C.forestSoft }}>
-                <td style={{ padding: '10px 6px', fontFamily: FONT_MONO, fontWeight: 700, color: C.forest }}>{h.number}</td>
-                <td style={{ padding: '10px 6px' }}>
-                  <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 500, color: C.forest }}>{h.horse}</div>
-                  <div style={{ fontSize: '10.5px', color: C.forestDim, marginTop: '1px' }}>{h.age}yo · {h.owner}</div>
-                </td>
-                <td style={{ padding: '10px 6px', color: C.forest }}>{h.jockey}</td>
-                <td style={{ padding: '10px 6px', color: C.forestDim, fontSize: '11.5px' }}>{h.trainer}</td>
-                <td style={{ padding: '10px 6px', textAlign: 'right', fontFamily: FONT_MONO, fontVariantNumeric: 'tabular-nums', color: C.forest }}>{h.weight}</td>
-                <td style={{ padding: '10px 6px', textAlign: 'right', fontFamily: FONT_MONO, fontVariantNumeric: 'tabular-nums', color: C.forestDim }}>{h.rating}</td>
-                {live && <td style={{ padding: '10px 6px', textAlign: 'right', fontFamily: FONT_MONO, color: h.sp ? C.burgundy : C.forestDim, fontWeight: h.sp ? 700 : 400 }}>{h.sp || '—'}</td>}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {draft && (
-        <div style={{ marginTop: '20px', padding: '12px 16px', backgroundColor: 'rgba(200,163,92,0.12)', border: '1px solid ' + C.gold, borderRadius: '2px', fontSize: '12px', color: C.forest, fontFamily: FONT_DISPLAY, fontStyle: 'italic' }}>
-          ⚠ Provisional list — declarations close 48 hours before raceday. Final field will be confirmed once declarations are received.
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ResultsView({ data, race }) {
-  const top3 = data.finishers.slice(0, 3);
-  const rest = data.finishers.slice(3);
-  const positionColors = ['#C8A35C', '#B8B8B8', '#A87844'];
-  return (
-    <div>
-      {/* Race conditions */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px',
-        padding: '14px 16px', marginBottom: '20px',
-        backgroundColor: C.cream, border: '1px solid ' + C.forestSoft, borderRadius: '2px'
-      }}>
-        {[
-          { label: 'Winning Time', value: data.winningTime },
-          { label: 'Going', value: data.going },
-          { label: 'Weather', value: data.weather },
-          { label: 'Field Size', value: data.finishers.length }
-        ].map(s => (
-          <div key={s.label}>
-            <div style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.12em', color: C.forestDim, fontWeight: 700, marginBottom: '3px' }}>{s.label}</div>
-            <div style={{ fontFamily: FONT_DISPLAY, fontSize: '15px', fontWeight: 500, color: C.forest, fontVariantNumeric: 'tabular-nums' }}>{s.value}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Podium for top 3 */}
-      <div style={{ marginBottom: '18px' }}>
-        <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em', color: C.forestDim, fontWeight: 700, marginBottom: '10px' }}>Result</div>
-        {top3.map((h, i) => (
-          <div key={i} style={{
-            display: 'flex', alignItems: 'center', gap: '14px',
-            padding: '14px 16px', marginBottom: '6px',
-            backgroundColor: i === 0 ? 'rgba(200,163,92,0.10)' : C.parchment,
-            border: '1px solid ' + (i === 0 ? C.gold : C.forestSoft),
-            borderLeft: '4px solid ' + positionColors[i],
-            borderRadius: '2px'
-          }}>
-            <div style={{
-              fontSize: '26px', fontFamily: FONT_DISPLAY, fontWeight: 700,
-              color: positionColors[i], width: '36px', textAlign: 'center',
-              fontVariantNumeric: 'tabular-nums', lineHeight: 1
-            }}>
-              {h.position}
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: '16px', fontWeight: 500, color: C.forest, fontStyle: i === 0 ? 'italic' : 'normal' }}>
-                {h.horse} {i === 0 && <Trophy size={14} strokeWidth={1.5} style={{ display: 'inline', marginLeft: '4px', color: C.gold, verticalAlign: 'baseline' }} />}
-              </div>
-              <div style={{ fontSize: '11.5px', color: C.forestDim, marginTop: '2px' }}>
-                {h.jockey} · {h.trainer}
-                {h.margin && <span> · won by {h.margin}</span>}
-              </div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontFamily: FONT_MONO, fontSize: '11px', color: C.forestDim, fontVariantNumeric: 'tabular-nums' }}>{h.weight}kg</div>
-              {h.sp && <div style={{ fontFamily: FONT_MONO, fontSize: '11px', color: C.burgundy, fontWeight: 700, marginTop: '2px' }}>{h.sp}</div>}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Remaining finishers */}
-      {rest.length > 0 && (
-        <div>
-          <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em', color: C.forestDim, fontWeight: 700, marginBottom: '10px' }}>Remaining finishers</div>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: FONT_BODY, fontSize: '12px' }}>
-            <tbody>
-              {rest.map(h => (
-                <tr key={h.position} style={{ borderBottom: '1px dashed ' + C.forestSoft }}>
-                  <td style={{ padding: '8px 6px', fontFamily: FONT_MONO, fontWeight: 600, color: C.forestDim, width: '32px' }}>{h.position}</td>
-                  <td style={{ padding: '8px 6px', fontFamily: FONT_DISPLAY, color: C.forest }}>{h.horse}</td>
-                  <td style={{ padding: '8px 6px', color: C.forestDim }}>{h.jockey}</td>
-                  <td style={{ padding: '8px 6px', textAlign: 'right', color: C.forestDim, fontFamily: FONT_MONO, fontSize: '11px' }}>{h.margin}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {data.stewards && (
-        <div style={{ marginTop: '18px', padding: '10px 14px', backgroundColor: 'rgba(107,39,55,0.08)', borderLeft: '3px solid ' + C.burgundy, fontSize: '12px', color: C.forest, fontFamily: FONT_DISPLAY }}>
-          <strong style={{ textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.1em', fontFamily: FONT_BODY }}>Stewards: </strong>
-          {data.stewards}
-        </div>
-      )}
     </div>
   );
 }
