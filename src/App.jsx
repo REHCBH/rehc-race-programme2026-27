@@ -506,6 +506,27 @@ const FEATURE_DAYS = {
 const RAMADAN_MEETINGS = [19, 20, 21, 22, 23];
 const RAMADAN_THURSDAY_MEETINGS = [19, 20, 21, 22];
 
+// Meeting start times & fixture type (from the official race-day schedule).
+// Keyed by meeting number. First-race post time (24h) + fixture label.
+const MEETING_TIMES = { 1: { t: "17:30", f: "Twilight" }, 2: { t: "17:30", f: "Twilight" }, 3: { t: "16:45", f: "Afternoon" }, 4: { t: "16:00", f: "Afternoon" }, 5: { t: "17:30", f: "Twilight" }, 6: { t: "16:00", f: "Afternoon" }, 7: { t: "16:00", f: "Afternoon" }, 8: { t: "16:00", f: "Afternoon" }, 9: { t: "17:30", f: "Twilight" }, 10: { t: "16:00", f: "Afternoon" }, 11: { t: "17:30", f: "Twilight" }, 12: { t: "16:00", f: "Afternoon" }, 13: { t: "16:00", f: "Afternoon" }, 14: { t: "16:00", f: "Afternoon" }, 15: { t: "16:00", f: "Afternoon" }, 16: { t: "17:30", f: "Twilight" }, 17: { t: "16:00", f: "Afternoon" }, 18: { t: "16:00", f: "Afternoon" }, 19: { t: "20:15", f: "Night" }, 20: { t: "20:00", f: "Night" }, 21: { t: "20:00", f: "Night" }, 22: { t: "20:00", f: "Night" }, 23: { t: "20:00", f: "Night" }, 24: { t: "16:00", f: "Afternoon" }, 25: { t: "16:00", f: "Afternoon" }, 26: { t: "16:00", f: "Afternoon" }, 27: { t: "17:30", f: "Twilight" }, 28: { t: "17:30", f: "Twilight" }, 29: { t: "17:30", f: "Twilight" }, 30: { t: "17:30", f: "Twilight" } };
+// Format "17:30" -> "5:30 PM"
+function fmtTime(t) {
+  if (!t) return null;
+  const [h, m] = t.split(':').map(Number);
+  const ap = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return h12 + ':' + String(m).padStart(2, '0') + ' ' + ap;
+}
+// Fixture colour for the tag.
+const FIXTURE_COLOR = { Twilight: '#B5763E', Afternoon: '#B08D4F', Night: '#3D5A80' };
+function meetingTimeInfo(meetingNumbers) {
+  if (!meetingNumbers) return null;
+  for (const n of meetingNumbers) {
+    if (MEETING_TIMES[n]) return MEETING_TIMES[n];
+  }
+  return null;
+}
+
 // Special series days from the Bahrain Bred programme legend.
 //   Champions Day (green) · Future Champions Day (brown) · Future Stars (blue)
 // Keyed by meeting number → series key.
@@ -661,8 +682,8 @@ function getRaceStatus(raceDateIso, todayIso) {
 // day's racecard listing (which shows all races on that date). The "view"
 // argument selects whether the user sees entries or results on landing.
 function btcUrlForRace(race, todayIso) {
-  // All "View on BTC" buttons link to the Bahrain Turf Club homepage.
-  return 'https://bahrainturfclub.com';
+  // All "View on BTC" buttons link to the Bahrain Turf Club racecards & results page.
+  return 'https://bahrainturfclub.com/racecards-results';
 }
 
 function btcUrlLabel(race, todayIso) {
@@ -1100,6 +1121,20 @@ function NextUpHero({ daysToNext, nextMeeting, isMobile, todayIso }) {
               {fmtShort(nextMeeting.date)}
             </span>
           </h2>
+          {meetingTimeInfo(nextMeeting.meetingNumbers) && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '-4px' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: C.ivory, fontWeight: 500 }}>
+                <Clock size={14} strokeWidth={2} style={{ color: C.gold }} />
+                First race {fmtTime(meetingTimeInfo(nextMeeting.meetingNumbers).t)}
+              </span>
+              <span style={{
+                fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
+                color: C.forest, backgroundColor: C.gold, padding: '2px 8px', borderRadius: '20px'
+              }}>
+                {meetingTimeInfo(nextMeeting.meetingNumbers).f}
+              </span>
+            </div>
+          )}
         </div>
         <div style={{
           textAlign: isMobile ? 'left' : 'right',
@@ -1159,6 +1194,7 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
   const isRamadanThu = isRamadanThursday(raceDay.meetingNumbers);
   const turfSeriesDay = hasTurfSeries(raceDay.races);
   const series = seriesInfo(raceDay.meetingNumbers);
+  const timeInfo = meetingTimeInfo(raceDay.meetingNumbers);
   const dt = dayType(raceDay.date);
   const dtMeta = DAY_TYPE_META[dt];
 
@@ -1312,6 +1348,28 @@ function MeetingCard({ raceDay, isOpen, onToggle, onRaceClick, todayIso, isMobil
                   </span>
                 )}
               </span>
+              {timeInfo && (
+                <span style={{
+                  marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '7px',
+                  flexShrink: 0, fontStyle: 'normal'
+                }}>
+                  <span style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '4px',
+                    fontFamily: FONT_BODY, fontSize: '11px', fontWeight: 600, color: C.forest
+                  }}>
+                    <Clock size={12} strokeWidth={2} style={{ color: C.forestDim }} />
+                    {fmtTime(timeInfo.t)}
+                  </span>
+                  <span style={{
+                    fontFamily: FONT_BODY, fontSize: '9px', fontWeight: 700,
+                    letterSpacing: '0.1em', textTransform: 'uppercase',
+                    color: '#fff', backgroundColor: FIXTURE_COLOR[timeInfo.f] || C.forestDim,
+                    padding: '2px 7px', borderRadius: '20px'
+                  }}>
+                    {timeInfo.f}
+                  </span>
+                </span>
+              )}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
               {raceDay.programmes.map(p => {
