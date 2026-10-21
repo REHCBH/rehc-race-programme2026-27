@@ -735,12 +735,6 @@ function exportICS() {
     const meetingNos = [...d.meetings].sort((a, b) => a - b);
     const ti = meetingTimeInfo(meetingNos);
     const dateKey = d.date.replace(/-/g, '');
-    // Programmes present that day, in canonical order.
-    const progs = [...new Set(d.races.map(r => r.programme))].sort((a, b) => progOrder(a) - progOrder(b));
-    const desc = progs.map(p => {
-      const rs = d.races.filter(r => r.programme === p).sort((a, b) => a.distance - b.distance);
-      return p + ':\\n' + rs.map(r => '  ' + r.distance + 'm — ' + r.text).join('\\n');
-    }).join('\\n\\n');
     const uid = 'rehc-day-' + d.date + '@rehc.bh';
     const summary = 'REHC Race Day — Meeting ' + meetingNos.map(n => String(n).padStart(2, '0')).join(' / ')
       + (ti ? ' (' + ti.f + ')' : '');
@@ -770,7 +764,7 @@ function exportICS() {
 
     lines.push(
       'SUMMARY:' + summary,
-      'DESCRIPTION:' + (ti ? 'First race ' + fmtTime(ti.t) + '\\n\\n' : '') + desc,
+      'DESCRIPTION:' + (ti ? 'First race ' + fmtTime(ti.t) : ''),
       'LOCATION:Bahrain',
       'END:VEVENT'
     );
