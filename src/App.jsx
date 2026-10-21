@@ -184,7 +184,7 @@ const PROGRAMME = [
   { p: 'I', m: 30, d: '2027-04-16', races: [
     { dist: 1200, text: 'Champions Sprint Cup — Domestic Grade 1', field: null },
     { dist: 1600, text: 'REHC Mile Cup — Domestic Grade 1', field: null },
-    { dist: 2000, text: 'Bahrain Gold Cup — Domestic Grade 1', field: null },
+    { dist: 2000, text: 'Bahrain Gold Cup (4yo+) — Listed', field: null },
     { dist: 2400, text: 'Stewards Cup — Domestic Grade 2', field: null }
   ]},
   // ============ BAHRAIN BRED ============
