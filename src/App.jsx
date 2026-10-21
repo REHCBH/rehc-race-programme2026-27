@@ -722,26 +722,55 @@ function exportCSV(rows) {
   downloadFile('\ufeff' + lines.join('\r\n'), 'rehc-2026-27.csv', 'text/csv;charset=utf-8;');
 }
 function exportICS() {
-  const meetings = new Map();
+  // One calendar event per RACE DAY (all programmes combined), not per race.
+  const days = new Map();
   RACES.forEach(r => {
-    const k = r.programme + '|' + r.meeting + '|' + r.date;
-    if (!meetings.has(k)) meetings.set(k, { programme: r.programme, meeting: r.meeting, date: r.date, races: [] });
-    meetings.get(k).races.push(r);
+    if (!days.has(r.date)) days.set(r.date, { date: r.date, meetings: new Set(), races: [] });
+    const d = days.get(r.date);
+    d.meetings.add(r.meeting);
+    d.races.push(r);
   });
   const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//REHC//Race Programme 2026-27//EN','CALSCALE:GREGORIAN'];
-  [...meetings.values()].forEach(m => {
-    const dateKey = m.date.replace(/-/g, '');
-    const next = new Date(m.date + 'T00:00:00');
-    next.setDate(next.getDate() + 1);
-    const endKey = next.toISOString().slice(0,10).replace(/-/g, '');
-    const desc = m.races.map(r => r.distance + 'm — ' + r.text + (r.field ? ' (' + r.field + ' runners)' : '')).join('\\n');
+  [...days.values()].sort((a, b) => a.date.localeCompare(b.date)).forEach(d => {
+    const meetingNos = [...d.meetings].sort((a, b) => a - b);
+    const ti = meetingTimeInfo(meetingNos);
+    const dateKey = d.date.replace(/-/g, '');
+    // Programmes present that day, in canonical order.
+    const progs = [...new Set(d.races.map(r => r.programme))].sort((a, b) => progOrder(a) - progOrder(b));
+    const desc = progs.map(p => {
+      const rs = d.races.filter(r => r.programme === p).sort((a, b) => a.distance - b.distance);
+      return p + ':\\n' + rs.map(r => '  ' + r.distance + 'm — ' + r.text).join('\\n');
+    }).join('\\n\\n');
+    const uid = 'rehc-day-' + d.date + '@rehc.bh';
+    const summary = 'REHC Race Day — Meeting ' + meetingNos.map(n => String(n).padStart(2, '0')).join(' / ')
+      + (ti ? ' (' + ti.f + ')' : '');
+
+    lines.push('BEGIN:VEVENT', 'UID:' + uid);
+
+    if (ti) {
+      // Timed event starting at the first-race post time (local Bahrain time, UTC+3).
+      const [h, m] = ti.t.split(':');
+      const start = dateKey + 'T' + h.padStart(2, '0') + m.padStart(2, '0') + '00';
+      // Assume the meeting runs ~3.5 hours.
+      const endDate = new Date(d.date + 'T' + ti.t + ':00+03:00');
+      endDate.setHours(endDate.getHours() + 3, endDate.getMinutes() + 30);
+      const ez = (n) => String(n).padStart(2, '0');
+      const end = dateKey + 'T' + ez(endDate.getHours()) + ez(endDate.getMinutes()) + '00';
+      lines.push(
+        'DTSTART;TZID=Asia/Bahrain:' + start,
+        'DTEND;TZID=Asia/Bahrain:' + end
+      );
+    } else {
+      // Fallback: all-day event.
+      const next = new Date(d.date + 'T00:00:00');
+      next.setDate(next.getDate() + 1);
+      const endKey = next.toISOString().slice(0, 10).replace(/-/g, '');
+      lines.push('DTSTART;VALUE=DATE:' + dateKey, 'DTEND;VALUE=DATE:' + endKey);
+    }
+
     lines.push(
-      'BEGIN:VEVENT',
-      'UID:rehc-' + m.programme.replace(/\s/g,'') + '-' + m.meeting + '-' + m.date + '@rehc.bh',
-      'DTSTART;VALUE=DATE:' + dateKey,
-      'DTEND;VALUE=DATE:' + endKey,
-      'SUMMARY:REHC Meeting ' + m.meeting + ' — ' + m.programme,
-      'DESCRIPTION:' + desc,
+      'SUMMARY:' + summary,
+      'DESCRIPTION:' + (ti ? 'First race ' + fmtTime(ti.t) + '\\n\\n' : '') + desc,
       'LOCATION:Bahrain',
       'END:VEVENT'
     );
